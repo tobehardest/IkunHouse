@@ -1,0 +1,42 @@
+global:
+  scrape_interval:
+  external_labels:
+    monitor: 'codelab-monitor'
+
+# 这里表示抓取对象的配置
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s  #重写了全局抓取间隔时间，由15秒重写成5秒
+    static_configs:
+      - targets: ['127.0.0.1:9090']
+  ## User服务
+  - job_name: 'video_clip-user-api-1'
+    static_configs:
+      - targets: [ 'video_clip-user-api-1:6001' ]
+        labels:
+          job: user-api
+          app: user-api
+          env: dev
+  - job_name: 'video_clip-user-api-2'
+    static_configs:
+      - targets: [ 'video_clip-user-api-2:6001' ]
+        labels:
+          job: user-api
+          app: user-api
+          env: dev
+
+
+  - job_name: 'video_clip-user-rpc-1'
+    static_configs:
+      - targets: [ 'video_clip-user-rpc-1:6002' ]
+        labels:
+          job: user-rpc
+          app: user-rpc
+          env: dev
+  - job_name: 'video_clip-user-rpc-2'
+    static_configs:
+      - targets: [ 'video_clip-user-rpc-2:6002' ]
+        labels:
+          job: user-rpc
+          app: user-rpc
+          env: dev

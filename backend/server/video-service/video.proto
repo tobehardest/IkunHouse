@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package video;
+
+message Video{
+  string id = 1; // 视频id
+  string url = 2; // 视频播放地址
+  string cover_url = 3; // 视频封面地址
+  string title = 4; // 视频标题
+  int64 favorite_count = 5; // 点赞总数
+  int64 comment_count = 6; // 评论总数
+  bool is_favorite = 7; // 是否点赞
+}
+
+message GetVideoListRequest{
+
+}
+
+message GetVideoListResponse{
+  repeated Video video_list = 1;
+}
+
+// 上传视频
+message UploadVideoRequest{
+  string title = 1;
+  string cover_url = 2;
+  string play_url = 3;
+  int64 author_id = 4;
+}
+
+message UploadVideoResponse{
+  repeated Video video_list = 1;
+}
+
+service VideoService {
+  rpc GetVideoList(GetVideoListRequest) returns (GetVideoListResponse){};
+  rpc UploadVideo(UploadVideoRequest) returns(UploadVideoResponse){};
+}

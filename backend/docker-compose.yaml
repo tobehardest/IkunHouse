@@ -1,0 +1,9 @@
+version: '3.5'
+networks:
+  video-net:
+    driver: bridge
+service:
+  api-server:
+
+  user-rpc:
+    image:

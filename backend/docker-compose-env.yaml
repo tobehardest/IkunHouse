@@ -28,7 +28,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     volumes:
-      - ./deploy/prometheus/server/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./deploy/prometheus/service/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./data/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -77,16 +77,16 @@ services:
       MYSQL_PASSWORD: 123456
       TZ: Asia/Shanghai
     ports:
-      - "3308:3306"
+      - "3306:3306"
     volumes:
       - ./deploy/data/mysql/data:/var/lib/mysql
       - ./deploy/data/mysql/conf:/etc/mysql/conf.d/
       - ./deploy/data/mysql/logs:/logs
       - ./deploy/config/db:/docker-entrypoint-initdb.d
     command:
-      --character-set-server=utf8mb4
+      --character-set-service=utf8mb4
       --default-authentication-plugin=mysql_native_password
-      --collation-server=utf8mb4_general_ci
+      --collation-service=utf8mb4_general_ci
       --explicit_defaults_for_timestamp=true
 #      --lower_case_table_names=1
     networks:
@@ -108,8 +108,8 @@ services:
 #    #      - ${MYSQL_DIR}/logs:/logs
 #    command:
 #      --default-authentication-plugin=mysql_native_password
-#      --character-set-server=utf8mb4
-#      --collation-server=utf8mb4_general_ci
+#      --character-set-service=utf8mb4
+#      --collation-service=utf8mb4_general_ci
 #      --explicit_defaults_for_timestamp=true
 #      --lower_case_table_names=2
 #    networks:
@@ -130,8 +130,8 @@ services:
 #      - ./deploy/config/db_init:/docker-entrypoint-initdb.d
 #    command:
 #      --default-authentication-plugin=mysql_native_password
-#      --character-set-server=utf8mb4
-#      --collation-server=utf8mb4_general_ci
+#      --character-set-service=utf8mb4
+#      --collation-service=utf8mb4_general_ci
 #      --explicit_defaults_for_timestamp=true
 #      --lower_case_table_name=1
 #    networks:
@@ -141,24 +141,11 @@ services:
     image: redis:6.2.7
     restart: always
     volumes:
-      - ./deploy/data/redis/data:/data
-      - ./deploy/data/redis/redis.conf:/etc/redis/redis.conf
+      - ./deploy/data/redisx/data:/data
+      - ./deploy/data/redisx/redisx.conf:/etc/redisx/redisx.conf
     ports:
       - "6379:6379"
-    command: redis-server /etc/redis/redis.conf
-    networks:
-      - video-net
-  kafdrop:
-    container_name: kafdrop
-    image: obsidiandynamics/kafdrop
-    restart: "no"
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    depends_on:
-      - "kafka"
+    command: redisx-service /etc/redisx/redisx.conf
     networks:
       - video-net
   kafka:
@@ -179,6 +166,20 @@ services:
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
     networks:
       - video-net
+  kafdrop:
+    container_name: kafdrop
+    image: obsidiandynamics/kafdrop
+    restart: "no"
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:29092"
+      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+    depends_on:
+      - "kafka"
+    networks:
+      - video-net
+
     #查看elasticsearch数据 - Kibana to view Elasticsearch data
   kibana:
     image: docker.elastic.co/kibana/kibana:7.13.4
@@ -227,6 +228,21 @@ services:
       # 如snap安装的docker，则为/var/snap/docker/common/var-lib-docker/containers - Example if docker is installed by Snap /var/snap/docker/common/var-lib-docker/containers
       # - /var/snap/docker/common/var-lib-docker/containers:/var/lib/docker/containers
       - /var/lib/docker/containers:/var/lib/docker/containers
+    networks:
+      - video-net
+
+  etcd:
+    container_name: etcd3
+    image: bitnami/etcd:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    privileged: true
+    ports:
+      - "2379:2379"
     networks:
       - video-net
 

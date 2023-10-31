@@ -14,6 +14,6 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
-		JWT:    middleware.NewJWTMiddleware().Handle,
+		JWT:    middleware.NewJWTMiddleware(c).Handle,
 	}
 }

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package template;
+
+message VideoModel {
+  int32 video_id = 1;
+  string url = 2;
+  string cover_url = 3;
+  string title = 4;
+  string type = 5;
+  int32 type_id = 6;
+  // TODO 这里的author_id可以换成作者信息，也可以后面发另外一个请求再加载
+  string author_id = 7;
+  int64 favorite_count = 8;
+  int64 comment_count = 9;
+}

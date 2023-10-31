@@ -7,12 +7,12 @@ import (
 	"github.com/qiniu/go-sdk/v7/storage"
 )
 
-func UploadData(key string, data []byte) {
+func UploadData(accessKey string, secretKey string, key string, data []byte) {
 	// 空间名称
 	putPolicy := storage.PutPolicy{
 		Scope: "bucket",
 	}
-	mac := qbox.NewMac("accesskey", "secretKey")
+	mac := qbox.NewMac(accessKey, secretKey)
 	upToken := putPolicy.UploadToken(mac)
 
 	cfg := storage.Config{}

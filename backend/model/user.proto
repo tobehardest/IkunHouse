@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package template;
+
+message UserModel {
+  string UserId = 1;
+  string Username = 2;
+  string Avatar = 3; // 头像
+  string Introduce = 4; // 个人简介
+  int64 FollowCount = 5; // 关注数
+  int64 FollowerCount = 6; // 粉丝数
+  int64 WorkCount = 7; // 作品数
+  int64 CollectCount = 8; // 收藏数
+}
+
+// 注册功能
+message RegisterRequest {
+  string Username = 1;
+  string Password = 2;
+  string Avatar = 3;
+  string Introduce = 4;
+}
+
+// 返回id，由api-service生成token返回
+message RegisterResponse{
+  string ID = 1;
+}
+
+
+// 登录功能
+message LoginRequest {
+  string Username = 1;
+  string Password = 2;
+}
+
+message LoginResponse{
+  string ID = 1;
+}
+
+// 批量获取用户信息
+message MGetUserInfoRequest {
+  repeated string ID = 1;
+}
+
+message MGetUserInfoResponse {
+  repeated UserModel UserInfo = 1;
+}
+
+// 新增关注数 , 用户ID新增count
+message FollowCountRequest {
+  string ID = 1;
+  int64 count = 2;
+  int64 action = 3; // 0-增加，1-减少
+}
+
+message FollowCountResponse {
+
+}
+
+message FollowerCountRequest {
+  string ID = 1;
+  int64 count = 2;
+  int64 action = 3;
+}
+
+message FollowerCountResponse{
+
+}
+
+message WorkCountRequest {
+  string ID = 1;
+  int64 count = 2;
+  int64 action = 3;
+}
+
+message WorkCountResponse{
+
+}
+
+message CollectCountRequest {
+  string ID = 1;
+  int64 count = 2;
+  int64 action = 3;
+}
+
+message CollectCountResponse{
+
+}
+
+message UserExistRequest {
+
+}
+
+message UserExistResponse{
+
+}
+
+service User {
+  rpc Register(RegisterRequest) returns(RegisterResponse);
+  rpc Login(LoginRequest) returns(LoginResponse);
+  rpc UserInfo(MGetUserInfoRequest) returns(MGetUserInfoResponse);
+  rpc FollowCount(FollowCountRequest) returns(FollowCountResponse);
+  rpc FollowerCount(FollowerCountRequest) returns(FollowerCountResponse);
+  rpc CollectCount(CollectCountRequest) returns(CollectCountResponse);
+  rpc WorkCount(WorkCountRequest) returns(WorkCountResponse);
+}

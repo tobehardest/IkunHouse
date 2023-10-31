@@ -10,8 +10,3 @@ CREATE TABLE `user` (
                         UNIQUE KEY `id` (`id`),
                         UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-
-
-CREATE TABLE `video` (
-    
-)

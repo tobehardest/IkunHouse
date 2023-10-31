@@ -14,3 +14,60 @@ message VideoModel {
   int64 favorite_count = 8;
   int64 comment_count = 9;
 }
+
+message UploadVideoRequest {
+  string url = 1;
+  string cover_url = 2;
+  string title = 3;
+  int32 type_id = 4;
+  string author_id = 5;
+}
+
+message UploadVideoResponse{
+  int32 id = 1;
+}
+
+message DeleteVideoRequest {
+  string video_id = 1;
+}
+
+message DeleteVideoResponse{
+
+}
+
+message GetVideoListRequest {
+  string user_id = 1;
+}
+
+message GetVideoListResponse{
+  repeated VideoModel videos = 1;
+}
+
+// 新增点赞数
+message FavoriteCountRequest{
+  int32 video_id = 1;
+  int64 count = 2;
+  int64 action = 3; // 0-增加，1-减少
+}
+
+message FavoriteCountResponse{
+
+}
+
+message CommentCountRequest{
+  int32 video_id = 1;
+  int64 count = 2;
+  int64 action = 3;
+}
+
+message CommentCountResponse{
+
+}
+
+service Video{
+  rpc UploadVideo (UploadVideoRequest) returns(UploadVideoResponse);
+  rpc DeleteVideo(DeleteVideoRequest) returns(DeleteVideoResponse);
+  rpc GetVideoList(GetVideoListRequest) returns(GetVideoListResponse);
+  rpc FavoriteCount(FavoriteCountRequest) returns(FavoriteCountResponse);
+  rpc CommentCount(CommentCountRequest) returns(CommentCountResponse);
+}

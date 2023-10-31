@@ -95,6 +95,17 @@ message UserExistResponse{
 
 }
 
+message UpdateUserInfoRequest {
+  string id = 1;
+  string username = 2;
+  string avatar = 3;
+  string introduce = 4;
+}
+
+message UpdateUserInfoResponse{
+
+}
+
 service User {
   rpc Register(RegisterRequest) returns(RegisterResponse);
   rpc Login(LoginRequest) returns(LoginResponse);
@@ -103,4 +114,5 @@ service User {
   rpc FollowerCount(FollowerCountRequest) returns(FollowerCountResponse);
   rpc CollectCount(CollectCountRequest) returns(CollectCountResponse);
   rpc WorkCount(WorkCountRequest) returns(WorkCountResponse);
+  rpc UpdateUserInfo(UpdateUserInfoRequest) returns(UpdateUserInfoResponse);
 }

@@ -20,7 +20,7 @@ Clusters:
             Op: and
       - Action: remove_field
         Fields:
-          # - message
+          # - msg
           - _source
           - _type
           - _score
@@ -36,7 +36,7 @@ Clusters:
           - stream
           - "@metadata"
       - Action: transfer
-        Field: message
+        Field: msg
         Target: data
     Output:
       ElasticSearch:

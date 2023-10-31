@@ -1,0 +1,58 @@
+import (
+	"auth/auth.api"
+	"user/user.api"
+	"video/video.api"
+	"msg/msg.api"
+)
+
+@server(
+	prefix: auth/v1
+	group: auth
+)
+service video_clip {
+	@doc "用户注册"
+	@handler userRegister
+	post /user/register (RegisterReq) returns (RegisterResp)
+
+	@doc "用户登录"
+	@handler userLogin
+	post /user/login (LoginReq) returns (LoginResp)
+
+	@doc "生成token服务"
+	@handler generateToken
+	post /user/generate_token (GenerateTokenReq) returns (GenerateTokenResp)
+}
+
+@server(
+	prefix: user/v1
+	group: user
+)
+service video_clip {
+	@doc "获取用户信息"
+	@handler getUserInfo
+	get /getUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse)
+}
+
+@server(
+	prefix: video/v1
+	group: video
+)
+service video_clip {
+	@doc "上传视频"
+	@handler uplocadVideo
+	get /uplocadVideo (UplocadVideoReq) returns (UplocadVideoRes)
+}
+
+@server(
+	prefix: msg/v1
+	group: msg
+)
+service video_clip {
+	@doc "发送私聊消息"
+	@handler sendMsg
+	get /sendMsg (SendMsgReq) returns (SendMsgRes)
+}
+
+
+
+

@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/IBM/sarama v1.41.3
 	github.com/bwmarrin/snowflake v0.3.0
+	github.com/elastic/go-elasticsearch/v8 v8.10.1
 	github.com/go-resty/resty/v2 v2.10.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/natefinch/lumberjack v2.0.0+incompatible
@@ -33,6 +34,7 @@ require (
 	github.com/eapache/go-resiliency v1.4.0 // indirect
 	github.com/eapache/go-xerial-snappy v0.0.0-20230731223053-c322873962e3 // indirect
 	github.com/eapache/queue v1.1.0 // indirect
+	github.com/elastic/elastic-transport-go/v8 v8.3.0 // indirect
 	github.com/emicklei/go-restful/v3 v3.9.0 // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect

@@ -12,8 +12,8 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-// prd
-// var configFile = flag.String("f", "etc/api.yaml", "the config file")
+// local
+// var configFile = flag.String("f", "etc/videoclip.yaml", "the config file")
 // dev
 var configFile = flag.String("f", "./cmd/api/etc/api.yaml", "the config file")
 

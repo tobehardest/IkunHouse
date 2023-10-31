@@ -9,10 +9,46 @@ info(
 )
 
 type (
-    UplocadVideoReq {
+    UploadVideoReq {
 
     }
-    UplocadVideoRes {
+    UploadVideoRes {
+        Avatar string `json:"avatar"`
+    }
+)
+
+type (
+    GetHotVideoListReq {
+
+    }
+    GetHotVideoListRes {
+
+    }
+)
+
+type (
+    GetVideoListByCatagoryReq {
+
+    }
+    GetVideoListByCatagoryRes {
+
+    }
+)
+
+type (
+    GetVideoListByTagReq {
+
+    }
+    GetVideoListByTagRes {
+
+    }
+)
+
+type (
+    DownloadVideoReq {
+
+    }
+    DownloadVideoRes {
 
     }
 )

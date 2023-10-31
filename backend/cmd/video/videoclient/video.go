@@ -13,11 +13,11 @@ import (
 )
 
 type (
-	Request  = video.Request
-	Response = video.Response
+	UploadVideoReq = video.UploadVideoReq
+	UploadVideoRes = video.UploadVideoRes
 
 	Video interface {
-		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error)
 	}
 
 	defaultVideo struct {
@@ -31,7 +31,7 @@ func NewVideo(cli zrpc.Client) Video {
 	}
 }
 
-func (m *defaultVideo) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+func (m *defaultVideo) UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error) {
 	client := video.NewVideoClient(m.cli.Conn())
-	return client.Ping(ctx, in, opts...)
+	return client.UploadVideo(ctx, in, opts...)
 }

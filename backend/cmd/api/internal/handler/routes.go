@@ -4,6 +4,10 @@ package handler
 import (
 	"net/http"
 
+	auth "video_clip/cmd/api/internal/handler/auth"
+	msg "video_clip/cmd/api/internal/handler/msg"
+	user "video_clip/cmd/api/internal/handler/user"
+	video "video_clip/cmd/api/internal/handler/video"
 	"video_clip/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -13,10 +17,59 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: ApiHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/user/register",
+				Handler: auth.UserRegisterHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/login",
+				Handler: auth.UserLoginHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/generate_token",
+				Handler: auth.GenerateTokenHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/auth/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/getUserInfo",
+				Handler: user.GetUserInfoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/detail",
+				Handler: user.UpdateUserInfoHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/user/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/uplocadVideo",
+				Handler: video.UplocadVideoHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/video/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/sendMsg",
+				Handler: msg.SendMsgHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/msg/v1"),
 	)
 }

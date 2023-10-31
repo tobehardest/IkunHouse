@@ -17,10 +17,9 @@ package msg
 import (
 	"errors"
 	"fmt"
-
-	"github.com/openimsdk/openkf/server/pkg/openim/client"
-	"github.com/openimsdk/openkf/server/pkg/openim/param/request"
-	"github.com/openimsdk/openkf/server/pkg/openim/param/response"
+	"video_clip/pkg/openim/client"
+	"video_clip/pkg/openim/params/reponse"
+	"video_clip/pkg/openim/params/request"
 )
 
 const (

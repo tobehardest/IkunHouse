@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Video_Ping_FullMethodName = "/video.Video/Ping"
+	Video_UploadVideo_FullMethodName = "/video.Video/UploadVideo"
 )
 
 // VideoClient is the client API for Video service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VideoClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error)
 }
 
 type videoClient struct {
@@ -37,9 +37,9 @@ func NewVideoClient(cc grpc.ClientConnInterface) VideoClient {
 	return &videoClient{cc}
 }
 
-func (c *videoClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Video_Ping_FullMethodName, in, out, opts...)
+func (c *videoClient) UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error) {
+	out := new(UploadVideoRes)
+	err := c.cc.Invoke(ctx, Video_UploadVideo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func (c *videoClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOp
 // All implementations must embed UnimplementedVideoServer
 // for forward compatibility
 type VideoServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	UploadVideo(context.Context, *UploadVideoReq) (*UploadVideoRes, error)
 	mustEmbedUnimplementedVideoServer()
 }
 
@@ -58,8 +58,8 @@ type VideoServer interface {
 type UnimplementedVideoServer struct {
 }
 
-func (UnimplementedVideoServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedVideoServer) UploadVideo(context.Context, *UploadVideoReq) (*UploadVideoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadVideo not implemented")
 }
 func (UnimplementedVideoServer) mustEmbedUnimplementedVideoServer() {}
 
@@ -74,20 +74,20 @@ func RegisterVideoServer(s grpc.ServiceRegistrar, srv VideoServer) {
 	s.RegisterService(&Video_ServiceDesc, srv)
 }
 
-func _Video_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _Video_UploadVideo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadVideoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VideoServer).Ping(ctx, in)
+		return srv.(VideoServer).UploadVideo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Video_Ping_FullMethodName,
+		FullMethod: Video_UploadVideo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).Ping(ctx, req.(*Request))
+		return srv.(VideoServer).UploadVideo(ctx, req.(*UploadVideoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -100,8 +100,8 @@ var Video_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*VideoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Video_Ping_Handler,
+			MethodName: "UploadVideo",
+			Handler:    _Video_UploadVideo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

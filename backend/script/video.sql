@@ -1,7 +1,7 @@
 CREATE TABLE `vc_video` (
-   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-   `uid` int(11) NOT NULL COMMENT '用户id',
-   `topic_id` int(11) DEFAULT '0' COMMENT '圈子id',
+   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `uid` bigint(20) NOT NULL COMMENT '用户id',
+   `topic_id` bigint(11) DEFAULT '0' COMMENT '圈子id',
    `discuss_id` int(11) DEFAULT '0' COMMENT '话题id',
    `title` varchar(50) DEFAULT '' COMMENT '标题',
    `content` longtext CHARACTER SET utf8mb4 COMMENT '内容',
@@ -19,4 +19,4 @@ CREATE TABLE `vc_video` (
    KEY `uid` (`uid`) USING BTREE,
    KEY `topic_id` (`topic_id`) USING BTREE,
    KEY `status` (`status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='帖子表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='帖子表';

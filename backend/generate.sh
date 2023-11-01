@@ -9,4 +9,4 @@
     goctl rpc protoc video.proto --go_out=. --go-grpc_out=. --zrpc_out=. -style goZero
 
 # model
-goctl model mysql ddl --src service/user-service/model/user.sql --dir service/user-service/model
+goctl model mysql ddl --src script/user.sql --dir cmd/user/model

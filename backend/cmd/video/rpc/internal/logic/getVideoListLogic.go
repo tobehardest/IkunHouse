@@ -24,7 +24,11 @@ func NewGetVideoListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetV
 }
 
 func (l *GetVideoListLogic) GetVideoList(in *video.GetVideoRequest) (*video.GetVideoResponse, error) {
-	// todo: add your logic here and delete this line
+	if in.Tag != "" {
+		// 根据类别查找
+	}
+
+	// 根据当前时间推荐视频
 
 	return &video.GetVideoResponse{}, nil
 }

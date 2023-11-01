@@ -83,3 +83,5 @@ func (m *defaultVcVideoCollectModel) Update(ctx context.Context, data *VcVideoCo
 func (m *defaultVcVideoCollectModel) tableName() string {
 	return m.table
 }
+
+//func (m *defaultVcVideoCollectModel) FindBy

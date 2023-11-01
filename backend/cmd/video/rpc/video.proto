@@ -14,6 +14,7 @@ message UploadVideoRequest {
   double longitude = 5; // 经度
   double latitude = 6; // 纬度
   repeated int64 tag_id = 7; // 标签id
+  string VideoSha256 = 8; // 哈希值，判断视频是否重复
 }
 
 message UploadVideoResponse {

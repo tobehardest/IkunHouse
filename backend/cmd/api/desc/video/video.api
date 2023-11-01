@@ -10,7 +10,7 @@ info(
 
 type (
     UploadVideoReq {
-
+        
     }
     UploadVideoRes {
         Avatar string `json:"avatar"`

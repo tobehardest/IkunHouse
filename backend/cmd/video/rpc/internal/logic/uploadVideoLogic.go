@@ -2,10 +2,11 @@ package logic
 
 import (
 	"context"
+	"database/sql"
+	"github.com/zeromicro/go-zero/core/logx"
+	"video_clip/cmd/video/model"
 	"video_clip/cmd/video/rpc/internal/svc"
 	"video_clip/cmd/video/rpc/video"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type UploadVideoLogic struct {
@@ -23,6 +24,25 @@ func NewUploadVideoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Uploa
 }
 
 func (l *UploadVideoLogic) UploadVideo(in *video.UploadVideoRequest) (*video.UploadVideoResponse, error) {
+	// 获得数据库连接
+	conn := model.NewTVideoModel(l.svcCtx.SqlConn)
 
-	return &video.UploadVideoResponse{}, nil
+	v := model.TVideo{
+		Uid:      in.Uid,
+		Title:    in.Title,
+		Media:    sql.NullString{String: in.Media},
+		CoverUrl: sql.NullString{String: in.CoverUrl},
+		Type:     2,
+		//Address: sql.NullString{Add}
+		Longitude: in.Longitude,
+		Latitude:  in.Latitude,
+	}
+	result, err := conn.Insert(l.ctx, &v)
+	if err != nil {
+		return &video.UploadVideoResponse{}, err
+	}
+	id, err := result.LastInsertId()
+	return &video.UploadVideoResponse{
+		Id: id,
+	}, err
 }

@@ -28,6 +28,7 @@ type (
 		FindOne(ctx context.Context, id int64) (*Tag, error)
 		Update(ctx context.Context, data *Tag) error
 		Delete(ctx context.Context, id int64) error
+		FindAll(ctx context.Context) ([]*Tag,error)
 	}
 
 	defaultTagModel struct {
@@ -85,3 +86,8 @@ func (m *defaultTagModel) Update(ctx context.Context, data *Tag) error {
 func (m *defaultTagModel) tableName() string {
 	return m.table
 }
+
+//func (m *defaultTagModel) FindAll(ctx context.Context) ([]*Tag,error) {
+//	query := fmt.Sprintf("select id,tag_name from %s order by update_time desc",m.table)
+//	err := m.conn.QueryRows()
+//}

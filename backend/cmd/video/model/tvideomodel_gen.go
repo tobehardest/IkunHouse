@@ -36,19 +36,20 @@ type (
 	}
 
 	TVideo struct {
-		Id         int64          `db:"id"`          // id
-		Uid        string         `db:"uid"`         // 用户id
-		Title      string         `db:"title"`       // 标题
-		Content    sql.NullString `db:"content"`     // 内容
-		Media      sql.NullString `db:"media"`       // 文件
-		CoverUrl   sql.NullString `db:"cover_url"`   // 视频封面
-		ReadCount  int64          `db:"read_count"`  // 浏览量
-		Type       int64          `db:"type"`        // 帖子类型：1图文2视频3文章
-		Address    sql.NullString `db:"address"`     // 地址名称
-		Longitude  float64        `db:"longitude"`   // 经度
-		Latitude   float64        `db:"latitude"`    // 纬度
-		CreateTime time.Time      `db:"create_time"` // 创建时间
-		UpdateTime time.Time      `db:"update_time"` // 最后修改时间
+		Id          int64          `db:"id"`           // id
+		Uid         string         `db:"uid"`          // 用户id
+		Title       string         `db:"title"`        // 标题
+		Content     sql.NullString `db:"content"`      // 内容
+		Media       sql.NullString `db:"media"`        // 文件
+		CoverUrl    sql.NullString `db:"cover_url"`    // 视频封面
+		VideoSha256 sql.NullString `db:"video_sha256"` // 视频哈希值
+		ReadCount   int64          `db:"read_count"`   // 浏览量
+		Type        int64          `db:"type"`         // 帖子类型：1图文2视频3文章
+		Address     sql.NullString `db:"address"`      // 地址名称
+		Longitude   float64        `db:"longitude"`    // 经度
+		Latitude    float64        `db:"latitude"`     // 纬度
+		CreateTime  time.Time      `db:"create_time"`  // 创建时间
+		UpdateTime  time.Time      `db:"update_time"`  // 最后修改时间
 	}
 )
 
@@ -80,14 +81,14 @@ func (m *defaultTVideoModel) FindOne(ctx context.Context, id int64) (*TVideo, er
 }
 
 func (m *defaultTVideoModel) Insert(ctx context.Context, data *TVideo) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, tVideoRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Uid, data.Title, data.Content, data.Media, data.CoverUrl, data.ReadCount, data.Type, data.Address, data.Longitude, data.Latitude)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, tVideoRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.Uid, data.Title, data.Content, data.Media, data.CoverUrl, data.VideoSha256, data.ReadCount, data.Type, data.Address, data.Longitude, data.Latitude)
 	return ret, err
 }
 
 func (m *defaultTVideoModel) Update(ctx context.Context, data *TVideo) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, tVideoRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Uid, data.Title, data.Content, data.Media, data.CoverUrl, data.ReadCount, data.Type, data.Address, data.Longitude, data.Latitude, data.Id)
+	_, err := m.conn.ExecCtx(ctx, query, data.Uid, data.Title, data.Content, data.Media, data.CoverUrl, data.VideoSha256, data.ReadCount, data.Type, data.Address, data.Longitude, data.Latitude, data.Id)
 	return err
 }
 

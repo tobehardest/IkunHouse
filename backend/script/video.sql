@@ -8,6 +8,7 @@ CREATE TABLE `t_video` (
    `content` longtext CHARACTER SET utf8mb4 COMMENT '内容',
    `media` text COMMENT '文件',
    `cover_url` text COMMENT '视频封面',
+   `video_sha256` text COMMENT '视频哈希值',
    `read_count` int(255) DEFAULT '0' COMMENT '浏览量',
 --    `post_top` int(1) DEFAULT '0' COMMENT '置顶',
    `type` int(1) DEFAULT '1' COMMENT '帖子类型：1图文2视频3文章',

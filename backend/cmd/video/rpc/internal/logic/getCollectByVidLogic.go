@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"video_clip/cmd/video/rpc/internal/svc"
 	"video_clip/cmd/video/rpc/video"
 
@@ -24,7 +23,8 @@ func NewGetCollectByVidLogic(ctx context.Context, svcCtx *svc.ServiceContext) *G
 }
 
 func (l *GetCollectByVidLogic) GetCollectByVid(in *video.GetCollectByVidRequest) (*video.GetCollectByVidResponse, error) {
-	// todo: add your logic here and delete this line
+	//conn := model.NewVcVideoCollectModel(l.svcCtx.SqlConn)
+	//conn.FindOne()
 
 	return &video.GetCollectByVidResponse{}, nil
 }

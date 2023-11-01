@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"video_clip/cmd/video/rpc/internal/svc"
 	"video_clip/cmd/video/rpc/video"
 
@@ -24,7 +23,8 @@ func NewGetTypeListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetTy
 }
 
 func (l *GetTypeListLogic) GetTypeList(in *video.GetTypeListRequest) (*video.GetTypeListResponse, error) {
-	// todo: add your logic here and delete this line
+	//conn := model.NewTagModel(l.svcCtx.SqlConn)
+	// TODO 实现批量查询方法
 
 	return &video.GetTypeListResponse{}, nil
 }

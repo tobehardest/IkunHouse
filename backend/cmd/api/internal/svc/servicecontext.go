@@ -3,9 +3,9 @@ package svc
 import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"video_clip/cmd/api/internal/config"
-	"video_clip/cmd/msg/msgclient"
+	"video_clip/cmd/msg/rpc/msgclient"
 	"video_clip/cmd/user/rpc/userclient"
-	"video_clip/cmd/video/videoclient"
+	"video_clip/cmd/video/rpc/videoclient"
 )
 
 type ServiceContext struct {

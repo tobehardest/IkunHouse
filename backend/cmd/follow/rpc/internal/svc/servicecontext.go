@@ -1,6 +1,8 @@
 package svc
 
-import "video_clip/cmd/follow/internal/config"
+import (
+	"video_clip/cmd/follow/rpc/internal/config"
+)
 
 type ServiceContext struct {
 	Config config.Config

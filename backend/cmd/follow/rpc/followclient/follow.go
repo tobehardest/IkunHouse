@@ -5,24 +5,23 @@ package followclient
 
 import (
 	"context"
-
-	"video_clip/cmd/follow/follow"
+	follow2 "video_clip/cmd/follow/rpc/follow"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	FansItem           = follow.FansItem
-	FansListRequest    = follow.FansListRequest
-	FansListResponse   = follow.FansListResponse
-	FollowItem         = follow.FollowItem
-	FollowListRequest  = follow.FollowListRequest
-	FollowListResponse = follow.FollowListResponse
-	FollowRequest      = follow.FollowRequest
-	FollowResponse     = follow.FollowResponse
-	UnFollowRequest    = follow.UnFollowRequest
-	UnFollowResponse   = follow.UnFollowResponse
+	FansItem           = follow2.FansItem
+	FansListRequest    = follow2.FansListRequest
+	FansListResponse   = follow2.FansListResponse
+	FollowItem         = follow2.FollowItem
+	FollowListRequest  = follow2.FollowListRequest
+	FollowListResponse = follow2.FollowListResponse
+	FollowRequest      = follow2.FollowRequest
+	FollowResponse     = follow2.FollowResponse
+	UnFollowRequest    = follow2.UnFollowRequest
+	UnFollowResponse   = follow2.UnFollowResponse
 
 	Follow interface {
 		// 关注
@@ -48,24 +47,24 @@ func NewFollow(cli zrpc.Client) Follow {
 
 // 关注
 func (m *defaultFollow) Follow(ctx context.Context, in *FollowRequest, opts ...grpc.CallOption) (*FollowResponse, error) {
-	client := follow.NewFollowClient(m.cli.Conn())
+	client := follow2.NewFollowClient(m.cli.Conn())
 	return client.Follow(ctx, in, opts...)
 }
 
 // 取消关注
 func (m *defaultFollow) UnFollow(ctx context.Context, in *UnFollowRequest, opts ...grpc.CallOption) (*UnFollowResponse, error) {
-	client := follow.NewFollowClient(m.cli.Conn())
+	client := follow2.NewFollowClient(m.cli.Conn())
 	return client.UnFollow(ctx, in, opts...)
 }
 
 // 关注列表
 func (m *defaultFollow) FollowList(ctx context.Context, in *FollowListRequest, opts ...grpc.CallOption) (*FollowListResponse, error) {
-	client := follow.NewFollowClient(m.cli.Conn())
+	client := follow2.NewFollowClient(m.cli.Conn())
 	return client.FollowList(ctx, in, opts...)
 }
 
 // 粉丝列表
 func (m *defaultFollow) FansList(ctx context.Context, in *FansListRequest, opts ...grpc.CallOption) (*FansListResponse, error) {
-	client := follow.NewFollowClient(m.cli.Conn())
+	client := follow2.NewFollowClient(m.cli.Conn())
 	return client.FansList(ctx, in, opts...)
 }

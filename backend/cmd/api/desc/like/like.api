@@ -10,10 +10,24 @@ info(
 
 type  (
     LikeReq {
-
+        BizId string `json:"bizId"`     // 业务id
+        TargetId int64 `json:"targetId"`      // 点赞对象id
+        UserId int64 `json:"userId"`    // 用户id
+        LikeType int32 `json:"likeType"`    // 点赞类型  0:点赞 1:点踩
     }
     LikeRes {
 
+    }
+)
+
+type (
+    IsLikeReq {
+        BizId string `json:"bizId"`
+        TargetId int64 `json:"targetId"`
+        UserId int64 `json:"userId"`
+    }
+    IsLikeRes {
+        UserLikes map[int64]string `json:"userLikes"`
     }
 )
 
@@ -25,5 +39,3 @@ type  (
 
     }
 )
-
-type

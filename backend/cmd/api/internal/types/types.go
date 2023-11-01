@@ -4,9 +4,17 @@ package types
 type RegisterReq struct {
 	UserName string `json:"username"`
 	Password string `json:"password"`
+	Avatar   string `json:"avatar"`
+	Mobile   string `json:"mobile"`
 }
 
 type RegisterResp struct {
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+	RefreshAfter int64  `json:"refreshAfter"`
+}
+
+type Token struct {
 	AccessToken  string `json:"accessToken"`
 	AccessExpire int64  `json:"accessExpire"`
 	RefreshAfter int64  `json:"refreshAfter"`
@@ -18,9 +26,7 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int64  `json:"accessExpire"`
-	RefreshAfter int64  `json:"refreshAfter"`
+	Token Token `json:"token"`
 }
 
 type GenerateTokenReq struct {
@@ -63,15 +69,156 @@ type UpdateUserInfoReq struct {
 type UpdateUserInfoRes struct {
 }
 
-type UplocadVideoReq struct {
+type UploadVideoReq struct {
 }
 
-type UplocadVideoRes struct {
+type UploadVideoRes struct {
 	Avatar string `json:"avatar"`
+}
+
+type GetHotVideoListReq struct {
+}
+
+type GetHotVideoListRes struct {
+}
+
+type GetVideoListByCatagoryReq struct {
+}
+
+type GetVideoListByCatagoryRes struct {
+}
+
+type GetVideoListByTagReq struct {
+}
+
+type GetVideoListByTagRes struct {
+}
+
+type DownloadVideoReq struct {
+}
+
+type DownloadVideoRes struct {
 }
 
 type SendMsgReq struct {
 }
 
 type SendMsgRes struct {
+}
+
+type LikeReq struct {
+	BizId    string `json:"bizId"`    // 业务id
+	TargetId int64  `json:"targetId"` // 点赞对象id
+	UserId   int64  `json:"userId"`   // 用户id
+	LikeType int32  `json:"likeType"` // 点赞类型  0:点赞 1:点踩
+}
+
+type LikeRes struct {
+}
+
+type IsLikeReq struct {
+	BizId    string `json:"bizId"`
+	TargetId int64  `json:"targetId"`
+	UserId   int64  `json:"userId"`
+}
+
+type IsLikeRes struct {
+	UserLikes map[int64]string `json:"userLikes"`
+}
+
+type CancelLikeReq struct {
+}
+
+type CancelLikeRes struct {
+}
+
+type FollowReq struct {
+	UserId         int64 `json:"userId"`
+	FollowedUserId int64 `json:"followedUserId"`
+}
+
+type FollowRes struct {
+}
+
+type UnFollowReq struct {
+	UserId         int64 `json:"userId"`
+	FollowedUserId int64 `json:"followedUserId"`
+}
+
+type UnFollowRes struct {
+}
+
+type FollowItem struct {
+}
+
+type FollowListReq struct {
+	UserId   int64 `json:"userId"`
+	Cursor   int64 `json:"cursor"`
+	PageSize int64 `json:"pageSize"`
+}
+
+type FollowListRes struct {
+	FollowList []FollowItem `json:"followList"`
+	Cursor     int64        `json:"cursor"`
+	IsEnd      bool         `json:"isEnd"`
+}
+
+type FansItem struct {
+	FansUserId int64 `json:"fansUserId"`
+}
+
+type FansListReq struct {
+	UserId   int64 `json:"userId"`
+	Cursor   int64 `json:"cursor"`
+	PageSize int64 `json:"pageSize"`
+}
+
+type FansListRes struct {
+	FansList []FansItem `json:"fansList"`
+	Cursor   int64      `json:"cursor"`
+	IsEnd    bool       `json:"isEnd"`
+}
+
+type Comment struct {
+	PostID    int64  `json:"postId"`
+	Pid       int64  `json:"pid"`
+	CommentId int64  `json:"commentId"`
+	Content   string `json:"content"`
+}
+
+type CommentReq struct {
+	PostID    int64  `json:"postId"`
+	Pid       int64  `json:"pid"`
+	CommentId int64  `json:"commentId"`
+	Content   string `json:"content"`
+}
+
+type CommentRes struct {
+	CommentId int64 `json:"commentId"`
+}
+
+type CancelCommentReq struct {
+}
+
+type CancelCommentRes struct {
+}
+
+type CommentListReq struct {
+	Ids []string `json:"ids"`
+}
+
+type CommentListRes struct {
+	CommentList []Comment `json:"commentList"`
+}
+
+type CommentDetailReq struct {
+}
+
+type CommentDetailRes struct {
+}
+
+type DeleteCommentReq struct {
+}
+
+type DeleteCommentRes struct {
 }

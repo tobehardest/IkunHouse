@@ -8,6 +8,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.10.1
 	github.com/go-resty/resty/v2 v2.10.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/jinzhu/copier v0.4.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/openimsdk/openkf/server v0.0.0-20231025060753-ce6e4e27ea7c
 	github.com/pkg/errors v0.9.1

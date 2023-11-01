@@ -13,19 +13,11 @@ import (
 )
 
 type (
-	LoginRequest     = user.LoginRequest
-	LoginResponse    = user.LoginResponse
-	RegisterRequest  = user.RegisterRequest
-	RegisterResponse = user.RegisterResponse
 	UserInfoModel    = user.UserInfoModel
 	UserInfoRequest  = user.UserInfoRequest
 	UserInfoResponse = user.UserInfoResponse
 
 	User interface {
-		// 注册接口
-		Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
-		// 登录接口
-		Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 		// 批量获得用户信息接口
 		MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 	}
@@ -39,18 +31,6 @@ func NewUser(cli zrpc.Client) User {
 	return &defaultUser{
 		cli: cli,
 	}
-}
-
-// 注册接口
-func (m *defaultUser) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
-	client := user.NewUserClient(m.cli.Conn())
-	return client.Register(ctx, in, opts...)
-}
-
-// 登录接口
-func (m *defaultUser) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	client := user.NewUserClient(m.cli.Conn())
-	return client.Login(ctx, in, opts...)
 }
 
 // 批量获得用户信息接口

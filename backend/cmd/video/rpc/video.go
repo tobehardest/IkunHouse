@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"video_clip/cmd/video/internal/config"
-	"video_clip/cmd/video/internal/server"
-	"video_clip/cmd/video/internal/svc"
-	"video_clip/cmd/video/video"
+	"video_clip/cmd/video/rpc/internal/config"
+	"video_clip/cmd/video/rpc/internal/server"
+	"video_clip/cmd/video/rpc/internal/svc"
+	"video_clip/cmd/video/rpc/video"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

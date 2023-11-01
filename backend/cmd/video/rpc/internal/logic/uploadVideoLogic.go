@@ -2,9 +2,8 @@ package logic
 
 import (
 	"context"
-
-	"video_clip/cmd/video/internal/svc"
-	"video_clip/cmd/video/video"
+	"video_clip/cmd/video/rpc/internal/svc"
+	"video_clip/cmd/video/rpc/video"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

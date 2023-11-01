@@ -5,10 +5,9 @@ package server
 
 import (
 	"context"
-
-	"video_clip/cmd/video/internal/logic"
-	"video_clip/cmd/video/internal/svc"
-	"video_clip/cmd/video/video"
+	"video_clip/cmd/video/rpc/internal/logic"
+	"video_clip/cmd/video/rpc/internal/svc"
+	"video_clip/cmd/video/rpc/video"
 )
 
 type VideoServer struct {

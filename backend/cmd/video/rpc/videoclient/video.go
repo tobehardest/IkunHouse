@@ -5,6 +5,7 @@ package videoclient
 
 import (
 	"context"
+
 	"video_clip/cmd/video/rpc/video"
 
 	"github.com/zeromicro/go-zero/zrpc"
@@ -12,11 +13,31 @@ import (
 )
 
 type (
-	UploadVideoReq = video.UploadVideoReq
-	UploadVideoRes = video.UploadVideoRes
+	AddCollectRequest       = video.AddCollectRequest
+	AddCollectResponse      = video.AddCollectResponse
+	AddReadCountRequest     = video.AddReadCountRequest
+	AddReadCountResponse    = video.AddReadCountResponse
+	GetCollectByUidRequest  = video.GetCollectByUidRequest
+	GetCollectByUidResponse = video.GetCollectByUidResponse
+	GetCollectByVidRequest  = video.GetCollectByVidRequest
+	GetCollectByVidResponse = video.GetCollectByVidResponse
+	GetTypeListRequest      = video.GetTypeListRequest
+	GetTypeListResponse     = video.GetTypeListResponse
+	GetVideoRequest         = video.GetVideoRequest
+	GetVideoResponse        = video.GetVideoResponse
+	Type                    = video.Type
+	UploadVideoRequest      = video.UploadVideoRequest
+	UploadVideoResponse     = video.UploadVideoResponse
+	VideoModel              = video.VideoModel
 
 	Video interface {
-		UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error)
+		UploadVideo(ctx context.Context, in *UploadVideoRequest, opts ...grpc.CallOption) (*UploadVideoResponse, error)
+		AddReadCount(ctx context.Context, in *AddReadCountRequest, opts ...grpc.CallOption) (*AddReadCountResponse, error)
+		GetVideoList(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*GetVideoResponse, error)
+		AddCollect(ctx context.Context, in *AddCollectRequest, opts ...grpc.CallOption) (*AddCollectResponse, error)
+		GetCollectByVid(ctx context.Context, in *GetCollectByVidRequest, opts ...grpc.CallOption) (*GetCollectByVidResponse, error)
+		GetCollectByUid(ctx context.Context, in *GetCollectByUidRequest, opts ...grpc.CallOption) (*GetCollectByUidResponse, error)
+		GetTypeList(ctx context.Context, in *GetTypeListRequest, opts ...grpc.CallOption) (*GetTypeListResponse, error)
 	}
 
 	defaultVideo struct {
@@ -30,7 +51,37 @@ func NewVideo(cli zrpc.Client) Video {
 	}
 }
 
-func (m *defaultVideo) UploadVideo(ctx context.Context, in *UploadVideoReq, opts ...grpc.CallOption) (*UploadVideoRes, error) {
+func (m *defaultVideo) UploadVideo(ctx context.Context, in *UploadVideoRequest, opts ...grpc.CallOption) (*UploadVideoResponse, error) {
 	client := video.NewVideoClient(m.cli.Conn())
 	return client.UploadVideo(ctx, in, opts...)
+}
+
+func (m *defaultVideo) AddReadCount(ctx context.Context, in *AddReadCountRequest, opts ...grpc.CallOption) (*AddReadCountResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.AddReadCount(ctx, in, opts...)
+}
+
+func (m *defaultVideo) GetVideoList(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*GetVideoResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.GetVideoList(ctx, in, opts...)
+}
+
+func (m *defaultVideo) AddCollect(ctx context.Context, in *AddCollectRequest, opts ...grpc.CallOption) (*AddCollectResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.AddCollect(ctx, in, opts...)
+}
+
+func (m *defaultVideo) GetCollectByVid(ctx context.Context, in *GetCollectByVidRequest, opts ...grpc.CallOption) (*GetCollectByVidResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.GetCollectByVid(ctx, in, opts...)
+}
+
+func (m *defaultVideo) GetCollectByUid(ctx context.Context, in *GetCollectByUidRequest, opts ...grpc.CallOption) (*GetCollectByUidResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.GetCollectByUid(ctx, in, opts...)
+}
+
+func (m *defaultVideo) GetTypeList(ctx context.Context, in *GetTypeListRequest, opts ...grpc.CallOption) (*GetTypeListResponse, error) {
+	client := video.NewVideoClient(m.cli.Conn())
+	return client.GetTypeList(ctx, in, opts...)
 }

@@ -22,8 +22,7 @@ func NewUploadVideoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Uploa
 	}
 }
 
-func (l *UploadVideoLogic) UploadVideo(in *video.UploadVideoReq) (*video.UploadVideoRes, error) {
-	// todo: add your logic here and delete this line
+func (l *UploadVideoLogic) UploadVideo(in *video.UploadVideoRequest) (*video.UploadVideoResponse, error) {
 
-	return &video.UploadVideoRes{}, nil
+	return &video.UploadVideoResponse{}, nil
 }

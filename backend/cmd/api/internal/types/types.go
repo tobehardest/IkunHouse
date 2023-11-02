@@ -75,13 +75,30 @@ type UploadVideoReq struct {
 	Latitude  float64 `form:"latitude" json:"latitude"`
 	Address   string  `form:"address" json:"address"` // 作者地址
 	TagId     []int64 `form:"tag_id" json:"tag_id"`   // 选择的类型
-	Media     string
-	CoverUrl string
-	Sha256 string
-	Uid string
+	Media     string  `json:"media"`
+	CoverUrl  string  `json:"cover_url"`
+	Sha256    string  `json:"sha256"`
 }
 
 type UploadVideoRes struct {
+}
+
+type AddReadCountRequest struct {
+}
+
+type AddReadCountResponse struct {
+}
+
+type GetTypeListRequest struct {
+}
+
+type GetTypeListResponse struct {
+	TypeList []Type `json:"type_list"`
+}
+
+type Type struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type GetVideoListRequst struct {

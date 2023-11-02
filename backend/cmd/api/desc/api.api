@@ -55,6 +55,10 @@ service video_clip {
 	@handler getVideoList
 	get /getVideoList (GetVideoListRequst) returns(GetVideoListResponse)
 	
+	@doc "获得视频类别"
+	@handler getTypeList
+	get /getTypeList (GetTypeListRequest) returns(GetTypeListResponse)
+	
 	//	@doc "get video by list"
 	//	@handler getVideoListByCatagory
 	//	get /getVideoListByCatagory (GetVideoListByCatagoryReq) returns (GetVideoListByCatagoryRes)

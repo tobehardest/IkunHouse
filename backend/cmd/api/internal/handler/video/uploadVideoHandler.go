@@ -76,6 +76,7 @@ func UploadVideoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		// 上传视频
 		req.Media, err = oss.UploadData(kubo_cfg, file_header, hash)
+		req.Sha256 = hash
 
 		// TODO 解析上传者id
 

@@ -6,6 +6,7 @@ import (
 	"like/like.api"
 	"follow/follow.api"
 	"comment/comment.api"
+	"collect/collect.api"
 )
 
 @server(
@@ -118,6 +119,20 @@ service video_clip {
 	@doc "delete comment"
 	@handler deleteComment
 	post /delete (DeleteCommentReq) returns (DeleteCommentReq)
+}
+
+@server(
+	prefix:	collect/v1
+	group: collect
+)
+service video_clip {
+	@doc "collect"
+	@handler collect
+	post /collect (CollectReq) returns (CollectRes)
+	
+	@doc "my collect list"
+	@handler collectList
+	post /list (CollectListReq) returns (CollectListRes)
 }
 
 @server(

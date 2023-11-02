@@ -4,6 +4,7 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"video_clip/cmd/api/internal/config"
 	"video_clip/cmd/auth/rpc/authclient"
+	"video_clip/cmd/collect/rpc/collectclient"
 	"video_clip/cmd/comment/rpc/commentclient"
 	"video_clip/cmd/follow/rpc/followclient"
 	"video_clip/cmd/like/rpc/likeclient"
@@ -22,6 +23,7 @@ type ServiceContext struct {
 	LikeClient    likeclient.Like
 	FollowClient  followclient.Follow
 	CommentClient commentclient.Comment
+	CollectClient collectclient.Collect
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -34,5 +36,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		LikeClient:    likeclient.NewLike(zrpc.MustNewClient(c.LikeRpcConf)),
 		FollowClient:  followclient.NewFollow(zrpc.MustNewClient(c.FollowRpcConf)),
 		CommentClient: commentclient.NewComment(zrpc.MustNewClient(c.CommentRpcConf)),
+		CollectClient: collectclient.NewCollect(zrpc.MustNewClient(c.CommentRpcConf)),
 	}
 }

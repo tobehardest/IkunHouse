@@ -16,4 +16,5 @@ type Config struct {
 	LikeRpcConf    zrpc.RpcClientConf
 	FollowRpcConf  zrpc.RpcClientConf
 	CommentRpcConf zrpc.RpcClientConf
+	CollectRpcConf zrpc.RpcClientConf
 }

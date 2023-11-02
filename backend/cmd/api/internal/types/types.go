@@ -222,3 +222,15 @@ type DeleteCommentReq struct {
 
 type DeleteCommentRes struct {
 }
+
+type CollectReq struct {
+}
+
+type CollectRes struct {
+}
+
+type CollectListReq struct {
+}
+
+type CollectListRes struct {
+}

@@ -2,11 +2,13 @@ package like
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
 
 	"video_clip/cmd/api/internal/svc"
 	"video_clip/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"video_clip/cmd/like/rpc/like"
 )
 
 type LikeLogic struct {
@@ -25,6 +27,16 @@ func NewLikeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LikeLogic {
 
 func (l *LikeLogic) Like(req *types.LikeReq) (resp *types.LikeRes, err error) {
 	// todo: add your logic here and delete this line
+	res, err := l.svcCtx.LikeClient.Like(l.ctx, &like.LikeReq{
+		BizId:    req.BizId,
+		TargetId: req.TargetId,
+		UserId:   req.UserId,
+		LikeType: req.LikeType,
+	})
 
-	return
+	err = copier.Copy(resp, res)
+	if err != nil {
+
+	}
+	return resp, nil
 }

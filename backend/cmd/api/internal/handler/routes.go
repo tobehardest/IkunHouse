@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	auth "video_clip/cmd/api/internal/handler/auth"
+	collect "video_clip/cmd/api/internal/handler/collect"
 	comment "video_clip/cmd/api/internal/handler/comment"
 	follow "video_clip/cmd/api/internal/handler/follow"
 	like "video_clip/cmd/api/internal/handler/like"
@@ -146,6 +147,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/comment/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/collect",
+				Handler: collect.CollectHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: collect.CollectListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/collect/v1"),
 	)
 
 	server.AddRoutes(

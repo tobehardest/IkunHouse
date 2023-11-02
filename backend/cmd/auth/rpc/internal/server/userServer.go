@@ -11,25 +11,25 @@ import (
 	"video_clip/cmd/auth/rpc/internal/svc"
 )
 
-type AuthServer struct {
+type UserServer struct {
 	svcCtx *svc.ServiceContext
-	auth.UnimplementedAuthServer
+	auth.UnimplementedUserServer
 }
 
-func NewAuthServer(svcCtx *svc.ServiceContext) *AuthServer {
-	return &AuthServer{
+func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
+	return &UserServer{
 		svcCtx: svcCtx,
 	}
 }
 
 // 注册接口
-func (s *AuthServer) Register(ctx context.Context, in *auth.RegisterReq) (*auth.RegisterRes, error) {
+func (s *UserServer) Register(ctx context.Context, in *auth.RegisterRequest) (*auth.RegisterResponse, error) {
 	l := logic.NewRegisterLogic(ctx, s.svcCtx)
 	return l.Register(in)
 }
 
 // 登录接口
-func (s *AuthServer) Login(ctx context.Context, in *auth.LoginReq) (*auth.LoginRes, error) {
+func (s *UserServer) Login(ctx context.Context, in *auth.LoginRequest) (*auth.LoginResponse, error) {
 	l := logic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
 }

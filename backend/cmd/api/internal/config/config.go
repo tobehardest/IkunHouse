@@ -9,7 +9,11 @@ type Config struct {
 	rest.RestConf
 
 	// rpc conf
-	UserRpcConf  zrpc.RpcClientConf
-	VideoRpcConf zrpc.RpcClientConf
-	MsgRpcConf   zrpc.RpcClientConf
+	AuthRpcConf    zrpc.RpcClientConf
+	UserRpcConf    zrpc.RpcClientConf
+	VideoRpcConf   zrpc.RpcClientConf
+	MsgRpcConf     zrpc.RpcClientConf
+	LikeRpcConf    zrpc.RpcClientConf
+	FollowRpcConf  zrpc.RpcClientConf
+	CommentRpcConf zrpc.RpcClientConf
 }

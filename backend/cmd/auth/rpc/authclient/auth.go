@@ -5,18 +5,24 @@ package authclient
 
 import (
 	"context"
-	auth2 "video_clip/cmd/auth/rpc/auth"
+
+	"video_clip/cmd/auth/rpc/auth"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	Request  = auth2.Request
-	Response = auth2.Response
+	LoginReq    = auth.LoginReq
+	LoginRes    = auth.LoginRes
+	RegisterReq = auth.RegisterReq
+	RegisterRes = auth.RegisterRes
 
 	Auth interface {
-		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		// 注册接口
+		Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
+		// 登录接口
+		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error)
 	}
 
 	defaultAuth struct {
@@ -30,7 +36,14 @@ func NewAuth(cli zrpc.Client) Auth {
 	}
 }
 
-func (m *defaultAuth) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	client := auth2.NewAuthClient(m.cli.Conn())
-	return client.Ping(ctx, in, opts...)
+// 注册接口
+func (m *defaultAuth) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error) {
+	client := auth.NewAuthClient(m.cli.Conn())
+	return client.Register(ctx, in, opts...)
+}
+
+// 登录接口
+func (m *defaultAuth) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error) {
+	client := auth.NewAuthClient(m.cli.Conn())
+	return client.Login(ctx, in, opts...)
 }

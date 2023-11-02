@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"video_clip/cmd/user/rpc/internal/svc"
-	"video_clip/cmd/user/rpc/types/user"
+	"video_clip/cmd/auth/rpc/auth"
+	"video_clip/cmd/auth/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,6 +24,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 // 登录接口
-func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
-	return &user.LoginResponse{}, nil
+func (l *LoginLogic) Login(in *auth.LoginRequest) (*auth.LoginResponse, error) {
+	// todo: add your logic here and delete this line
+
+	return &auth.LoginResponse{}, nil
 }

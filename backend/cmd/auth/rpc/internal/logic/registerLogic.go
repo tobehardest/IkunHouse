@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"video_clip/cmd/user/rpc/internal/svc"
-	"video_clip/cmd/user/rpc/types/user"
+	"video_clip/cmd/auth/rpc/auth"
+	"video_clip/cmd/auth/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +24,8 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 // 注册接口
-func (l *RegisterLogic) Register(in *user.RegisterRequest) (*user.RegisterResponse, error) {
+func (l *RegisterLogic) Register(in *auth.RegisterRequest) (*auth.RegisterResponse, error) {
+	// todo: add your logic here and delete this line
 
-	return &user.RegisterResponse{}, nil
+	return &auth.RegisterResponse{}, nil
 }

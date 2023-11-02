@@ -8,12 +8,22 @@ info(
     version: "type version here"
 )
 
+type Comment {
+    PostID int64 `json:"postId"`
+    Pid    int64 `json:"pid"`
+    CommentId int64 `json:"commentId"`
+    Content string `json:"content"`
+}
+
 type (
     CommentReq {
-
+        PostID int64 `json:"postId"`
+        Pid    int64 `json:"pid"`
+        CommentId int64 `json:"commentId"`
+        Content string `json:"content"`
     }
     CommentRes {
-
+        CommentId int64 `json:"commentId"`
     }
 )
 
@@ -28,10 +38,10 @@ type (
 
 type (
     CommentListReq {
-
+        Ids []string `json:"ids"`
     }
     CommentListRes {
-
+        CommentList []Comment `json:"commentList"`
     }
 )
 

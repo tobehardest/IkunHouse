@@ -5,14 +5,15 @@ package server
 
 import (
 	"context"
+
 	"video_clip/cmd/like/rpc/internal/logic"
 	"video_clip/cmd/like/rpc/internal/svc"
-	like2 "video_clip/cmd/like/rpc/like"
+	"video_clip/cmd/like/rpc/like"
 )
 
 type LikeServer struct {
 	svcCtx *svc.ServiceContext
-	like2.UnimplementedLikeServer
+	like.UnimplementedLikeServer
 }
 
 func NewLikeServer(svcCtx *svc.ServiceContext) *LikeServer {
@@ -21,7 +22,12 @@ func NewLikeServer(svcCtx *svc.ServiceContext) *LikeServer {
 	}
 }
 
-func (s *LikeServer) Ping(ctx context.Context, in *like2.Request) (*like2.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+func (s *LikeServer) Like(ctx context.Context, in *like.LikeReq) (*like.LikeRes, error) {
+	l := logic.NewLikeLogic(ctx, s.svcCtx)
+	return l.Like(in)
+}
+
+func (s *LikeServer) IsLike(ctx context.Context, in *like.IsLikeReq) (*like.IsLikeRes, error) {
+	l := logic.NewIsLikeLogic(ctx, s.svcCtx)
+	return l.IsLike(in)
 }

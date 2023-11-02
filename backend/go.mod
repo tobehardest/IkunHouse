@@ -15,6 +15,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/qiniu/go-sdk/v7 v7.18.2
 	github.com/redis/go-redis/v9 v9.2.1
+	github.com/sony/sonyflake v1.2.0
 	github.com/zeromicro/go-queue v1.1.8
 	github.com/zeromicro/go-zero v1.6.0
 	go.opentelemetry.io/otel v1.19.0

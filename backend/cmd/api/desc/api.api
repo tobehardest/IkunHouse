@@ -46,17 +46,18 @@ service video_clip {
 	group: video
 )
 service video_clip {
+	// TODO 上传视频需要判断用户是否登录
 	@doc "上传视频"
 	@handler uploadVideo
 	get /uploadVideo (UploadVideoReq) returns (UploadVideoRes)
 	
-	@doc "get hot video list"
-	@handler getHotVideoList
-	get /getHotVideoList (GetHotVideoListReq) returns (UploadVideoRes)
+	@doc "获得视频"
+	@handler getVideoList
+	get /getVideoList (GetVideoListRequst) returns(GetVideoListResponse)
 	
-	@doc "get video by list"
-	@handler getVideoListByCatagory
-	get /getVideoListByCatagory (GetVideoListByCatagoryReq) returns (GetVideoListByCatagoryRes)
+	//	@doc "get video by list"
+	//	@handler getVideoListByCatagory
+	//	get /getVideoListByCatagory (GetVideoListByCatagoryReq) returns (GetVideoListByCatagoryRes)
 }
 
 @server(

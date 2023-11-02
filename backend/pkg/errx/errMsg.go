@@ -17,6 +17,9 @@ func init() {
 	message[FollowedUserIdEmpty] = "被关注用户id为空"
 	message[CannotFollowSelf] = "不能关注自己"
 	message[UserIdEmpty] = "用户id为空"
+
+	// 视频模块
+
 }
 
 func MapErrMsg(errcode uint32) string {

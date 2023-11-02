@@ -19,13 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Video_UploadVideo_FullMethodName     = "/video.Video/UploadVideo"
-	Video_AddReadCount_FullMethodName    = "/video.Video/AddReadCount"
-	Video_GetVideoList_FullMethodName    = "/video.Video/GetVideoList"
-	Video_AddCollect_FullMethodName      = "/video.Video/AddCollect"
-	Video_GetCollectByVid_FullMethodName = "/video.Video/GetCollectByVid"
-	Video_GetCollectByUid_FullMethodName = "/video.Video/GetCollectByUid"
-	Video_GetTypeList_FullMethodName     = "/video.Video/GetTypeList"
+	Video_UploadVideo_FullMethodName  = "/video.Video/UploadVideo"
+	Video_AddReadCount_FullMethodName = "/video.Video/AddReadCount"
+	Video_GetVideoList_FullMethodName = "/video.Video/GetVideoList"
+	Video_GetTypeList_FullMethodName  = "/video.Video/GetTypeList"
+	Video_IfExistVideo_FullMethodName = "/video.Video/IfExistVideo"
 )
 
 // VideoClient is the client API for Video service.
@@ -35,10 +33,11 @@ type VideoClient interface {
 	UploadVideo(ctx context.Context, in *UploadVideoRequest, opts ...grpc.CallOption) (*UploadVideoResponse, error)
 	AddReadCount(ctx context.Context, in *AddReadCountRequest, opts ...grpc.CallOption) (*AddReadCountResponse, error)
 	GetVideoList(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*GetVideoResponse, error)
-	AddCollect(ctx context.Context, in *AddCollectRequest, opts ...grpc.CallOption) (*AddCollectResponse, error)
-	GetCollectByVid(ctx context.Context, in *GetCollectByVidRequest, opts ...grpc.CallOption) (*GetCollectByVidResponse, error)
-	GetCollectByUid(ctx context.Context, in *GetCollectByUidRequest, opts ...grpc.CallOption) (*GetCollectByUidResponse, error)
+	// rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
+	// rpc GetCollectByVid(GetCollectByVidRequest) returns(GetCollectByVidResponse);
+	// rpc GetCollectByUid(GetCollectByUidRequest) returns(GetCollectByUidResponse);
 	GetTypeList(ctx context.Context, in *GetTypeListRequest, opts ...grpc.CallOption) (*GetTypeListResponse, error)
+	IfExistVideo(ctx context.Context, in *ExistVideoRequest, opts ...grpc.CallOption) (*ExistVideoResponse, error)
 }
 
 type videoClient struct {
@@ -76,36 +75,18 @@ func (c *videoClient) GetVideoList(ctx context.Context, in *GetVideoRequest, opt
 	return out, nil
 }
 
-func (c *videoClient) AddCollect(ctx context.Context, in *AddCollectRequest, opts ...grpc.CallOption) (*AddCollectResponse, error) {
-	out := new(AddCollectResponse)
-	err := c.cc.Invoke(ctx, Video_AddCollect_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *videoClient) GetCollectByVid(ctx context.Context, in *GetCollectByVidRequest, opts ...grpc.CallOption) (*GetCollectByVidResponse, error) {
-	out := new(GetCollectByVidResponse)
-	err := c.cc.Invoke(ctx, Video_GetCollectByVid_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *videoClient) GetCollectByUid(ctx context.Context, in *GetCollectByUidRequest, opts ...grpc.CallOption) (*GetCollectByUidResponse, error) {
-	out := new(GetCollectByUidResponse)
-	err := c.cc.Invoke(ctx, Video_GetCollectByUid_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *videoClient) GetTypeList(ctx context.Context, in *GetTypeListRequest, opts ...grpc.CallOption) (*GetTypeListResponse, error) {
 	out := new(GetTypeListResponse)
 	err := c.cc.Invoke(ctx, Video_GetTypeList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *videoClient) IfExistVideo(ctx context.Context, in *ExistVideoRequest, opts ...grpc.CallOption) (*ExistVideoResponse, error) {
+	out := new(ExistVideoResponse)
+	err := c.cc.Invoke(ctx, Video_IfExistVideo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -119,10 +100,11 @@ type VideoServer interface {
 	UploadVideo(context.Context, *UploadVideoRequest) (*UploadVideoResponse, error)
 	AddReadCount(context.Context, *AddReadCountRequest) (*AddReadCountResponse, error)
 	GetVideoList(context.Context, *GetVideoRequest) (*GetVideoResponse, error)
-	AddCollect(context.Context, *AddCollectRequest) (*AddCollectResponse, error)
-	GetCollectByVid(context.Context, *GetCollectByVidRequest) (*GetCollectByVidResponse, error)
-	GetCollectByUid(context.Context, *GetCollectByUidRequest) (*GetCollectByUidResponse, error)
+	// rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
+	// rpc GetCollectByVid(GetCollectByVidRequest) returns(GetCollectByVidResponse);
+	// rpc GetCollectByUid(GetCollectByUidRequest) returns(GetCollectByUidResponse);
 	GetTypeList(context.Context, *GetTypeListRequest) (*GetTypeListResponse, error)
+	IfExistVideo(context.Context, *ExistVideoRequest) (*ExistVideoResponse, error)
 	mustEmbedUnimplementedVideoServer()
 }
 
@@ -139,17 +121,11 @@ func (UnimplementedVideoServer) AddReadCount(context.Context, *AddReadCountReque
 func (UnimplementedVideoServer) GetVideoList(context.Context, *GetVideoRequest) (*GetVideoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVideoList not implemented")
 }
-func (UnimplementedVideoServer) AddCollect(context.Context, *AddCollectRequest) (*AddCollectResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCollect not implemented")
-}
-func (UnimplementedVideoServer) GetCollectByVid(context.Context, *GetCollectByVidRequest) (*GetCollectByVidResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCollectByVid not implemented")
-}
-func (UnimplementedVideoServer) GetCollectByUid(context.Context, *GetCollectByUidRequest) (*GetCollectByUidResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCollectByUid not implemented")
-}
 func (UnimplementedVideoServer) GetTypeList(context.Context, *GetTypeListRequest) (*GetTypeListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTypeList not implemented")
+}
+func (UnimplementedVideoServer) IfExistVideo(context.Context, *ExistVideoRequest) (*ExistVideoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IfExistVideo not implemented")
 }
 func (UnimplementedVideoServer) mustEmbedUnimplementedVideoServer() {}
 
@@ -218,60 +194,6 @@ func _Video_GetVideoList_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Video_AddCollect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCollectRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoServer).AddCollect(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Video_AddCollect_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).AddCollect(ctx, req.(*AddCollectRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Video_GetCollectByVid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCollectByVidRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoServer).GetCollectByVid(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Video_GetCollectByVid_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).GetCollectByVid(ctx, req.(*GetCollectByVidRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Video_GetCollectByUid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCollectByUidRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoServer).GetCollectByUid(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Video_GetCollectByUid_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).GetCollectByUid(ctx, req.(*GetCollectByUidRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Video_GetTypeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTypeListRequest)
 	if err := dec(in); err != nil {
@@ -286,6 +208,24 @@ func _Video_GetTypeList_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VideoServer).GetTypeList(ctx, req.(*GetTypeListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Video_IfExistVideo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExistVideoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServer).IfExistVideo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Video_IfExistVideo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServer).IfExistVideo(ctx, req.(*ExistVideoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -310,20 +250,12 @@ var Video_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Video_GetVideoList_Handler,
 		},
 		{
-			MethodName: "AddCollect",
-			Handler:    _Video_AddCollect_Handler,
-		},
-		{
-			MethodName: "GetCollectByVid",
-			Handler:    _Video_GetCollectByVid_Handler,
-		},
-		{
-			MethodName: "GetCollectByUid",
-			Handler:    _Video_GetCollectByUid_Handler,
-		},
-		{
 			MethodName: "GetTypeList",
 			Handler:    _Video_GetTypeList_Handler,
+		},
+		{
+			MethodName: "IfExistVideo",
+			Handler:    _Video_IfExistVideo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

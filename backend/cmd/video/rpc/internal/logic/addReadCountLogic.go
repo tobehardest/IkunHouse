@@ -24,7 +24,6 @@ func NewAddReadCountLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddR
 }
 
 func (l *AddReadCountLogic) AddReadCount(in *video.AddReadCountRequest) (*video.AddReadCountResponse, error) {
-	// todo: add your logic here and delete this line
-
-	return &video.AddReadCountResponse{}, nil
+	err := l.svcCtx.VideoModel.AddReadCount(context.Background(), in.Id, in.Count)
+	return &video.AddReadCountResponse{}, err
 }

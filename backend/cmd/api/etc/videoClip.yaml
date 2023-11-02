@@ -1,3 +1,9 @@
 Name: video_clip
 Host: 0.0.0.0
 Port: 8888
+
+OSS:
+  AccessKey: 2H0cu5Oo9QRD7pSWXX-gCjDXjyaKU4Mw7y2XSx5q
+  SecretKey: VAEiWagIhTqM7VlTDBg-zRFM4UIFWhr5kJbAzBXR
+  Bucket: video-clip2
+  Domain: s3eki5poq.hn-bkt.clouddn.com

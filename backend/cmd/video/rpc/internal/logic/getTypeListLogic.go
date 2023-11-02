@@ -23,8 +23,13 @@ func NewGetTypeListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetTy
 }
 
 func (l *GetTypeListLogic) GetTypeList(in *video.GetTypeListRequest) (*video.GetTypeListResponse, error) {
-	//conn := model.NewTagModel(l.svcCtx.SqlConn)
-	// TODO 实现批量查询方法
-
-	return &video.GetTypeListResponse{}, nil
+	tags, err := l.svcCtx.TagModel.FindAllTag(l.ctx)
+	type_list := make([]*video.Type, len(tags))
+	for index, tag := range tags {
+		type_list[index].Id = tag.Id
+		type_list[index].Name = tag.TagName
+	}
+	return &video.GetTypeListResponse{
+		TypeList: type_list,
+	}, err
 }

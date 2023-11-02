@@ -6,6 +6,8 @@ import (
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 	"mime/multipart"
+	"os"
+	"os/exec"
 )
 
 type KuboConfig struct {
@@ -53,6 +55,31 @@ func UploadData(kubo_cfg *KuboConfig, file *multipart.FileHeader, key string) (s
 
 	// 上传后的文件访问路径
 	url := kubo_cfg.DomainName + "/" + ret.Key
+	return url, err
+}
+
+func GenerateDefaultCoverUrl(cfg *KuboConfig, media multipart.File) (string, error) {
+	// 使用ffmpeg生成
+	// CreateTemp 会保证生成唯一的文件夹
+	thumbnaiFile, err := os.CreateTemp("tmp", "cover_*.jpg")
+	defer thumbnaiFile.Close()
+	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-vframes", "1", thumbnaiFile.Name())
+	cmd.Stdin = media
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+	file_info, err := os.Stat(thumbnaiFile.Name())
+	if err != nil {
+		return "", err
+	}
+	// 创建虚拟文件头
+	fileHeader := &multipart.FileHeader{
+		Filename: thumbnaiFile.Name(),
+		Size:     file_info.Size(),
+	}
+
+	// 上传对象存储
+	url, err := UploadData(cfg, fileHeader, "")
 	return url, err
 }
 

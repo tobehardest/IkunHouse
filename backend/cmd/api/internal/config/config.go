@@ -17,4 +17,11 @@ type Config struct {
 	FollowRpcConf  zrpc.RpcClientConf
 	CommentRpcConf zrpc.RpcClientConf
 	CollectRpcConf zrpc.RpcClientConf
+
+	Oss struct {
+		AccessKey string
+		SecretKey string
+		Bucket    string
+		Domain    string
+	}
 }

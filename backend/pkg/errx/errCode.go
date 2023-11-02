@@ -22,3 +22,5 @@ const (
 	CannotFollowSelf    = 400003
 	UserIdEmpty         = 400004
 )
+
+// 视频模块

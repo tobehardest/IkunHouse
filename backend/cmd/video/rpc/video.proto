@@ -13,8 +13,9 @@ message UploadVideoRequest {
   string cover_url = 4; // 封面路径
   double longitude = 5; // 经度
   double latitude = 6; // 纬度
-  repeated int64 tag_id = 7; // 标签id
-  string VideoSha256 = 8; // 哈希值，判断视频是否重复
+  string Address = 7;
+  repeated int64 tag_id = 8; // 标签id
+  string VideoSha256 = 9; // 哈希值，判断视频是否重复
 }
 
 message UploadVideoResponse {
@@ -40,9 +41,10 @@ message VideoModel {
   string media = 4;
   string cover_url = 5;
   string read_count = 6;
-  double longitude = 7;
-  double latitude = 8;
-  google.protobuf.Timestamp create_time = 9;
+  string address = 7;
+  double longitude = 8;
+  double latitude = 9;
+  google.protobuf.Timestamp create_time = 10;
 }
 
 // 添加访问量
@@ -56,32 +58,32 @@ message AddReadCountResponse{
 
 }
 
-message AddCollectRequest {
-  string uid = 1;
-  int64 vid = 2;
-}
+//message AddCollectRequest {
+//  string uid = 1;
+//  int64 vid = 2;
+//}
+//
+//message AddCollectResponse{
+//
+//}
 
-message AddCollectResponse{
-
-}
-
-message GetCollectByVidRequest{
-  int64 vid = 1;
-}
-
-message GetCollectByVidResponse{
-  int64 vid = 1;
-  int64 collect_num = 2;
-}
-
-message GetCollectByUidRequest{
-  string uid = 1;
-}
-
-message GetCollectByUidResponse{
-  string uid = 1;
-  int64 collect_num = 2;
-}
+//message GetCollectByVidRequest{
+//  int64 vid = 1;
+//}
+//
+//message GetCollectByVidResponse{
+//  int64 vid = 1;
+//  int64 collect_num = 2;
+//}
+//
+//message GetCollectByUidRequest{
+//  string uid = 1;
+//}
+//
+//message GetCollectByUidResponse{
+//  string uid = 1;
+//  int64 collect_num = 2;
+//}
 
 // 获得所有类型
 message GetTypeListRequest{
@@ -97,13 +99,24 @@ message Type {
   string name = 2;
 }
 
+message ExistVideoRequest {
+  string videoHash256 = 1;
+}
+
+message ExistVideoResponse{
+  bool exist = 1; // 是否存在
+  string media = 2; // 视频链接(存在时才返回)
+}
+
+// TODO 获得附近的视频 - 根据经纬度计算
 
 service Video {
   rpc UploadVideo(UploadVideoRequest) returns(UploadVideoResponse);
   rpc AddReadCount(AddReadCountRequest) returns(AddReadCountResponse);
   rpc GetVideoList(GetVideoRequest) returns(GetVideoResponse);
-  rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
-  rpc GetCollectByVid(GetCollectByVidRequest) returns(GetCollectByVidResponse);
-  rpc GetCollectByUid(GetCollectByUidRequest) returns(GetCollectByUidResponse);
+//  rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
+//  rpc GetCollectByVid(GetCollectByVidRequest) returns(GetCollectByVidResponse);
+//  rpc GetCollectByUid(GetCollectByUidRequest) returns(GetCollectByUidResponse);
   rpc GetTypeList(GetTypeListRequest) returns(GetTypeListResponse);
+  rpc IfExistVideo(ExistVideoRequest) returns(ExistVideoResponse);
 }

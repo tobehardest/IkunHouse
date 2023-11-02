@@ -24,9 +24,6 @@ func NewUploadVideoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Uploa
 }
 
 func (l *UploadVideoLogic) UploadVideo(in *video.UploadVideoRequest) (*video.UploadVideoResponse, error) {
-	// 获得数据库连接
-	conn := model.NewTVideoModel(l.svcCtx.SqlConn)
-
 	v := model.TVideo{
 		Uid:      in.Uid,
 		Title:    in.Title,
@@ -37,7 +34,8 @@ func (l *UploadVideoLogic) UploadVideo(in *video.UploadVideoRequest) (*video.Upl
 		Longitude: in.Longitude,
 		Latitude:  in.Latitude,
 	}
-	result, err := conn.Insert(l.ctx, &v)
+	//result, err := conn.Insert(l.ctx, &v)
+	result, err := l.svcCtx.VideoModel.Insert(l.ctx, &v)
 	if err != nil {
 		return &video.UploadVideoResponse{}, err
 	}

@@ -28,6 +28,8 @@ type (
 		FindOne(ctx context.Context, id int64) (*TVideo, error)
 		Update(ctx context.Context, data *TVideo) error
 		Delete(ctx context.Context, id int64) error
+		SelectVideoExist(ctx context.Context,videoSha256 string) (*TVideo,error)
+		AddReadCount(ctx context.Context,id int64,count int64) error
 	}
 
 	defaultTVideoModel struct {
@@ -94,4 +96,31 @@ func (m *defaultTVideoModel) Update(ctx context.Context, data *TVideo) error {
 
 func (m *defaultTVideoModel) tableName() string {
 	return m.table
+}
+
+func (m *defaultTVideoModel) SelectVideoExist(ctx context.Context,videoSha256 string) (*TVideo,error) {
+	var resp *TVideo
+	query := fmt.Sprintf("select %s from %s where `video_sha256` = ? limit 1",tVideoRows,m.table)
+	err := m.conn.QueryRowCtx(ctx,&resp,query,videoSha256)
+	if err != nil {
+		return resp,nil
+	}
+	switch err {
+	case nil:
+		return resp,nil
+	case sqlc.ErrNotFound:
+		return nil,ErrNotFound
+	default:
+		return nil,err
+	}
+}
+
+
+func (m *defaultTVideoModel) AddReadCount(ctx context.Context,id int64,count int64) error {
+	updateQuery := fmt.Sprintf("update %s set read_count = read_count + ? where id = ?",m.table)
+	_,err := m.conn.ExecCtx(ctx,updateQuery,count,id)
+	if err != nil {
+		return err
+	}
+	return nil
 }

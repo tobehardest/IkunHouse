@@ -10,45 +10,61 @@ info(
 
 type (
     UploadVideoReq {
-        
+        // form表单的file不在api里写，而是在logic从request中获取
+        // 包括封面
+        Title string `form:"title" json:"title"`
+        Longitude float64 `form:"longitude" json:"longitude"`
+        Latitude float64 `form:"latitude" json:"latitude"`
+        Address string `form:"address" json:"address"` // 作者地址
+        TagId []int64 `form:"tag_id" json:"tag_id"` // 选择的类型
     }
     UploadVideoRes {
-        Avatar string `json:"avatar"`
-    }
-)
-
-type (
-    GetHotVideoListReq {
-
-    }
-    GetHotVideoListRes {
 
     }
 )
 
 type (
-    GetVideoListByCatagoryReq {
+    GetVideoListRequst {
 
     }
-    GetVideoListByCatagoryRes {
 
-    }
-)
-
-type (
-    GetVideoListByTagReq {
-
-    }
-    GetVideoListByTagRes {
+    GetVideoListResponse{
 
     }
 )
 
-type (
-    DownloadVideoReq {
+//type (
+//    GetHotVideoListReq {
+//
+//    }
+//    GetHotVideoListRes {
+//
+//    }
+//)
 
-    }
-    DownloadVideoRes {
+//type (
+//    GetVideoListByCatagoryReq {
+//
+//    }
+//    GetVideoListByCatagoryRes {
+//
+//    }
+//)
 
-    }
-)
+//type (
+//    GetVideoListByTagReq {
+//
+//    }
+//    GetVideoListByTagRes {
+//
+//    }
+//)
+
+//type (
+//    DownloadVideoReq {
+//
+//    }
+//    DownloadVideoRes {
+//
+//    }
+//)

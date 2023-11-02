@@ -37,22 +37,13 @@ func (s *VideoServer) GetVideoList(ctx context.Context, in *video.GetVideoReques
 	return l.GetVideoList(in)
 }
 
-func (s *VideoServer) AddCollect(ctx context.Context, in *video.AddCollectRequest) (*video.AddCollectResponse, error) {
-	l := logic.NewAddCollectLogic(ctx, s.svcCtx)
-	return l.AddCollect(in)
-}
-
-func (s *VideoServer) GetCollectByVid(ctx context.Context, in *video.GetCollectByVidRequest) (*video.GetCollectByVidResponse, error) {
-	l := logic.NewGetCollectByVidLogic(ctx, s.svcCtx)
-	return l.GetCollectByVid(in)
-}
-
-func (s *VideoServer) GetCollectByUid(ctx context.Context, in *video.GetCollectByUidRequest) (*video.GetCollectByUidResponse, error) {
-	l := logic.NewGetCollectByUidLogic(ctx, s.svcCtx)
-	return l.GetCollectByUid(in)
-}
-
+// rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
 func (s *VideoServer) GetTypeList(ctx context.Context, in *video.GetTypeListRequest) (*video.GetTypeListResponse, error) {
 	l := logic.NewGetTypeListLogic(ctx, s.svcCtx)
 	return l.GetTypeList(in)
+}
+
+func (s *VideoServer) IfExistVideo(ctx context.Context, in *video.ExistVideoRequest) (*video.ExistVideoResponse, error) {
+	l := logic.NewIfExistVideoLogic(ctx, s.svcCtx)
+	return l.IfExistVideo(in)
 }

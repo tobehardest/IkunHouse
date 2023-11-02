@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package collect;
+option go_package="./collect";
+
+service Collect {
+  // 收藏
+  rpc Collect (CollectReq) returns (CollectRes);
+
+  // 收藏列表
+  rpc CollectList (CollectListReq) returns (CollectListRes);
+}
+
+message CollectReq {
+
+}
+
+message CollectRes {
+
+}
+
+message CollectListReq {
+
+}
+
+message CollectListRes {
+
+}

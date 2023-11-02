@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Like_Ping_FullMethodName = "/like.Like/Ping"
+	Like_Like_FullMethodName   = "/like.Like/Like"
+	Like_IsLike_FullMethodName = "/like.Like/IsLike"
 )
 
 // LikeClient is the client API for Like service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LikeClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Like(ctx context.Context, in *LikeReq, opts ...grpc.CallOption) (*LikeRes, error)
+	IsLike(ctx context.Context, in *IsLikeReq, opts ...grpc.CallOption) (*IsLikeRes, error)
 }
 
 type likeClient struct {
@@ -37,9 +39,18 @@ func NewLikeClient(cc grpc.ClientConnInterface) LikeClient {
 	return &likeClient{cc}
 }
 
-func (c *likeClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Like_Ping_FullMethodName, in, out, opts...)
+func (c *likeClient) Like(ctx context.Context, in *LikeReq, opts ...grpc.CallOption) (*LikeRes, error) {
+	out := new(LikeRes)
+	err := c.cc.Invoke(ctx, Like_Like_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *likeClient) IsLike(ctx context.Context, in *IsLikeReq, opts ...grpc.CallOption) (*IsLikeRes, error) {
+	out := new(IsLikeRes)
+	err := c.cc.Invoke(ctx, Like_IsLike_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +61,8 @@ func (c *likeClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOpt
 // All implementations must embed UnimplementedLikeServer
 // for forward compatibility
 type LikeServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	Like(context.Context, *LikeReq) (*LikeRes, error)
+	IsLike(context.Context, *IsLikeReq) (*IsLikeRes, error)
 	mustEmbedUnimplementedLikeServer()
 }
 
@@ -58,8 +70,11 @@ type LikeServer interface {
 type UnimplementedLikeServer struct {
 }
 
-func (UnimplementedLikeServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedLikeServer) Like(context.Context, *LikeReq) (*LikeRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Like not implemented")
+}
+func (UnimplementedLikeServer) IsLike(context.Context, *IsLikeReq) (*IsLikeRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsLike not implemented")
 }
 func (UnimplementedLikeServer) mustEmbedUnimplementedLikeServer() {}
 
@@ -74,20 +89,38 @@ func RegisterLikeServer(s grpc.ServiceRegistrar, srv LikeServer) {
 	s.RegisterService(&Like_ServiceDesc, srv)
 }
 
-func _Like_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _Like_Like_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LikeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LikeServer).Ping(ctx, in)
+		return srv.(LikeServer).Like(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Like_Ping_FullMethodName,
+		FullMethod: Like_Like_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LikeServer).Ping(ctx, req.(*Request))
+		return srv.(LikeServer).Like(ctx, req.(*LikeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Like_IsLike_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLikeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LikeServer).IsLike(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Like_IsLike_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LikeServer).IsLike(ctx, req.(*IsLikeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -100,8 +133,12 @@ var Like_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LikeServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Like_Ping_Handler,
+			MethodName: "Like",
+			Handler:    _Like_Like_Handler,
+		},
+		{
+			MethodName: "IsLike",
+			Handler:    _Like_IsLike_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -4,7 +4,9 @@ import (
 	"video/video.api"
 	"msg/msg.api"
 	"like/like.api"
+	"follow/follow.api"
 	"comment/comment.api"
+	"collect/collect.api"
 )
 
 @server(
@@ -47,11 +49,11 @@ service video_clip {
 	@doc "上传视频"
 	@handler uploadVideo
 	get /uploadVideo (UploadVideoReq) returns (UploadVideoRes)
-
+	
 	@doc "get hot video list"
 	@handler getHotVideoList
 	get /getHotVideoList (GetHotVideoListReq) returns (UploadVideoRes)
-
+	
 	@doc "get video by list"
 	@handler getVideoListByCatagory
 	get /getVideoListByCatagory (GetVideoListByCatagoryReq) returns (GetVideoListByCatagoryRes)
@@ -65,10 +67,32 @@ service video_clip {
 	@doc "like"
 	@handler like
 	post /like (LikeReq) returns (LikeRes)
-
+	
 	@doc "cancel like"
 	@handler cancelLike
 	post /cancelLike (CancelLikeReq) returns (CancelLikeReq)
+}
+
+@server(
+	prefix:	follow/v1
+	group: follow
+)
+service video_clip {
+	@doc "follow"
+	@handler follow
+	post /follow (FollowReq) returns (FollowRes)
+	
+	@doc "unFollow"
+	@handler unFollow
+	post /unFollow (UnFollowReq) returns (UnFollowRes)
+	
+	@doc "follow list"
+	@handler followList
+	post /follow/list (FollowListReq) returns (FollowListReq)
+	
+	@doc "fas list"
+	@handler fansList
+	post /fans/list (FansListReq) returns (FansListRes)
 }
 
 @server(
@@ -79,22 +103,36 @@ service video_clip {
 	@doc "comment"
 	@handler comment
 	post /comment (CommentReq) returns (CommentRes)
-
+	
 	@doc "cancel comment"
 	@handler cancelComment
 	post /cancel (CancelCommentReq) returns (CancelCommentReq)
-
+	
 	@doc "comment list"
 	@handler commentList
 	post /list (CommentListReq) returns (CommentListRes)
-
+	
 	@doc "comment detail"
 	@handler commentDetail
 	post /detail (CommentDetailReq) returns (CommentDetailRes)
-
+	
 	@doc "delete comment"
 	@handler deleteComment
 	post /delete (DeleteCommentReq) returns (DeleteCommentReq)
+}
+
+@server(
+	prefix:	collect/v1
+	group: collect
+)
+service video_clip {
+	@doc "collect"
+	@handler collect
+	post /collect (CollectReq) returns (CollectRes)
+	
+	@doc "my collect list"
+	@handler collectList
+	post /list (CollectListReq) returns (CollectListRes)
 }
 
 @server(

@@ -1,3 +1,0 @@
-syntax = "v1"
-// goctl api-service go -api-service cmd/api-service-cmd/app.api-service -dir cmd/api-service-cmd -style goZero
-import "apis/user.api-service"

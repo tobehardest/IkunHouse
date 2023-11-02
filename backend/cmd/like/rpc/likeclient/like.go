@@ -5,18 +5,23 @@ package likeclient
 
 import (
 	"context"
-	like2 "video_clip/cmd/like/rpc/like"
+
+	"video_clip/cmd/like/rpc/like"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	Request  = like2.Request
-	Response = like2.Response
+	IsLikeReq   = like.IsLikeReq
+	IsLikeRes   = like.IsLikeRes
+	LikeReq     = like.LikeReq
+	LikeRes     = like.LikeRes
+	UserThumbup = like.UserThumbup
 
 	Like interface {
-		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		Like(ctx context.Context, in *LikeReq, opts ...grpc.CallOption) (*LikeRes, error)
+		IsLike(ctx context.Context, in *IsLikeReq, opts ...grpc.CallOption) (*IsLikeRes, error)
 	}
 
 	defaultLike struct {
@@ -30,7 +35,12 @@ func NewLike(cli zrpc.Client) Like {
 	}
 }
 
-func (m *defaultLike) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	client := like2.NewLikeClient(m.cli.Conn())
-	return client.Ping(ctx, in, opts...)
+func (m *defaultLike) Like(ctx context.Context, in *LikeReq, opts ...grpc.CallOption) (*LikeRes, error) {
+	client := like.NewLikeClient(m.cli.Conn())
+	return client.Like(ctx, in, opts...)
+}
+
+func (m *defaultLike) IsLike(ctx context.Context, in *IsLikeReq, opts ...grpc.CallOption) (*IsLikeRes, error) {
+	client := like.NewLikeClient(m.cli.Conn())
+	return client.IsLike(ctx, in, opts...)
 }

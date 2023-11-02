@@ -4,25 +4,6 @@ package user;
 
 option go_package = "./user";
 
-message RegisterRequest {
-  string username = 1;
-  string password = 2;
-}
-
-message RegisterResponse {
-  string UserId = 1;
-//  string Token = 2;
-}
-
-message LoginRequest {
-  string username = 1;
-  string password = 2;
-}
-
-message LoginResponse{
-  int64 UserId = 1;
-}
-
 message UserInfoRequest {
   repeated string UserId = 1;
 }
@@ -43,10 +24,6 @@ message UserInfoModel {
 }
 
 service User {
-  // 注册接口
-  rpc Register(RegisterRequest) returns(RegisterResponse) {}
-  // 登录接口
-  rpc Login(LoginRequest) returns(LoginResponse){}
   // 批量获得用户信息接口
   rpc MGetUserInfo(UserInfoRequest) returns(UserInfoResponse){}
 }

@@ -5,6 +5,10 @@ import (
 	"net/http"
 
 	auth "video_clip/cmd/api/internal/handler/auth"
+	collect "video_clip/cmd/api/internal/handler/collect"
+	comment "video_clip/cmd/api/internal/handler/comment"
+	follow "video_clip/cmd/api/internal/handler/follow"
+	like "video_clip/cmd/api/internal/handler/like"
 	msg "video_clip/cmd/api/internal/handler/msg"
 	user "video_clip/cmd/api/internal/handler/user"
 	video "video_clip/cmd/api/internal/handler/video"
@@ -44,7 +48,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/detail",
+				Path:    "/user/updateUserInfo",
 				Handler: user.UpdateUserInfoHandler(serverCtx),
 			},
 		},
@@ -55,11 +59,110 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/uplocadVideo",
-				Handler: video.UplocadVideoHandler(serverCtx),
+				Path:    "/uploadVideo",
+				Handler: video.UploadVideoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/getHotVideoList",
+				Handler: video.GetHotVideoListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/getVideoListByCatagory",
+				Handler: video.GetVideoListByCatagoryHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/video/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/like",
+				Handler: like.LikeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cancelLike",
+				Handler: like.CancelLikeHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/like/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/follow",
+				Handler: follow.FollowHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/unFollow",
+				Handler: follow.UnFollowHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/follow/list",
+				Handler: follow.FollowListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/fans/list",
+				Handler: follow.FansListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/follow/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/comment",
+				Handler: comment.CommentHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cancel",
+				Handler: comment.CancelCommentHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: comment.CommentListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/detail",
+				Handler: comment.CommentDetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: comment.DeleteCommentHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/comment/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/collect",
+				Handler: collect.CollectHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: collect.CollectListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/collect/v1"),
 	)
 
 	server.AddRoutes(

@@ -5,14 +5,15 @@ package server
 
 import (
 	"context"
-	auth2 "video_clip/cmd/auth/rpc/auth"
+
+	"video_clip/cmd/auth/rpc/auth"
 	"video_clip/cmd/auth/rpc/internal/logic"
 	"video_clip/cmd/auth/rpc/internal/svc"
 )
 
 type AuthServer struct {
 	svcCtx *svc.ServiceContext
-	auth2.UnimplementedAuthServer
+	auth.UnimplementedAuthServer
 }
 
 func NewAuthServer(svcCtx *svc.ServiceContext) *AuthServer {
@@ -21,7 +22,14 @@ func NewAuthServer(svcCtx *svc.ServiceContext) *AuthServer {
 	}
 }
 
-func (s *AuthServer) Ping(ctx context.Context, in *auth2.Request) (*auth2.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+// 注册接口
+func (s *AuthServer) Register(ctx context.Context, in *auth.RegisterReq) (*auth.RegisterRes, error) {
+	l := logic.NewRegisterLogic(ctx, s.svcCtx)
+	return l.Register(in)
+}
+
+// 登录接口
+func (s *AuthServer) Login(ctx context.Context, in *auth.LoginReq) (*auth.LoginRes, error) {
+	l := logic.NewLoginLogic(ctx, s.svcCtx)
+	return l.Login(in)
 }

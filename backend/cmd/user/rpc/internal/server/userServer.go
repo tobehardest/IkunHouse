@@ -22,18 +22,6 @@ func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
 	}
 }
 
-// 注册接口
-func (s *UserServer) Register(ctx context.Context, in *user.RegisterRequest) (*user.RegisterResponse, error) {
-	l := logic.NewRegisterLogic(ctx, s.svcCtx)
-	return l.Register(in)
-}
-
-// 登录接口
-func (s *UserServer) Login(ctx context.Context, in *user.LoginRequest) (*user.LoginResponse, error) {
-	l := logic.NewLoginLogic(ctx, s.svcCtx)
-	return l.Login(in)
-}
-
 // 批量获得用户信息接口
 func (s *UserServer) MGetUserInfo(ctx context.Context, in *user.UserInfoRequest) (*user.UserInfoResponse, error) {
 	l := logic.NewMGetUserInfoLogic(ctx, s.svcCtx)

@@ -169,7 +169,8 @@ video {
 
 .video-hide {
   position: absolute;
-  animation: slide 0.5s;
+  left: -9999px;
+  top: -999px;
 }
 @keyframes slide{
   from{

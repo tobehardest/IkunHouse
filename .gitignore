@@ -1,3 +1,4 @@
 backend/deploy/config/
 backend/deploy/data/
 backend/data/
+frontend/node_modules/

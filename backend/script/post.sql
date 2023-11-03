@@ -17,7 +17,7 @@ CREATE TABLE `post` (
     `comment_num` int(11) NOT NULL DEFAULT '0' COMMENT '评论数',
     `like_num` int(11) NOT NULL DEFAULT '0' COMMENT '点赞数',
     `collect_num` int(11) NOT NULL DEFAULT '0' COMMENT '收藏数',
-    `view_num` int(11) NOT NULL DEFAULT '0' COMMENT '浏览数',
+#     `view_num` int(11) NOT NULL DEFAULT '0' COMMENT '浏览数',
     `share_num` int(11) NOT NULL DEFAULT '0' COMMENT '分享数',
     `tag_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '标签ID',
     `publish_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',

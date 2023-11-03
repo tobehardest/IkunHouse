@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user";
+
+message UserInfoRequest {
+  repeated string UserId = 1;
+}
+
+message UserInfoResponse{
+  repeated UserInfoModel UserInfo = 1;
+}
+
+message UserInfoModel {
+  string id = 1;// 用户id
+  string name = 2; //用户名
+  string avatar = 3; //用户头像
+  bool is_follow = 4; // 是否关注
+  int64 follow_count = 5; //关注总数
+  int64 follower_count = 6; // 粉丝总数
+  int64 work_count = 7; // 总作品数
+//  int64 favorite_count = 8; // 点赞总数
+}
+
+service User {
+  // 批量获得用户信息接口
+  rpc MGetUserInfo(UserInfoRequest) returns(UserInfoResponse){}
+}

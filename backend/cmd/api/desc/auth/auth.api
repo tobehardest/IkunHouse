@@ -1,0 +1,49 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+type (
+    RegisterReq {
+        UserName        string `json:"username"`
+        Password        string `json:"password"`
+        Avatar   string `json:"avatar"`
+        Mobile   string `json:"mobile"`
+    }
+    RegisterResp {
+        AccessToken  string `json:"accessToken"`
+        AccessExpire int64  `json:"accessExpire"`
+        RefreshAfter int64  `json:"refreshAfter"`
+    }
+)
+
+type (
+    Token {
+        AccessToken  string `json:"accessToken"`
+        AccessExpire int64  `json:"accessExpire"`
+        RefreshAfter int64  `json:"refreshAfter"`
+    }
+    LoginReq {
+        UserName        string `json:"username"`
+        Password        string `json:"password"`
+    }
+    LoginResp {
+        Token   Token   `json:"token"`
+    }
+)
+
+type (
+    GenerateTokenReq {
+        UserId int64 `json:"userId,string"`
+    }
+    GenerateTokenResp {
+        AccessToken  string `json:"accessToken"`
+        AccessExpire int64  `json:"accessExpire"`
+        RefreshAfter int64  `json:"refreshAfter"`
+    }
+)

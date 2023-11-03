@@ -28,7 +28,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     volumes:
-      - ./deploy/prometheus/service/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./deploy/prometheus/cmd/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./data/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -84,9 +84,9 @@ services:
       - ./deploy/data/mysql/logs:/logs
       - ./deploy/config/db:/docker-entrypoint-initdb.d
     command:
-      --character-set-service=utf8mb4
+      --character-set-cmd=utf8mb4
       --default-authentication-plugin=mysql_native_password
-      --collation-service=utf8mb4_general_ci
+      --collation-cmd=utf8mb4_general_ci
       --explicit_defaults_for_timestamp=true
 #      --lower_case_table_names=1
     networks:
@@ -108,8 +108,8 @@ services:
 #    #      - ${MYSQL_DIR}/logs:/logs
 #    command:
 #      --default-authentication-plugin=mysql_native_password
-#      --character-set-service=utf8mb4
-#      --collation-service=utf8mb4_general_ci
+#      --character-set-cmd=utf8mb4
+#      --collation-cmd=utf8mb4_general_ci
 #      --explicit_defaults_for_timestamp=true
 #      --lower_case_table_names=2
 #    networks:
@@ -130,8 +130,8 @@ services:
 #      - ./deploy/config/db_init:/docker-entrypoint-initdb.d
 #    command:
 #      --default-authentication-plugin=mysql_native_password
-#      --character-set-service=utf8mb4
-#      --collation-service=utf8mb4_general_ci
+#      --character-set-cmd=utf8mb4
+#      --collation-cmd=utf8mb4_general_ci
 #      --explicit_defaults_for_timestamp=true
 #      --lower_case_table_name=1
 #    networks:
@@ -145,7 +145,7 @@ services:
       - ./deploy/data/redisx/redisx.conf:/etc/redisx/redisx.conf
     ports:
       - "6379:6379"
-    command: redisx-service /etc/redisx/redisx.conf
+    command: redisx-cmd /etc/redisx/redisx.conf
     networks:
       - video-net
   kafka:

@@ -1,0 +1,151 @@
+import (
+	"auth/auth.api"
+	"user/user.api"
+	"video/video.api"
+	"msg/msg.api"
+	"like/like.api"
+	"follow/follow.api"
+	"comment/comment.api"
+	"collect/collect.api"
+)
+
+@server(
+	prefix: auth/v1
+	group: auth
+)
+service video_clip {
+	@doc "user register"
+	@handler userRegister
+	post /user/register (RegisterReq) returns (RegisterResp)
+	
+	@doc "user login"
+	@handler userLogin
+	post /user/login (LoginReq) returns (LoginResp)
+	
+	@doc "生成token服务"
+	@handler generateToken
+	post /user/generate_token (GenerateTokenReq) returns (GenerateTokenResp)
+}
+
+@server(
+	prefix: user/v1
+	group: user
+)
+service video_clip {
+	@doc "get user info"
+	@handler getUserInfo
+	get /getUserInfo (GetUserInfoReq) returns (GetUserInfoRes)
+	
+	@doc "update user info"
+	@handler updateUserInfo
+	post /user/updateUserInfo (UpdateUserInfoReq) returns (UpdateUserInfoRes)
+}
+
+@server(
+	prefix: video/v1
+	group: video
+)
+service video_clip {
+	// TODO 上传视频需要判断用户是否登录
+	@doc "上传视频"
+	@handler uploadVideo
+	get /uploadVideo (UploadVideoReq) returns (UploadVideoRes)
+	
+	@doc "获得视频"
+	@handler getVideoList
+	get /getVideoList (GetVideoListRequst) returns(GetVideoListResponse)
+	
+	@doc "获得视频类别"
+	@handler getTypeList
+	get /getTypeList (GetTypeListRequest) returns(GetTypeListResponse)
+	
+	//	@doc "get video by list"
+	//	@handler getVideoListByCatagory
+	//	get /getVideoListByCatagory (GetVideoListByCatagoryReq) returns (GetVideoListByCatagoryRes)
+}
+
+@server(
+	prefix: like/v1
+	group: like
+)
+service video_clip {
+	@doc "like"
+	@handler like
+	post /like (LikeReq) returns (LikeRes)
+	
+	@doc "cancel like"
+	@handler cancelLike
+	post /cancelLike (CancelLikeReq) returns (CancelLikeReq)
+}
+
+@server(
+	prefix:	follow/v1
+	group: follow
+)
+service video_clip {
+	@doc "follow"
+	@handler follow
+	post /follow (FollowReq) returns (FollowRes)
+	
+	@doc "unFollow"
+	@handler unFollow
+	post /unFollow (UnFollowReq) returns (UnFollowRes)
+	
+	@doc "follow list"
+	@handler followList
+	post /follow/list (FollowListReq) returns (FollowListReq)
+	
+	@doc "fas list"
+	@handler fansList
+	post /fans/list (FansListReq) returns (FansListRes)
+}
+
+@server(
+	prefix:	comment/v1
+	group: comment
+)
+service video_clip {
+	@doc "comment"
+	@handler comment
+	post /comment (CommentReq) returns (CommentRes)
+	
+	@doc "cancel comment"
+	@handler cancelComment
+	post /cancel (CancelCommentReq) returns (CancelCommentReq)
+	
+	@doc "comment list"
+	@handler commentList
+	post /list (CommentListReq) returns (CommentListRes)
+	
+	@doc "comment detail"
+	@handler commentDetail
+	post /detail (CommentDetailReq) returns (CommentDetailRes)
+	
+	@doc "delete comment"
+	@handler deleteComment
+	post /delete (DeleteCommentReq) returns (DeleteCommentReq)
+}
+
+@server(
+	prefix:	collect/v1
+	group: collect
+)
+service video_clip {
+	@doc "collect"
+	@handler collect
+	post /collect (CollectReq) returns (CollectRes)
+	
+	@doc "my collect list"
+	@handler collectList
+	post /list (CollectListReq) returns (CollectListRes)
+}
+
+@server(
+	prefix: msg/v1
+	group: msg
+)
+service video_clip {
+	@doc "发送私聊消息"
+	@handler sendMsg
+	get /sendMsg (SendMsgReq) returns (SendMsgRes)
+}

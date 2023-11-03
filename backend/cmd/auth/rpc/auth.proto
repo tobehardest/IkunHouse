@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package auth;
+option go_package="./auth";
+
+message RegisterReq {
+  string Username = 1;
+  string Password = 2;
+  string Avatar = 3;
+  string Mobile = 4;
+}
+
+message RegisterRes {
+  string UserId = 1;
+  //  string Token = 2;
+}
+
+message LoginReq {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginRes{
+  int64 UserId = 1;
+}
+
+service Auth {
+  // 注册接口
+  rpc Register(RegisterReq) returns(RegisterRes) {}
+  // 登录接口
+  rpc Login(LoginReq) returns(LoginRes){}
+}
+

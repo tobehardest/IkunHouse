@@ -1,0 +1,30 @@
+Name: api
+Host: 0.0.0.0
+Port: 8888
+
+# RPC 配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: user.rpc
+
+#Upstreams:
+#  - Grpc:
+#      Etcd:
+#        Hosts:
+#          - localhost:2379
+#        Key: user.rpc
+#    ProtoSets:
+#      - user.pb
+
+
+Auth:
+  AccessSecret: video_clip_secret123
+  AccessExpire: 129600 # 15天
+
+OSS:
+  AccessKey: 2H0cu5Oo9QRD7pSWXX-gCjDXjyaKU4Mw7y2XSx5q
+  SecretKey: VAEiWagIhTqM7VlTDBg-zRFM4UIFWhr5kJbAzBXR
+  Bucket: video-clip2
+  Domain: s3eki5poq.hn-bkt.clouddn.com

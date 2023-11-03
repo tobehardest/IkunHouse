@@ -19,14 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Comment_Ping_FullMethodName = "/comment.Comment/Ping"
+	Comment_Comment_FullMethodName     = "/comment.comment/Comment"
+	Comment_DelComment_FullMethodName  = "/comment.comment/DelComment"
+	Comment_CommentList_FullMethodName = "/comment.comment/CommentList"
 )
 
 // CommentClient is the client API for Comment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommentClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Comment(ctx context.Context, in *CommentReq, opts ...grpc.CallOption) (*CommentRes, error)
+	DelComment(ctx context.Context, in *DelCommentReq, opts ...grpc.CallOption) (*DelCommentRes, error)
+	CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListRes, error)
 }
 
 type commentClient struct {
@@ -37,9 +41,27 @@ func NewCommentClient(cc grpc.ClientConnInterface) CommentClient {
 	return &commentClient{cc}
 }
 
-func (c *commentClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Comment_Ping_FullMethodName, in, out, opts...)
+func (c *commentClient) Comment(ctx context.Context, in *CommentReq, opts ...grpc.CallOption) (*CommentRes, error) {
+	out := new(CommentRes)
+	err := c.cc.Invoke(ctx, Comment_Comment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentClient) DelComment(ctx context.Context, in *DelCommentReq, opts ...grpc.CallOption) (*DelCommentRes, error) {
+	out := new(DelCommentRes)
+	err := c.cc.Invoke(ctx, Comment_DelComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentClient) CommentList(ctx context.Context, in *CommentListReq, opts ...grpc.CallOption) (*CommentListRes, error) {
+	out := new(CommentListRes)
+	err := c.cc.Invoke(ctx, Comment_CommentList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +72,9 @@ func (c *commentClient) Ping(ctx context.Context, in *Request, opts ...grpc.Call
 // All implementations must embed UnimplementedCommentServer
 // for forward compatibility
 type CommentServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	Comment(context.Context, *CommentReq) (*CommentRes, error)
+	DelComment(context.Context, *DelCommentReq) (*DelCommentRes, error)
+	CommentList(context.Context, *CommentListReq) (*CommentListRes, error)
 	mustEmbedUnimplementedCommentServer()
 }
 
@@ -58,8 +82,14 @@ type CommentServer interface {
 type UnimplementedCommentServer struct {
 }
 
-func (UnimplementedCommentServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedCommentServer) Comment(context.Context, *CommentReq) (*CommentRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Comment not implemented")
+}
+func (UnimplementedCommentServer) DelComment(context.Context, *DelCommentReq) (*DelCommentRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelComment not implemented")
+}
+func (UnimplementedCommentServer) CommentList(context.Context, *CommentListReq) (*CommentListRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommentList not implemented")
 }
 func (UnimplementedCommentServer) mustEmbedUnimplementedCommentServer() {}
 
@@ -74,20 +104,56 @@ func RegisterCommentServer(s grpc.ServiceRegistrar, srv CommentServer) {
 	s.RegisterService(&Comment_ServiceDesc, srv)
 }
 
-func _Comment_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _Comment_Comment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CommentReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommentServer).Ping(ctx, in)
+		return srv.(CommentServer).Comment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Comment_Ping_FullMethodName,
+		FullMethod: Comment_Comment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServer).Ping(ctx, req.(*Request))
+		return srv.(CommentServer).Comment(ctx, req.(*CommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Comment_DelComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServer).DelComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Comment_DelComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServer).DelComment(ctx, req.(*DelCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Comment_CommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CommentListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServer).CommentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Comment_CommentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServer).CommentList(ctx, req.(*CommentListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,12 +162,20 @@ func _Comment_Ping_Handler(srv interface{}, ctx context.Context, dec func(interf
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Comment_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "comment.Comment",
+	ServiceName: "comment.comment",
 	HandlerType: (*CommentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Comment_Ping_Handler,
+			MethodName: "Comment",
+			Handler:    _Comment_Comment_Handler,
+		},
+		{
+			MethodName: "DelComment",
+			Handler:    _Comment_DelComment_Handler,
+		},
+		{
+			MethodName: "CommentList",
+			Handler:    _Comment_CommentList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

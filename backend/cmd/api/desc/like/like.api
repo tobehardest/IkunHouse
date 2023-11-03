@@ -31,11 +31,10 @@ type (
     }
 )
 
-type  (
-    CancelLikeReq {
+type LikeCountReq {
 
-    }
-    CancelLikeRes {
+}
 
-    }
-)
+type LikeCountRes {
+
+}

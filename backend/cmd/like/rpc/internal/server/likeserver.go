@@ -31,3 +31,8 @@ func (s *LikeServer) IsLike(ctx context.Context, in *like.IsLikeReq) (*like.IsLi
 	l := logic.NewIsLikeLogic(ctx, s.svcCtx)
 	return l.IsLike(in)
 }
+
+func (s *LikeServer) LikeCount(ctx context.Context, in *like.LikeCountReq) (*like.LikeCountRes, error) {
+	l := logic.NewLikeCountLogic(ctx, s.svcCtx)
+	return l.LikeCount(in)
+}

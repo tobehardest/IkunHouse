@@ -27,6 +27,10 @@ type (
 		*es8.Client
 	}
 
+	TypedEs struct {
+		*es8.TypedClient
+	}
+
 	// esTransport is a transport for elasticsearch client
 	esTransport struct{}
 )
@@ -87,6 +91,34 @@ func NewEs(conf *Config) (*Es, error) {
 	return &Es{
 		Client: client,
 	}, nil
+}
+
+func NewTypedEs(conf *Config) (*TypedEs, error) {
+	c := es8.Config{
+		Addresses:  conf.Addresses,
+		Username:   conf.Username,
+		Password:   conf.Password,
+		MaxRetries: conf.MaxRetries,
+		Transport:  &esTransport{},
+	}
+
+	client, err := es8.NewTypedClient(c)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TypedEs{
+		TypedClient: client,
+	}, nil
+}
+
+func MustNewTypedEs(conf *Config) *TypedEs {
+	es, err := NewTypedEs(conf)
+	if err != nil {
+		panic(err)
+	}
+
+	return es
 }
 
 func MustNewEs(conf *Config) *Es {

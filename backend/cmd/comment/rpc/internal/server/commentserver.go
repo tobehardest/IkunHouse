@@ -5,14 +5,15 @@ package server
 
 import (
 	"context"
-	comment2 "video_clip/cmd/comment/rpc/comment"
+
+	"video_clip/cmd/comment/rpc/comment"
 	"video_clip/cmd/comment/rpc/internal/logic"
 	"video_clip/cmd/comment/rpc/internal/svc"
 )
 
 type CommentServer struct {
 	svcCtx *svc.ServiceContext
-	comment2.UnimplementedCommentServer
+	comment.UnimplementedCommentServer
 }
 
 func NewCommentServer(svcCtx *svc.ServiceContext) *CommentServer {
@@ -21,7 +22,17 @@ func NewCommentServer(svcCtx *svc.ServiceContext) *CommentServer {
 	}
 }
 
-func (s *CommentServer) Ping(ctx context.Context, in *comment2.Request) (*comment2.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+func (s *CommentServer) Comment(ctx context.Context, in *comment.CommentReq) (*comment.CommentRes, error) {
+	l := logic.NewCommentLogic(ctx, s.svcCtx)
+	return l.Comment(in)
+}
+
+func (s *CommentServer) DelComment(ctx context.Context, in *comment.DelCommentReq) (*comment.DelCommentRes, error) {
+	l := logic.NewDelCommentLogic(ctx, s.svcCtx)
+	return l.DelComment(in)
+}
+
+func (s *CommentServer) CommentList(ctx context.Context, in *comment.CommentListReq) (*comment.CommentListRes, error) {
+	l := logic.NewCommentListLogic(ctx, s.svcCtx)
+	return l.CommentList(in)
 }

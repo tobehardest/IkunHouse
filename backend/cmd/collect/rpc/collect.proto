@@ -7,22 +7,51 @@ service Collect {
   // 收藏
   rpc Collect (CollectReq) returns (CollectRes);
 
+  // 取消收藏
+  rpc UnCollect (UnCollectReq) returns (UnCollectRes);
+
   // 收藏列表
   rpc CollectList (CollectListReq) returns (CollectListRes);
 }
 
 message CollectReq {
-
+  int64 userId = 1; // 用户ID
+  int64 postId = 2; // 被收藏对象的id
+  string bizId = 3; //被收藏对象的类型
 }
 
 message CollectRes {
 
 }
 
-message CollectListReq {
+message UnCollectReq {
+  int64 userId = 1; // 用户ID
+  int64 postId = 2; // 被收藏对象的id
+  string bizType = 3; //被收藏对象的类型
+}
+
+message UnCollectRes {
 
 }
 
-message CollectListRes {
 
+message CollectItem {
+  int64 Id = 1;
+  int64 followedUserId = 2; // 被关注者
+  int64 fansCount = 3; // 粉丝数
+  int64 createTime = 4; // 关注时间
+}
+
+message CollectListReq {
+  int64 Id = 1;
+  int64 userId = 2;
+  int64 cursor = 3;
+  int64 pageSize = 4;
+}
+
+message CollectListRes {
+  repeated CollectItem items = 1;
+  int64 cursor = 2;
+  bool isEnd = 3;
+  int64 Id = 4;
 }

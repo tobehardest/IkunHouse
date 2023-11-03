@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Collect_Collect_FullMethodName     = "/collect.Collect/Collect"
+	Collect_UnCollect_FullMethodName   = "/collect.Collect/UnCollect"
 	Collect_CollectList_FullMethodName = "/collect.Collect/CollectList"
 )
 
@@ -29,6 +30,8 @@ const (
 type CollectClient interface {
 	// 收藏
 	Collect(ctx context.Context, in *CollectReq, opts ...grpc.CallOption) (*CollectRes, error)
+	// 取消收藏
+	UnCollect(ctx context.Context, in *UnCollectReq, opts ...grpc.CallOption) (*UnCollectRes, error)
 	// 收藏列表
 	CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListRes, error)
 }
@@ -50,6 +53,15 @@ func (c *collectClient) Collect(ctx context.Context, in *CollectReq, opts ...grp
 	return out, nil
 }
 
+func (c *collectClient) UnCollect(ctx context.Context, in *UnCollectReq, opts ...grpc.CallOption) (*UnCollectRes, error) {
+	out := new(UnCollectRes)
+	err := c.cc.Invoke(ctx, Collect_UnCollect_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *collectClient) CollectList(ctx context.Context, in *CollectListReq, opts ...grpc.CallOption) (*CollectListRes, error) {
 	out := new(CollectListRes)
 	err := c.cc.Invoke(ctx, Collect_CollectList_FullMethodName, in, out, opts...)
@@ -65,6 +77,8 @@ func (c *collectClient) CollectList(ctx context.Context, in *CollectListReq, opt
 type CollectServer interface {
 	// 收藏
 	Collect(context.Context, *CollectReq) (*CollectRes, error)
+	// 取消收藏
+	UnCollect(context.Context, *UnCollectReq) (*UnCollectRes, error)
 	// 收藏列表
 	CollectList(context.Context, *CollectListReq) (*CollectListRes, error)
 	mustEmbedUnimplementedCollectServer()
@@ -76,6 +90,9 @@ type UnimplementedCollectServer struct {
 
 func (UnimplementedCollectServer) Collect(context.Context, *CollectReq) (*CollectRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Collect not implemented")
+}
+func (UnimplementedCollectServer) UnCollect(context.Context, *UnCollectReq) (*UnCollectRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnCollect not implemented")
 }
 func (UnimplementedCollectServer) CollectList(context.Context, *CollectListReq) (*CollectListRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CollectList not implemented")
@@ -111,6 +128,24 @@ func _Collect_Collect_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Collect_UnCollect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnCollectReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CollectServer).UnCollect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Collect_UnCollect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CollectServer).UnCollect(ctx, req.(*UnCollectReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Collect_CollectList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CollectListReq)
 	if err := dec(in); err != nil {
@@ -139,6 +174,10 @@ var Collect_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Collect",
 			Handler:    _Collect_Collect_Handler,
+		},
+		{
+			MethodName: "UnCollect",
+			Handler:    _Collect_UnCollect_Handler,
 		},
 		{
 			MethodName: "CollectList",

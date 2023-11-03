@@ -6,11 +6,12 @@ option go_package="./like";
 service Like {
   rpc Like(LikeReq) returns (LikeRes);
   rpc IsLike(IsLikeReq) returns (IsLikeRes);
+  rpc LikeCount (LikeCountReq) returns (LikeCountRes);
 }
 
 message LikeReq {
   string bizId = 1; // 业务id
-  int64 targetId = 2; // 点赞对象id
+  int64 objId = 2; // 点赞对象id
   int64 userId  = 3; // 用户id
   int32 likeType = 4; // 类型
 }
@@ -24,7 +25,7 @@ message LikeRes {
 
 message IsLikeReq {
   string bizId = 1; // 业务id
-  int64 targetId = 2; // 点赞对象id
+  int64 objId = 2; // 点赞对象id
   int64 userId  = 3; // 用户id
 }
 
@@ -36,4 +37,13 @@ message UserThumbup {
   int64 userId = 1;
   int64 thumbupTime = 2;
   int32 likeType = 3; // 类型
+}
+
+message LikeCountReq {
+  string bizId = 1; // 业务id
+  int64 objId = 2; // 点赞对象id
+}
+
+message LikeCountRes {
+  int64 likeNum = 1;
 }

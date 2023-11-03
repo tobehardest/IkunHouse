@@ -3,3 +3,41 @@ syntax = "proto3";
 package comment;
 option go_package="./comment";
 
+service comment {
+  rpc Comment(CommentReq) returns (CommentRes);
+  rpc DelComment(DelCommentReq) returns (DelCommentRes);
+  rpc CommentList(CommentListReq) returns (CommentListRes);
+}
+message CommentReq {
+  int64 postId = 1;
+  int64 pid = 2;
+  int64 uid = 3;  //用户id
+  string content = 4; //内容
+}
+
+message CommentRes {
+
+}
+
+message DelCommentReq {
+  int64 commentId = 1;
+}
+
+message DelCommentRes {
+
+}
+
+message CommentListReq {
+  repeated int64 ids = 1;
+}
+
+message CommentItem {
+  int64 postId = 1;
+  int64 pid = 2;
+  int64 uid = 3;  //用户id
+  string content = 4; //内容
+}
+
+message CommentListRes {
+  repeated CommentItem commentItems = 1;
+}

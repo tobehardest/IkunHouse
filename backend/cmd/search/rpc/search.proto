@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package search;
+option go_package="./search";
+
+service Search {
+  rpc SearchShortVideo (SearchShortVideoReq) returns(SearchShortVideoRes);
+}
+
+message SearchShortVideoReq {
+  string query = 1;
+  int64 cursor = 2;
+  int64 pageSize = 3;
+}
+
+message SearchShortVideoRes {
+  int64 id = 1;
+}
+
+

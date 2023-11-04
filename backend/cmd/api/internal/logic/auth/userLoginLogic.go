@@ -2,12 +2,11 @@ package auth
 
 import (
 	"context"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
-	"video_clip/cmd/auth/rpc/auth"
-
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
+	"video_clip/cmd/api/internal/svc"
+	"video_clip/cmd/api/internal/types"
+	"video_clip/cmd/auth/rpc/authCenter"
 )
 
 type UserLoginLogic struct {
@@ -26,7 +25,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLog
 
 func (l *UserLoginLogic) UserLogin(req *types.LoginReq) (resp *types.LoginResp, err error) {
 	// todo: add your logic here and delete this line
-	loginResp, err := l.svcCtx.AuthClient.Login(l.ctx, &auth.LoginReq{
+	loginResp, err := l.svcCtx.AuthClient.Login(l.ctx, &authCenter.LoginReq{
 		Username: req.UserName,
 		Password: req.Password,
 	})
@@ -34,7 +33,11 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq) (resp *types.LoginResp, 
 		return nil, err
 	}
 
-	_ = copier.Copy(&resp, loginResp)
+	resp = &types.LoginResp{}
+	err = copier.Copy(&resp, loginResp)
+	if err != nil {
+		// todo fill err
+	}
 
 	return resp, nil
 }

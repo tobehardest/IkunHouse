@@ -6,23 +6,24 @@ import (
 )
 
 type Claims struct {
-	UserId int64 `json:"userId"`
+	UserId string `json:"userId"`
 	jwt.StandardClaims
 }
 
 // CreateToken 签发用户Token
-func CreateToken(userId int64, AccessSecret string, AccessExpire int64) (string, error) {
+func CreateToken(userId string, AccessSecret string, AccessExpire int64) (string, uint64, error) {
+	expiresAt := time.Now().Unix() + AccessExpire
 	claims := Claims{
 		UserId: userId,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Unix() + AccessExpire,
+			ExpiresAt: expiresAt,
 			IssuedAt:  time.Now().Unix(),
 			Issuer:    "video_clip-app",
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	token, err := tokenClaims.SignedString([]byte(AccessSecret))
-	return token, err
+	return token, uint64(expiresAt), err
 }
 
 // ValidToken 验证用户token
@@ -48,7 +49,7 @@ func ValidToken(token string, AccessSecret string) (bool, error) {
 }
 
 // GetUserIDFormToken 从token中获取用户id
-func GetUserIDFormToken(token string, AccessSecret string) (int64, error) {
+func GetUserIDFormToken(token string, AccessSecret string) (string, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(AccessSecret), nil
 	})
@@ -57,5 +58,5 @@ func GetUserIDFormToken(token string, AccessSecret string) (int64, error) {
 			return claims.UserId, nil
 		}
 	}
-	return -1, err
+	return "", err
 }

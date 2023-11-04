@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"video_clip/cmd/auth/rpc/auth"
+	"video_clip/cmd/auth/rpc/authCenter"
 	"video_clip/cmd/auth/rpc/internal/config"
 	"video_clip/cmd/auth/rpc/internal/server"
 	"video_clip/cmd/auth/rpc/internal/svc"
@@ -15,7 +15,10 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "etc/auth.yaml", "the config file")
+// prd
+// var configFile = flag.String("f", "etc/auth.yaml", "the config file")
+// dev
+var configFile = flag.String("f", "./cmd/auth/rpc/etc/authCenter.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -25,7 +28,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		auth.RegisterAuthServer(grpcServer, server.NewAuthServer(ctx))
+		authCenter.RegisterAuthCenterServer(grpcServer, server.NewAuthCenterServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

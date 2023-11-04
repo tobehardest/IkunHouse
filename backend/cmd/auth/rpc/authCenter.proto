@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package auth;
-option go_package="./auth";
+package authCenter;
+option go_package="./authCenter";
 
 message RegisterReq {
   string Username = 1;
@@ -12,7 +12,6 @@ message RegisterReq {
 
 message RegisterRes {
   string UserId = 1;
-  //  string Token = 2;
 }
 
 message LoginReq {
@@ -20,11 +19,18 @@ message LoginReq {
   string password = 2;
 }
 
-message LoginRes{
-  int64 UserId = 1;
+message TokenRes {
+  string Token = 1;
+  uint64 ExpireTimeSeconds = 2;
 }
 
-service Auth {
+message LoginRes{
+  string UserId = 1;
+  TokenRes VCToken = 2;
+  TokenRes IMToken = 3;
+}
+
+service AuthCenter {
   // 注册接口
   rpc Register(RegisterReq) returns(RegisterRes) {}
   // 登录接口

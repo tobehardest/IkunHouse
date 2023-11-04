@@ -16,24 +16,24 @@ type (
         Mobile   string `json:"mobile"`
     }
     RegisterResp {
-        AccessToken  string `json:"accessToken"`
-        AccessExpire int64  `json:"accessExpire"`
-        RefreshAfter int64  `json:"refreshAfter"`
+        UserId string `json:"userId"`
     }
 )
 
+
 type (
-    Token {
-        AccessToken  string `json:"accessToken"`
-        AccessExpire int64  `json:"accessExpire"`
-        RefreshAfter int64  `json:"refreshAfter"`
+    TokenRes {
+        Token  string `json:"token"`
+        ExpireTimeSeconds uint64  `json:"expireTimeSeconds"`
     }
     LoginReq {
         UserName        string `json:"username"`
         Password        string `json:"password"`
     }
     LoginResp {
-        Token   Token   `json:"token"`
+        UserId string `json:"userId"`
+        VCToken TokenRes `json:"vcToken"`
+        IMToken TokenRes `json:"imToken"`
     }
 )
 

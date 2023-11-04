@@ -1,13 +1,63 @@
 Name: api
 Host: 0.0.0.0
-Port: 8888
+Port: 11071
 
-# RPC 配置
-UserRpc:
+# auth client
+AuthRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: auth.rpc
+
+# user client
+UserRpcConf:
   Etcd:
     Hosts:
       - localhost:2379
     Key: user.rpc
+
+VideoRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: video.rpc
+
+MsgRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: msg.rpc
+
+LikeRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: like.rpc
+
+FollowRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: follow.rpc
+
+CommentRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: comment.rpc
+
+CollectRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: collect.rpc
+
+SearchRpcConf:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: search.rpc
+
 
 #Upstreams:
 #  - Grpc:
@@ -18,10 +68,6 @@ UserRpc:
 #    ProtoSets:
 #      - user.pb
 
-
-Auth:
-  AccessSecret: video_clip_secret123
-  AccessExpire: 129600 # 15天
 
 OSS:
   AccessKey:

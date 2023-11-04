@@ -4,10 +4,9 @@ import (
 	"context"
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
-	"video_clip/cmd/auth/rpc/auth"
-
 	"video_clip/cmd/api/internal/svc"
 	"video_clip/cmd/api/internal/types"
+	"video_clip/cmd/auth/rpc/authCenter"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -29,7 +28,7 @@ func NewUserRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *User
 func (l *UserRegisterLogic) UserRegister(req *types.RegisterReq) (resp *types.RegisterResp, err error) {
 	// todo: add your logic here and delete this line
 
-	registerResp, err := l.svcCtx.AuthClient.Register(l.ctx, &auth.RegisterReq{
+	registerResp, err := l.svcCtx.AuthClient.Register(l.ctx, &authCenter.RegisterReq{
 		Mobile:   req.Mobile,
 		Username: req.UserName,
 		Password: req.Password,
@@ -38,6 +37,8 @@ func (l *UserRegisterLogic) UserRegister(req *types.RegisterReq) (resp *types.Re
 	if err != nil {
 		return nil, errors.Wrapf(err, "req: %+v", req)
 	}
+
+	resp = &types.RegisterResp{}
 	_ = copier.Copy(&resp, registerResp)
 
 	return resp, nil

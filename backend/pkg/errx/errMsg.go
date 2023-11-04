@@ -11,12 +11,6 @@ func init() {
 	message[TOKEN_GENERATE_ERROR] = "生成token失败"
 	message[DB_ERROR] = "数据库繁忙,请稍后再试"
 	message[DB_UPDATE_AFFECTED_ZERO_ERROR] = "更新数据影响行数为0"
-
-	// 关注模块
-	message[FollowUserIdEmpty] = "关注用户id为空"
-	message[FollowedUserIdEmpty] = "被关注用户id为空"
-	message[CannotFollowSelf] = "不能关注自己"
-	message[UserIdEmpty] = "用户id为空"
 }
 
 func MapErrMsg(errcode uint32) string {

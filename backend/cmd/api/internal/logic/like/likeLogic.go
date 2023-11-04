@@ -29,7 +29,7 @@ func (l *LikeLogic) Like(req *types.LikeReq) (resp *types.LikeRes, err error) {
 	// todo: add your logic here and delete this line
 	res, err := l.svcCtx.LikeClient.Like(l.ctx, &like.LikeReq{
 		BizId:    req.BizId,
-		TargetId: req.TargetId,
+		ObjId:    req.TargetId,
 		UserId:   req.UserId,
 		LikeType: req.LikeType,
 	})

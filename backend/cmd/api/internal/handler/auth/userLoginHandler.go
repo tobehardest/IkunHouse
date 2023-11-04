@@ -7,6 +7,7 @@ import (
 	"video_clip/cmd/api/internal/logic/auth"
 	"video_clip/cmd/api/internal/svc"
 	"video_clip/cmd/api/internal/types"
+	"video_clip/pkg/result"
 )
 
 func UserLoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -19,10 +20,6 @@ func UserLoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := auth.NewUserLoginLogic(r.Context(), svcCtx)
 		resp, err := l.UserLogin(&req)
-		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
-		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
-		}
+		result.HttpResult(r, w, resp, err)
 	}
 }

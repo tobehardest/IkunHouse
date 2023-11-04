@@ -21,13 +21,22 @@ type  (
 )
 
 type (
+    CancelLikeReq {
+
+    }
+    CancelLikeRes {
+
+    }
+)
+
+type (
     IsLikeReq {
         BizId string `json:"bizId"`
         TargetId int64 `json:"targetId"`
         UserId int64 `json:"userId"`
     }
     IsLikeRes {
-        UserLikes map[int64]string `json:"userLikes"`
+
     }
 )
 

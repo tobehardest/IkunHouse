@@ -2,17 +2,16 @@ package logic
 
 import (
 	"context"
+	"github.com/openimsdk/openkf/server/pkg/utils"
 	"github.com/pkg/errors"
-	"strconv"
+	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"video_clip/cmd/auth/code"
-	"video_clip/pkg/errx"
-	"video_clip/pkg/uniqueid/snowflake"
-
-	"video_clip/cmd/auth/rpc/auth"
+	"video_clip/cmd/auth/rpc/authCenter"
 	"video_clip/cmd/auth/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 	"video_clip/cmd/auth/model"
+	"video_clip/pkg/errx"
 )
 
 type RegisterLogic struct {
@@ -30,32 +29,34 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 // 注册接口
-func (l *RegisterLogic) Register(in *auth.RegisterReq) (*auth.RegisterRes, error) {
+func (l *RegisterLogic) Register(in *authCenter.RegisterReq) (*authCenter.RegisterRes, error) {
 	// todo: add your logic here and delete this line
 
 	// 1、判断用户存不存在
-	_, err := l.svcCtx.UserModel.FindOneByUsername(l.ctx, in.Username)
-	if err != nil {
+	user, err := l.svcCtx.UserModel.FindOneByUserName(l.ctx, in.Username)
+	if err != nil && err != sqlc.ErrNotFound {
 		// 数据库查询出错
 		return nil, errors.Wrapf(errx.NewErrCode(errx.DB_ERROR), "userName:%s", in.Username)
 	}
-
-	// 2、生成UID
-	userId, err := snowflake.GetID()
-	if err != nil {
-		return nil, errors.Wrapf(code.ErrorGenIDFailed, "userName:%s", in.Username)
+	if user != nil {
+		// 用户已存在
+		return nil, errors.Wrapf(code.ErrUserExistsed, "userName:%s", in.Username)
 	}
 
+	// 用户不存在
+	// 2、生成UID
+	userId := utils.GenUUIDWithoutHyphen()
+
 	// 构造一个User实例
-	user := &model.User{
-		Id:       strconv.FormatUint(userId, 10),
-		Username: in.Username,
+	user = &model.User{
+		UserId:   userId,
+		UserName: in.Username,
 		Password: in.Password,
 	}
 	// 3、保存进数据库
 	l.svcCtx.UserModel.Insert(l.ctx, user)
 
-	return &auth.RegisterRes{
-		UserId: strconv.FormatUint(userId, 10),
+	return &authCenter.RegisterRes{
+		UserId: userId,
 	}, nil
 }

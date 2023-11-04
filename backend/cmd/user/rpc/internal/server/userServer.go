@@ -8,7 +8,7 @@ import (
 
 	"video_clip/cmd/user/rpc/internal/logic"
 	"video_clip/cmd/user/rpc/internal/svc"
-	"video_clip/cmd/user/rpc/types/user"
+	"video_clip/cmd/user/rpc/user"
 )
 
 type UserServer struct {

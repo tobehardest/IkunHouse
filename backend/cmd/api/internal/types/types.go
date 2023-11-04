@@ -9,15 +9,12 @@ type RegisterReq struct {
 }
 
 type RegisterResp struct {
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int64  `json:"accessExpire"`
-	RefreshAfter int64  `json:"refreshAfter"`
+	UserId string `json:"userId"`
 }
 
-type Token struct {
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int64  `json:"accessExpire"`
-	RefreshAfter int64  `json:"refreshAfter"`
+type TokenRes struct {
+	Token             string `json:"token"`
+	ExpireTimeSeconds uint64 `json:"expireTimeSeconds"`
 }
 
 type LoginReq struct {
@@ -26,7 +23,9 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	Token Token `json:"token"`
+	UserId  string   `json:"userId"`
+	VCToken TokenRes `json:"vcToken"`
+	IMToken TokenRes `json:"imToken"`
 }
 
 type GenerateTokenReq struct {
@@ -116,6 +115,12 @@ type LikeReq struct {
 type LikeRes struct {
 }
 
+type CancelLikeReq struct {
+}
+
+type CancelLikeRes struct {
+}
+
 type IsLikeReq struct {
 	BizId    string `json:"bizId"`
 	TargetId int64  `json:"targetId"`
@@ -123,13 +128,12 @@ type IsLikeReq struct {
 }
 
 type IsLikeRes struct {
-	UserLikes map[int64]string `json:"userLikes"`
 }
 
-type CancelLikeReq struct {
+type LikeCountReq struct {
 }
 
-type CancelLikeRes struct {
+type LikeCountRes struct {
 }
 
 type FollowReq struct {

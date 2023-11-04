@@ -2,7 +2,7 @@ package video
 
 import (
 	"net/http"
-	"video_clip/cmd/video/videoclient"
+	"video_clip/cmd/video/rpc/videoclient"
 
 	"video_clip/cmd/api/internal/svc"
 	"video_clip/cmd/api/internal/types"
@@ -26,7 +26,7 @@ func NewUplocadVideoLogic(r *http.Request, svcCtx *svc.ServiceContext) *UplocadV
 	}
 }
 
-func (l *UplocadVideoLogic) UplocadVideo(req *types.UplocadVideoReq) (resp *types.UplocadVideoRes, err error) {
+func (l *UplocadVideoLogic) UplocadVideo(req *types.UploadVideoReq) (resp *types.UploadVideoRes, err error) {
 	// todo: add your logic here and delete this line
 
 	//userId := ctxdata.GetUidFromCtx(l.r.Context())

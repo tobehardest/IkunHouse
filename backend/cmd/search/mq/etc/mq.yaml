@@ -1,0 +1,26 @@
+Name: mq
+UserKqConsumerConf:
+  Name: like-kq-consumer
+  Brokers:
+    - 127.0.0.1:9092
+  Group: group-beyond-like
+  Topic: topic-beyond-like
+  Offset: last
+  Consumers: 1
+  Processors: 1
+
+ShortVideoKqConsumerConf:
+  Name: article-cache-kq-consumer
+  Brokers:
+    - 127.0.1:9092
+  Group: group-article-event
+  Topic: topic-article-event
+  Offset: last
+  Consumers: 1
+  Processors: 1
+
+Es:
+  Addresses:
+    - http://localhost:9200/
+  Username: elastic
+  Password: C++ry7cJwC06o1IyBIZI

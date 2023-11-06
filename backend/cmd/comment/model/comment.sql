@@ -1,4 +1,4 @@
-CREATE TABLE `fd_comment` (
+CREATE TABLE `comment` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `pid` int(11) DEFAULT '0' COMMENT '父级id',
   `type` int(1) NOT NULL DEFAULT '1' COMMENT '评论类型:1视频, 2评论.',

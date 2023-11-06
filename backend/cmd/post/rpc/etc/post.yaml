@@ -1,0 +1,23 @@
+Name: post.rpc
+ListenOn: 0.0.0.0:9090
+Etcd:
+  Hosts:
+    - 114.132.232.3:2379
+  Key: post.rpc
+UserRpcConf:
+  Etcd:
+    Hosts:
+      - 114.132.233.3:2379
+    Key: user.rpc
+LikeRpcConf:
+  Etcd:
+    Hosts:
+      - 114.132.232.3:2379
+    Key: like.rpc
+CollectRpcConf:
+  Etcd:
+    Hosts:
+      - 114.132.232.3:2379
+    Key: collect.rpc
+Mysql:
+  DataSource: root:hcybeyond@tcp(114.132.232.3:3307)/video_clip?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

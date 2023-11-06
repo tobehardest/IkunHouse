@@ -28,6 +28,12 @@ func (s *CollectServer) Collect(ctx context.Context, in *collect.CollectReq) (*c
 	return l.Collect(in)
 }
 
+// 取消收藏
+func (s *CollectServer) UnCollect(ctx context.Context, in *collect.UnCollectReq) (*collect.UnCollectRes, error) {
+	l := logic.NewUnCollectLogic(ctx, s.svcCtx)
+	return l.UnCollect(in)
+}
+
 // 收藏列表
 func (s *CollectServer) CollectList(ctx context.Context, in *collect.CollectListReq) (*collect.CollectListRes, error) {
 	l := logic.NewCollectListLogic(ctx, s.svcCtx)

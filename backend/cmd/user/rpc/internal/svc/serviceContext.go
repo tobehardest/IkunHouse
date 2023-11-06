@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"gorm.io/gorm"
 	"video_clip/cmd/user/rpc/internal/config"
-	"video_clip/pkg/consts"
+	"video_clip/pkg/const"
 	"video_clip/pkg/redisx"
 )
 
@@ -21,7 +21,7 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	snowflakeNode, _ := snowflake.NewNode(consts.UserRpcMachineId)
+	snowflakeNode, _ := snowflake.NewNode(_const.UserRpcMachineId)
 	rc := make([]string, 0)
 	rc = append(rc, c.RedisCluster.Cluster)
 	redisDb := redisx.InitRedis(rc)

@@ -7,6 +7,7 @@ import (
 	"video_clip/cmd/like/rpc/like"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"video_clip/pkg/utils"
 )
 
 type IsLikeLogic struct {
@@ -24,7 +25,12 @@ func NewIsLikeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *IsLikeLogi
 }
 
 func (l *IsLikeLogic) IsLike(in *like.IsLikeReq) (*like.IsLikeRes, error) {
-	// todo: add your logic here and delete this line
+	// 1. 查询redis
+	likeKey := utils.GetEntityLikeKey(in.BizId, in.ObjId)
+	_, err := l.svcCtx.BizRedis.SismemberCtx(l.ctx, likeKey, in.UserId)
+	if err != nil {
 
-	return &like.IsLikeRes{}, nil
+	}
+	out := &like.IsLikeRes{}
+	return out, nil
 }

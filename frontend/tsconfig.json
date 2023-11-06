@@ -5,6 +5,10 @@
     "module": "esnext",
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "baseUrl": "./",
+    "types":[
+      "vite/client",
+      "node"
+    ],
     "paths": {
       "@": ["src"],
       "@/*": ["src/*"]

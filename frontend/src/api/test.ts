@@ -5,4 +5,7 @@ export default {
     testAxios(data: any) {
         return axios({ url: '/user/test', method: 'get', params: data })
     },
+    createUser(loginData: any) {
+        return axios({ url: '/user/test', method: 'get', params: loginData })
+    },
 }

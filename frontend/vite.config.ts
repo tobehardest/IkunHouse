@@ -4,7 +4,10 @@ import * as path from 'path'
 import eslintPlugin from 'vite-plugin-eslint' //导入包
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import WindiCSS from "vite-plugin-windicss";
 // https://vitejs.dev/config/
 export default defineConfig({
   css: {
@@ -27,8 +30,15 @@ export default defineConfig({
     vue(),
     // 支持jsx
     vueJsx(),
+    WindiCSS(),
     eslintPlugin(),
-
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+    
     // // https://github.com/vbenjs/vite-plugin-svg-icons
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
@@ -52,5 +62,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 8080, //启动端口
+    hmr:true
   },
 })

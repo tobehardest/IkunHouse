@@ -66,34 +66,41 @@ type UpdateUserInfoRes struct {
 }
 
 type UploadVideoReq struct {
+	Title     string  `form:"title" json:"title"`
+	Longitude float64 `form:"longitude" json:"longitude"`
+	Latitude  float64 `form:"latitude" json:"latitude"`
+	Address   string  `form:"address" json:"address"` // 作者地址
+	TagId     []int64 `form:"tag_id" json:"tag_id"`   // 选择的类型
+	Media     string  `json:"media"`
+	CoverUrl  string  `json:"cover_url"`
+	Sha256    string  `json:"sha256"`
 }
 
 type UploadVideoRes struct {
-	Avatar string `json:"avatar"`
 }
 
-type GetHotVideoListReq struct {
+type AddReadCountRequest struct {
 }
 
-type GetHotVideoListRes struct {
+type AddReadCountResponse struct {
 }
 
-type GetVideoListByCatagoryReq struct {
+type GetTypeListRequest struct {
 }
 
-type GetVideoListByCatagoryRes struct {
+type GetTypeListResponse struct {
+	TypeList []Type `json:"type_list"`
 }
 
-type GetVideoListByTagReq struct {
+type Type struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
-type GetVideoListByTagRes struct {
+type GetVideoListRequst struct {
 }
 
-type DownloadVideoReq struct {
-}
-
-type DownloadVideoRes struct {
+type GetVideoListResponse struct {
 }
 
 type SendMsgReq struct {

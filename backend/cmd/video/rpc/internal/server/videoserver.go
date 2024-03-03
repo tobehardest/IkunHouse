@@ -5,6 +5,7 @@ package server
 
 import (
 	"context"
+
 	"video_clip/cmd/video/rpc/internal/logic"
 	"video_clip/cmd/video/rpc/internal/svc"
 	"video_clip/cmd/video/rpc/video"
@@ -21,7 +22,28 @@ func NewVideoServer(svcCtx *svc.ServiceContext) *VideoServer {
 	}
 }
 
-func (s *VideoServer) UploadVideo(ctx context.Context, in *video.UploadVideoReq) (*video.UploadVideoRes, error) {
+func (s *VideoServer) UploadVideo(ctx context.Context, in *video.UploadVideoRequest) (*video.UploadVideoResponse, error) {
 	l := logic.NewUploadVideoLogic(ctx, s.svcCtx)
 	return l.UploadVideo(in)
+}
+
+func (s *VideoServer) AddReadCount(ctx context.Context, in *video.AddReadCountRequest) (*video.AddReadCountResponse, error) {
+	l := logic.NewAddReadCountLogic(ctx, s.svcCtx)
+	return l.AddReadCount(in)
+}
+
+func (s *VideoServer) GetVideoList(ctx context.Context, in *video.GetVideoRequest) (*video.GetVideoResponse, error) {
+	l := logic.NewGetVideoListLogic(ctx, s.svcCtx)
+	return l.GetVideoList(in)
+}
+
+// rpc AddCollect(AddCollectRequest) returns(AddCollectResponse);
+func (s *VideoServer) GetTypeList(ctx context.Context, in *video.GetTypeListRequest) (*video.GetTypeListResponse, error) {
+	l := logic.NewGetTypeListLogic(ctx, s.svcCtx)
+	return l.GetTypeList(in)
+}
+
+func (s *VideoServer) IfExistVideo(ctx context.Context, in *video.ExistVideoRequest) (*video.ExistVideoResponse, error) {
+	l := logic.NewIfExistVideoLogic(ctx, s.svcCtx)
+	return l.IfExistVideo(in)
 }

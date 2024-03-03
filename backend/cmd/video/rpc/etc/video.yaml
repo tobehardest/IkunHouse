@@ -2,5 +2,12 @@ Name: video.rpc
 ListenOn: 0.0.0.0:11074
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - 114.132.232.3:2379
   Key: video.rpc
+#Redis:
+Mysql:
+  DataSource: root:hcybeyond@tcp(114.132.232.3:3307)/video_clip?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+#  Address: 114.132.232.3:3307
+#  Username: root
+#  Password: hcybeyond
+#  DbName: video_clip

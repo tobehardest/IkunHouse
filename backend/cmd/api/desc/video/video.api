@@ -10,45 +10,84 @@ info(
 
 type (
     UploadVideoReq {
-
+        // form表单的file不在api里写，而是在logic从request中获取
+        // 包括封面
+        Title string `form:"title" json:"title"`
+        Longitude float64 `form:"longitude" json:"longitude"`
+        Latitude float64 `form:"latitude" json:"latitude"`
+        Address string `form:"address" json:"address"` // 作者地址
+        TagId []int64 `form:"tag_id" json:"tag_id"` // 选择的类型
+        Media string `json:"media"`
+        CoverUrl string  `json:"cover_url"`
+        Sha256 string `json:"sha256"`
     }
     UploadVideoRes {
-        Avatar string `json:"avatar"`
+
+    }
+    
+    // 浏览量新增接口
+    AddReadCountRequest {
+    
+    }
+    AddReadCountResponse{
+    
+    }
+
+    // 获得类别接口
+    GetTypeListRequest {
+    
+    }
+    GetTypeListResponse {
+        TypeList []Type `json:"type_list"`
+    }
+    Type {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
     }
 )
 
 type (
-    GetHotVideoListReq {
+    GetVideoListRequst {
 
     }
-    GetHotVideoListRes {
 
-    }
-)
-
-type (
-    GetVideoListByCatagoryReq {
-
-    }
-    GetVideoListByCatagoryRes {
+    GetVideoListResponse{
 
     }
 )
 
-type (
-    GetVideoListByTagReq {
+//type (
+//    GetHotVideoListReq {
+//
+//    }
+//    GetHotVideoListRes {
+//
+//    }
+//)
 
-    }
-    GetVideoListByTagRes {
+//type (
+//    GetVideoListByCatagoryReq {
+//
+//    }
+//    GetVideoListByCatagoryRes {
+//
+//    }
+//)
 
-    }
-)
+//type (
+//    GetVideoListByTagReq {
+//
+//    }
+//    GetVideoListByTagRes {
+//
+//    }
+//)
 
-type (
-    DownloadVideoReq {
-
-    }
-    DownloadVideoRes {
-
-    }
-)
+//type (
+//    DownloadVideoReq {
+//
+//    }
+//    DownloadVideoRes {
+//
+//    }
+//)

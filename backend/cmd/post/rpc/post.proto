@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+package post;
+option go_package="./post";
+
+import public "google/protobuf/timestamp.proto";
+
+// 上传视频
+message UploadVideoRequest {
+  string media = 1; // 视频路径
+  string uid = 2;
+  string title = 3;
+  string cover_url = 4; // 封面路径
+  double longitude = 5; // 经度
+  double latitude = 6; // 纬度
+  string address = 7; // 地址
+  repeated int64 tag_id = 8; // 标签id
+  string VideoSha256 = 9; // 哈希值，判断视频是否重复
+}
+
+message UploadVideoResponse {
+  int64 id = 1;
+}
+
+// 获得视频方法 - 可根据标签查找,若tag为"",则是默认查找
+// 为每一个用户建立一个bloom，用以避免重复推送
+// 默认查找即推荐功能 - 现在只是根据时间推送
+message GetVideoListRequest {
+  string uid = 1; // 可扩展，获得好友相关视频以及其他
+  string tag = 2; // 根据标签查找
+  int64 count = 3; // 获得个数
+//  repeated int64 video_id = 4; // 已获得的video_id，避免推送重复的
+}
+
+message GetVideoListResponse{
+  repeated VideoModel video_list = 1;
+}
+
+message VideoModel {
+  int64 id = 1; // 帖子id
+  Author author = 2;
+  string title = 3;
+  string media = 4;
+  string cover_url = 5;
+//  string read_count = 6;
+  string address = 7;
+  int64 comment_num = 8;
+  int64 like_num = 9;
+  int64 collect_num = 10;
+  string video_duration = 11; // 视频时长
+  repeated Tag tags = 12;
+  bool if_like = 13; // 是否点赞
+  bool if_collect = 14; // 是否收藏
+  google.protobuf.Timestamp publish_time = 15; // 发布时间
+}
+
+// 获得热门视频方法
+message GetHotVideoRequest{
+  string uid = 1; // 可扩展，获得好友相关视频以及其他
+  int64 count = 3; // 获得个数
+}
+
+message GetHotVideoResponse{
+  repeated VideoModel video_list = 1;
+}
+
+// 查找用户视频 - 类似分页
+message GetVideoByUidRequest {
+  int64 uid = 1;
+  int64 num = 2;
+  int64 page = 3;
+}
+
+message GetVideoByUidResponse{
+  repeated VideoModel video_list = 1;
+}
+
+// 根据搜索获得视频 - 根据title查询
+message SearchVideoRequest{
+  string search = 1;
+  int64 num = 2;
+  int64 page = 3;
+}
+
+message SearchVideoResponse{
+  repeated VideoModel video_list = 1;
+}
+
+// 获得类型列表
+message GetTagListRequest{
+
+}
+
+message GetTagListResponse{
+  repeated Tag tag_list = 1;
+}
+
+// 增加评论数
+message CommentNumRequest{
+  int64 vid = 1;
+  int64 count = 2;
+  int64 action = 3; // 0-增加，1-减少
+}
+
+message CommentNumResponse{
+
+}
+
+// 点赞数
+message LikeNumRequest{
+  int64 vid = 1;
+  int64 count = 2;
+  int64 action = 3; // 0-增加，1-减少
+}
+
+message LikeNumResponse{
+
+}
+
+// 收藏数
+message CollectNumRequest{
+  int64 vid = 1;
+  int64 count = 2;
+  int64 action = 3;
+}
+
+message CollectNumResponse{
+
+}
+
+// 判断视频链接是否存在，根据sha256计算，如果存在则不重复上传了
+
+
+// 类型 - tag
+message Tag {
+  int64 id = 1;
+  string name = 2;
+}
+
+message Author {
+  int64 id = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+service Post{
+  // 上传视频
+  rpc UploadVideo(UploadVideoRequest) returns(UploadVideoResponse);
+  // 获得视频 - 默认/分类
+  rpc GetVideoList(GetVideoListRequest) returns(GetVideoListResponse);
+  // 获得热门视频
+  rpc GetHotVideoList(GetHotVideoRequest) returns(GetHotVideoResponse);
+  // 根据用户id查找视频
+  rpc GetVideoByUid(GetVideoByUidRequest) returns(GetVideoByUidResponse);
+  // 根据搜索查询视频
+  rpc SearchVideo(SearchVideoRequest) returns(SearchVideoResponse);
+  // 获得类别
+  rpc GetTagList(GetTagListRequest) returns(GetTagListResponse);
+  // 评论数操作
+  rpc SetCommentNum(CommentNumRequest) returns(CommentNumResponse);
+  // 点赞数操作
+  rpc SetLikeNum(LikeNumRequest) returns(LikeNumResponse);
+  // 收藏数操作
+  rpc CollectNum(CollectNumRequest) returns(CollectNumResponse);
+}

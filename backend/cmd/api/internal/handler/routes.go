@@ -64,13 +64,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/getHotVideoList",
-				Handler: video.GetHotVideoListHandler(serverCtx),
+				Path:    "/getVideoList",
+				Handler: video.GetVideoListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/getVideoListByCatagory",
-				Handler: video.GetVideoListByCatagoryHandler(serverCtx),
+				Path:    "/getTypeList",
+				Handler: video.GetTypeListHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/video/v1"),

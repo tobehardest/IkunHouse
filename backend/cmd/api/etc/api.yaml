@@ -70,6 +70,7 @@ SearchRpcConf:
 
 
 OSS:
-  AccessKey:
-  SecretKey:
-  Bucket:
+  AccessKey: 2H0cu5Oo9QRD7pSWXX-gCjDXjyaKU4Mw7y2XSx5q
+  SecretKey: VAEiWagIhTqM7VlTDBg-zRFM4UIFWhr5kJbAzBXR
+  Bucket: video-clip2
+  Domain: s3eki5poq.hn-bkt.clouddn.com

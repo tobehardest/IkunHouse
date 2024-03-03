@@ -6,7 +6,7 @@ Etcd:
   Key: collect.rpc
 
 DB:
-  DataSource: root:12345678@tcp(127.0.0.1:3306)/video_clip?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:12345678@tcp(127.0.0.1:3306)/IkunHouse?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 CacheRedis:
   - Host: 127.0.0.1:6379
     Pass: #G62m50oigInC30sf

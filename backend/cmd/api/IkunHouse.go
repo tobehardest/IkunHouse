@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"video_clip/cmd/api/internal/config"
-	"video_clip/cmd/api/internal/handler"
-	"video_clip/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/config"
+	"IkunHouse/cmd/api/internal/handler"
+	"IkunHouse/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

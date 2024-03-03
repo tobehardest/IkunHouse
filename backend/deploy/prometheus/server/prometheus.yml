@@ -10,32 +10,32 @@ scrape_configs:
     static_configs:
       - targets: ['127.0.0.1:9090']
   ## User服务
-  - job_name: 'video_clip-user-api-service-1'
+  - job_name: 'IkunHouse-user-api-service-1'
     static_configs:
-      - targets: [ 'video_clip-user-api-service-1:6001' ]
+      - targets: [ 'IkunHouse-user-api-service-1:6001' ]
         labels:
           job: user-api-service
           app: user-api-service
           env: dev
-  - job_name: 'video_clip-user-api-service-2'
+  - job_name: 'IkunHouse-user-api-service-2'
     static_configs:
-      - targets: [ 'video_clip-user-api-service-2:6001' ]
+      - targets: [ 'IkunHouse-user-api-service-2:6001' ]
         labels:
           job: user-api-service
           app: user-api-service
           env: dev
 
 
-  - job_name: 'video_clip-user-rpc-1'
+  - job_name: 'IkunHouse-user-rpc-1'
     static_configs:
-      - targets: [ 'video_clip-user-rpc-1:6002' ]
+      - targets: [ 'IkunHouse-user-rpc-1:6002' ]
         labels:
           job: user-rpc
           app: user-rpc
           env: dev
-  - job_name: 'video_clip-user-rpc-2'
+  - job_name: 'IkunHouse-user-rpc-2'
     static_configs:
-      - targets: [ 'video_clip-user-rpc-2:6002' ]
+      - targets: [ 'IkunHouse-user-rpc-2:6002' ]
         labels:
           job: user-rpc
           app: user-rpc

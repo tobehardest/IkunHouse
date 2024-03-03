@@ -5,14 +5,14 @@ import (
 	"strconv"
 	"time"
 
-	"video_clip/cmd/collect/rpc/collect"
-	"video_clip/cmd/collect/rpc/internal/svc"
+	"IkunHouse/cmd/collect/rpc/collect"
+	"IkunHouse/cmd/collect/rpc/internal/svc"
 
+	"IkunHouse/cmd/collect/code"
+	"IkunHouse/cmd/collect/model"
+	"IkunHouse/cmd/collect/rpc/internal/types"
+	"IkunHouse/pkg/utils"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/collect/code"
-	"video_clip/cmd/collect/model"
-	"video_clip/cmd/collect/rpc/internal/types"
-	"video_clip/pkg/utils"
 )
 
 type CollectLogic struct {

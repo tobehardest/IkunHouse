@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/follow/rpc/follow"
-	"video_clip/cmd/follow/rpc/internal/logic"
-	"video_clip/cmd/follow/rpc/internal/svc"
+	"IkunHouse/cmd/follow/rpc/follow"
+	"IkunHouse/cmd/follow/rpc/internal/logic"
+	"IkunHouse/cmd/follow/rpc/internal/svc"
 )
 
 type FollowServer struct {

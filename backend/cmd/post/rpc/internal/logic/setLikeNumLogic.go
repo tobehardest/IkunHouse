@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"video_clip/cmd/post/rpc/internal/svc"
-	"video_clip/cmd/post/rpc/post"
+	"IkunHouse/cmd/post/rpc/internal/svc"
+	"IkunHouse/cmd/post/rpc/post"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

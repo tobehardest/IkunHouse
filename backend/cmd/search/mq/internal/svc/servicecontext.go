@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"video_clip/cmd/search/mq/internal/config"
-	"video_clip/pkg/es"
+	"IkunHouse/cmd/search/mq/internal/config"
+	"IkunHouse/pkg/es"
 )
 
 type ServiceContext struct {

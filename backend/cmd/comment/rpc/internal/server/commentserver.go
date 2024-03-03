@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/comment/rpc/comment"
-	"video_clip/cmd/comment/rpc/internal/logic"
-	"video_clip/cmd/comment/rpc/internal/svc"
+	"IkunHouse/cmd/comment/rpc/comment"
+	"IkunHouse/cmd/comment/rpc/internal/logic"
+	"IkunHouse/cmd/comment/rpc/internal/svc"
 )
 
 type CommentServer struct {

@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/search/rpc/internal/logic"
-	"video_clip/cmd/search/rpc/internal/svc"
-	"video_clip/cmd/search/rpc/search"
+	"IkunHouse/cmd/search/rpc/internal/logic"
+	"IkunHouse/cmd/search/rpc/internal/svc"
+	"IkunHouse/cmd/search/rpc/search"
 )
 
 type SearchServer struct {

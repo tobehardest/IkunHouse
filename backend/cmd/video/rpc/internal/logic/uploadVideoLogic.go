@@ -1,12 +1,12 @@
 package logic
 
 import (
+	"IkunHouse/cmd/video/model"
+	"IkunHouse/cmd/video/rpc/internal/svc"
+	"IkunHouse/cmd/video/rpc/video"
 	"context"
 	"database/sql"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/video/model"
-	"video_clip/cmd/video/rpc/internal/svc"
-	"video_clip/cmd/video/rpc/video"
 )
 
 type UploadVideoLogic struct {

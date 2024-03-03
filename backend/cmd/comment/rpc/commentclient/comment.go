@@ -6,7 +6,7 @@ package commentClient
 import (
 	"context"
 
-	"video_clip/cmd/comment/rpc/comment"
+	"IkunHouse/cmd/comment/rpc/comment"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

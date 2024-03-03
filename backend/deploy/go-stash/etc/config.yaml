@@ -5,7 +5,7 @@ Clusters:
         Brokers:
           - "kafka1:9093"
         Topics:
-          - video_clip-log
+          - IkunHouse-log
         Group: pro
         Consumers: 16
     Filters:
@@ -42,4 +42,4 @@ Clusters:
       ElasticSearch:
         Hosts:
           - "http://elasticsearch:9200"
-        Index: "video_clip-{{yyyy-MM-dd}}"
+        Index: "IkunHouse-{{yyyy-MM-dd}}"

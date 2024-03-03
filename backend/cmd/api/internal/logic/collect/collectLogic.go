@@ -4,11 +4,11 @@ import (
 	"context"
 	"github.com/jinzhu/copier"
 
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 
+	"IkunHouse/cmd/collect/rpc/collect"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/collect/rpc/collect"
 )
 
 type CollectLogic struct {

@@ -1,10 +1,10 @@
 package svc
 
 import (
+	"IkunHouse/cmd/like/model"
+	"IkunHouse/cmd/like/rpc/internal/config"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"video_clip/cmd/like/model"
-	"video_clip/cmd/like/rpc/internal/config"
 )
 
 type ServiceContext struct {

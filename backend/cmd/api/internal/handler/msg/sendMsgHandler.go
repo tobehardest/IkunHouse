@@ -3,10 +3,10 @@ package msg
 import (
 	"net/http"
 
+	"IkunHouse/cmd/api/internal/logic/msg"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"video_clip/cmd/api/internal/logic/msg"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
 )
 
 func SendMsgHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

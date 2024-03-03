@@ -4,15 +4,15 @@ package handler
 import (
 	"net/http"
 
-	auth "video_clip/cmd/api/internal/handler/auth"
-	collect "video_clip/cmd/api/internal/handler/collect"
-	comment "video_clip/cmd/api/internal/handler/comment"
-	follow "video_clip/cmd/api/internal/handler/follow"
-	like "video_clip/cmd/api/internal/handler/like"
-	msg "video_clip/cmd/api/internal/handler/msg"
-	user "video_clip/cmd/api/internal/handler/user"
-	video "video_clip/cmd/api/internal/handler/video"
-	"video_clip/cmd/api/internal/svc"
+	auth "IkunHouse/cmd/api/internal/handler/auth"
+	collect "IkunHouse/cmd/api/internal/handler/collect"
+	comment "IkunHouse/cmd/api/internal/handler/comment"
+	follow "IkunHouse/cmd/api/internal/handler/follow"
+	like "IkunHouse/cmd/api/internal/handler/like"
+	msg "IkunHouse/cmd/api/internal/handler/msg"
+	user "IkunHouse/cmd/api/internal/handler/user"
+	video "IkunHouse/cmd/api/internal/handler/video"
+	"IkunHouse/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

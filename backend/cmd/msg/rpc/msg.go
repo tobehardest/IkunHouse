@@ -1,12 +1,12 @@
 package main
 
 import (
+	"IkunHouse/cmd/msg/rpc/internal/config"
+	"IkunHouse/cmd/msg/rpc/internal/server"
+	"IkunHouse/cmd/msg/rpc/internal/svc"
+	"IkunHouse/cmd/msg/rpc/msg"
 	"flag"
 	"fmt"
-	"video_clip/cmd/msg/rpc/internal/config"
-	"video_clip/cmd/msg/rpc/internal/server"
-	"video_clip/cmd/msg/rpc/internal/svc"
-	"video_clip/cmd/msg/rpc/msg"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

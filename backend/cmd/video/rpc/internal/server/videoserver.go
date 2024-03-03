@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/video/rpc/internal/logic"
-	"video_clip/cmd/video/rpc/internal/svc"
-	"video_clip/cmd/video/rpc/video"
+	"IkunHouse/cmd/video/rpc/internal/logic"
+	"IkunHouse/cmd/video/rpc/internal/svc"
+	"IkunHouse/cmd/video/rpc/video"
 )
 
 type VideoServer struct {

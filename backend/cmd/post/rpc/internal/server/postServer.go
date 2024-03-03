@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/post/rpc/internal/logic"
-	"video_clip/cmd/post/rpc/internal/svc"
-	"video_clip/cmd/post/rpc/post"
+	"IkunHouse/cmd/post/rpc/internal/logic"
+	"IkunHouse/cmd/post/rpc/internal/svc"
+	"IkunHouse/cmd/post/rpc/post"
 )
 
 type PostServer struct {

@@ -1,9 +1,9 @@
 package svc
 
 import (
+	"IkunHouse/cmd/video/model"
+	"IkunHouse/cmd/video/rpc/internal/config"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"video_clip/cmd/video/model"
-	"video_clip/cmd/video/rpc/internal/config"
 )
 
 type ServiceContext struct {

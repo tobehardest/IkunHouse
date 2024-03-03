@@ -1,6 +1,10 @@
 package main
 
 import (
+	"IkunHouse/cmd/collect/rpc/collect"
+	"IkunHouse/cmd/collect/rpc/internal/config"
+	"IkunHouse/cmd/collect/rpc/internal/server"
+	"IkunHouse/cmd/collect/rpc/internal/svc"
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/conf"
@@ -8,10 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"video_clip/cmd/collect/rpc/collect"
-	"video_clip/cmd/collect/rpc/internal/config"
-	"video_clip/cmd/collect/rpc/internal/server"
-	"video_clip/cmd/collect/rpc/internal/svc"
 )
 
 var configFile = flag.String("f", "etc/collect.yaml", "the config file")

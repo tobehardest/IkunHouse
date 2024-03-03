@@ -20,4 +20,4 @@ CollectRpcConf:
       - 114.132.232.3:2379
     Key: collect.rpc
 Mysql:
-  DataSource: root:hcybeyond@tcp(114.132.232.3:3307)/video_clip?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:hcybeyond@tcp(114.132.232.3:3307)/IkunHouse?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

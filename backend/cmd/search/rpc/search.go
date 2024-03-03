@@ -1,12 +1,12 @@
 package main
 
 import (
+	"IkunHouse/cmd/search/rpc/internal/config"
+	"IkunHouse/cmd/search/rpc/internal/server"
+	"IkunHouse/cmd/search/rpc/internal/svc"
+	"IkunHouse/cmd/search/rpc/search"
 	"flag"
 	"fmt"
-	"video_clip/cmd/search/rpc/internal/config"
-	"video_clip/cmd/search/rpc/internal/server"
-	"video_clip/cmd/search/rpc/internal/svc"
-	"video_clip/cmd/search/rpc/search"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

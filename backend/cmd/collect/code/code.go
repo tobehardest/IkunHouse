@@ -1,6 +1,6 @@
 package code
 
-import "video_clip/pkg/errx"
+import "IkunHouse/pkg/errx"
 
 var (
 	CollectPostIdEmpty = errx.NewErrCodeMsg(500002, "收藏帖子id为空")

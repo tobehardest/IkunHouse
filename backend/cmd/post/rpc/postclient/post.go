@@ -6,7 +6,7 @@ package postclient
 import (
 	"context"
 
-	"video_clip/cmd/post/rpc/post"
+	"IkunHouse/cmd/post/rpc/post"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

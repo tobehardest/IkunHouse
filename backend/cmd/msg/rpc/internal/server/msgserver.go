@@ -4,10 +4,10 @@
 package server
 
 import (
+	"IkunHouse/cmd/msg/rpc/internal/logic"
+	"IkunHouse/cmd/msg/rpc/internal/svc"
+	msg2 "IkunHouse/cmd/msg/rpc/msg"
 	"context"
-	"video_clip/cmd/msg/rpc/internal/logic"
-	"video_clip/cmd/msg/rpc/internal/svc"
-	msg2 "video_clip/cmd/msg/rpc/msg"
 )
 
 type MsgServer struct {

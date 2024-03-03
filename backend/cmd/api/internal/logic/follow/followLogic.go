@@ -5,12 +5,12 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 
+	"IkunHouse/cmd/follow/rpc/follow"
+	"IkunHouse/pkg/errx"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/follow/rpc/follow"
-	"video_clip/pkg/errx"
 )
 
 type FollowLogic struct {

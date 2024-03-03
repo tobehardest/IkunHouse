@@ -1,9 +1,9 @@
 package svc
 
 import (
+	"IkunHouse/cmd/auth/model"
+	"IkunHouse/cmd/auth/rpc/internal/config"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"video_clip/cmd/auth/model"
-	"video_clip/cmd/auth/rpc/internal/config"
 )
 
 type ServiceContext struct {

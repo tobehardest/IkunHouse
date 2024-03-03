@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/user/rpc/internal/logic"
-	"video_clip/cmd/user/rpc/internal/svc"
-	"video_clip/cmd/user/rpc/user"
+	"IkunHouse/cmd/user/rpc/internal/logic"
+	"IkunHouse/cmd/user/rpc/internal/svc"
+	"IkunHouse/cmd/user/rpc/user"
 )
 
 type UserServer struct {

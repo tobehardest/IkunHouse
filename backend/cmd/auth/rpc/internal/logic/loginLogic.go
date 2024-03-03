@@ -1,6 +1,11 @@
 package logic
 
 import (
+	"IkunHouse/cmd/auth/code"
+	"IkunHouse/cmd/auth/rpc/authCenter"
+	"IkunHouse/cmd/auth/rpc/internal/svc"
+	"IkunHouse/pkg/errx"
+	"IkunHouse/pkg/jwtx"
 	"context"
 	"database/sql"
 	"fmt"
@@ -9,11 +14,6 @@ import (
 	imAuth "github.com/openimsdk/openkf/server/pkg/openim/sdk/auth"
 	"github.com/pkg/errors"
 	"net"
-	"video_clip/cmd/auth/code"
-	"video_clip/cmd/auth/rpc/authCenter"
-	"video_clip/cmd/auth/rpc/internal/svc"
-	"video_clip/pkg/errx"
-	"video_clip/pkg/jwtx"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

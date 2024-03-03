@@ -6,7 +6,7 @@ package userClient
 import (
 	"context"
 
-	"video_clip/cmd/user/rpc/user"
+	"IkunHouse/cmd/user/rpc/user"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

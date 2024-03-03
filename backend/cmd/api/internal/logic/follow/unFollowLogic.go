@@ -3,8 +3,8 @@ package follow
 import (
 	"context"
 
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

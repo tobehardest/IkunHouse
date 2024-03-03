@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/like/rpc/internal/logic"
-	"video_clip/cmd/like/rpc/internal/svc"
-	"video_clip/cmd/like/rpc/like"
+	"IkunHouse/cmd/like/rpc/internal/logic"
+	"IkunHouse/cmd/like/rpc/internal/svc"
+	"IkunHouse/cmd/like/rpc/like"
 )
 
 type LikeServer struct {

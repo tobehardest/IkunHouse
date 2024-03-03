@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 
-	localtypes "video_clip/cmd/search/rpc/internal/types"
+	localtypes "IkunHouse/cmd/search/rpc/internal/types"
 
-	"video_clip/cmd/search/rpc/internal/svc"
-	"video_clip/cmd/search/rpc/search"
+	"IkunHouse/cmd/search/rpc/internal/svc"
+	"IkunHouse/cmd/search/rpc/search"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

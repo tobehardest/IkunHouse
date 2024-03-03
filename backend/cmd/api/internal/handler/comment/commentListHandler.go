@@ -3,10 +3,10 @@ package comment
 import (
 	"net/http"
 
+	"IkunHouse/cmd/api/internal/logic/comment"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"video_clip/cmd/api/internal/logic/comment"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
 )
 
 func CommentListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

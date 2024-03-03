@@ -1,14 +1,14 @@
 package auth
 
 import (
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
+	"IkunHouse/cmd/auth/rpc/authCenter"
+	"IkunHouse/pkg/errx"
 	"context"
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
-	"video_clip/cmd/auth/rpc/authCenter"
-	"video_clip/pkg/errx"
 )
 
 type UserLoginLogic struct {

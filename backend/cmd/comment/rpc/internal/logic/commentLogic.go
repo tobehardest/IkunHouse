@@ -5,13 +5,13 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 
-	"video_clip/cmd/comment/rpc/comment"
-	"video_clip/cmd/comment/rpc/internal/svc"
+	"IkunHouse/cmd/comment/rpc/comment"
+	"IkunHouse/cmd/comment/rpc/internal/svc"
 
+	"IkunHouse/cmd/comment/code"
+	"IkunHouse/cmd/comment/model"
+	"IkunHouse/pkg/uniqueid/snowflake"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/comment/code"
-	"video_clip/cmd/comment/model"
-	"video_clip/pkg/uniqueid/snowflake"
 )
 
 type CommentLogic struct {

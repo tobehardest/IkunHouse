@@ -3,11 +3,11 @@ package logic
 import (
 	"context"
 
-	"video_clip/cmd/collect/rpc/collect"
-	"video_clip/cmd/collect/rpc/internal/svc"
+	"IkunHouse/cmd/collect/rpc/collect"
+	"IkunHouse/cmd/collect/rpc/internal/svc"
 
+	"IkunHouse/cmd/collect/model"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/collect/model"
 )
 
 type CollectListLogic struct {

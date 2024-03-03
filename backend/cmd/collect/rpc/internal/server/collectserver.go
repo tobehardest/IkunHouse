@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"video_clip/cmd/collect/rpc/collect"
-	"video_clip/cmd/collect/rpc/internal/logic"
-	"video_clip/cmd/collect/rpc/internal/svc"
+	"IkunHouse/cmd/collect/rpc/collect"
+	"IkunHouse/cmd/collect/rpc/internal/logic"
+	"IkunHouse/cmd/collect/rpc/internal/svc"
 )
 
 type CollectServer struct {

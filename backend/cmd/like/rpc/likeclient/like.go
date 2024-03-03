@@ -6,7 +6,7 @@ package likeClient
 import (
 	"context"
 
-	"video_clip/cmd/like/rpc/like"
+	"IkunHouse/cmd/like/rpc/like"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

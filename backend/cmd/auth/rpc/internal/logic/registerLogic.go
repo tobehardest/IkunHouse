@@ -1,18 +1,18 @@
 package logic
 
 import (
+	"IkunHouse/cmd/auth/code"
+	"IkunHouse/cmd/auth/rpc/authCenter"
+	"IkunHouse/cmd/auth/rpc/internal/svc"
 	"context"
 	"github.com/jinzhu/copier"
 	"github.com/openimsdk/openkf/server/pkg/utils"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
-	"video_clip/cmd/auth/code"
-	"video_clip/cmd/auth/rpc/authCenter"
-	"video_clip/cmd/auth/rpc/internal/svc"
 
+	"IkunHouse/cmd/auth/model"
+	"IkunHouse/pkg/errx"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/auth/model"
-	"video_clip/pkg/errx"
 )
 
 type RegisterLogic struct {

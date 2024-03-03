@@ -13,7 +13,7 @@ import (
 	prefix: auth/v1
 	group: auth
 )
-service video_clip {
+service IkunHouse {
 	@doc "user register"
 	@handler userRegister
 	post /user/register (RegisterReq) returns (RegisterResp)
@@ -31,7 +31,7 @@ service video_clip {
 	prefix: user/v1
 	group: user
 )
-service video_clip {
+service IkunHouse {
 	@doc "get user info"
 	@handler getUserInfo
 	get /getUserInfoDetail (GetUserInfoDetailReq) returns (GetUserInfoDetailRes)
@@ -45,7 +45,7 @@ service video_clip {
 	prefix: video/v1
 	group: video
 )
-service video_clip {
+service IkunHouse {
 	@doc "上传视频"
 	@handler uploadVideo
 	get /uploadVideo (UploadVideoReq) returns (UploadVideoRes)
@@ -63,7 +63,7 @@ service video_clip {
 	prefix: like/v1
 	group: like
 )
-service video_clip {
+service IkunHouse {
 	@doc "like"
 	@handler like
 	post /like (LikeReq) returns (LikeRes)
@@ -77,7 +77,7 @@ service video_clip {
 	prefix:	follow/v1
 	group: follow
 )
-service video_clip {
+service IkunHouse {
 	@doc "follow"
 	@handler follow
 	post /follow (FollowReq) returns (FollowRes)
@@ -99,7 +99,7 @@ service video_clip {
 	prefix:	comment/v1
 	group: comment
 )
-service video_clip {
+service IkunHouse {
 	@doc "comment"
 	@handler comment
 	post /comment (CommentReq) returns (CommentRes)
@@ -125,7 +125,7 @@ service video_clip {
 	prefix:	collect/v1
 	group: collect
 )
-service video_clip {
+service IkunHouse {
 	@doc "collect"
 	@handler collect
 	post /collect (CollectReq) returns (CollectRes)
@@ -139,7 +139,7 @@ service video_clip {
 	prefix: msg/v1
 	group: msg
 )
-service video_clip {
+service IkunHouse {
 	@doc "发送私聊消息"
 	@handler sendMsg
 	get /sendMsg (SendMsgReq) returns (SendMsgRes)

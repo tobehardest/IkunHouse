@@ -1,6 +1,6 @@
 package code
 
-import "video_clip/pkg/errx"
+import "IkunHouse/pkg/errx"
 
 var (
 	FollowUserIdEmpty   = errx.NewErrCodeMsg(40001, "关注用户id为空")

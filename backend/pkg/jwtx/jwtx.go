@@ -18,7 +18,7 @@ func CreateToken(userId string, AccessSecret string, AccessExpire int64) (string
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expiresAt,
 			IssuedAt:  time.Now().Unix(),
-			Issuer:    "video_clip-app",
+			Issuer:    "IkunHouse-app",
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

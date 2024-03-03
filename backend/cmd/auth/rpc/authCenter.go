@@ -1,12 +1,10 @@
 package main
 
 import (
+	"IkunHouse/cmd/auth/rpc/internal/config"
+	"IkunHouse/cmd/auth/rpc/internal/svc"
 	"flag"
 	"fmt"
-	"video_clip/cmd/auth/rpc/authCenter"
-	"video_clip/cmd/auth/rpc/internal/config"
-	"video_clip/cmd/auth/rpc/internal/server"
-	"video_clip/cmd/auth/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

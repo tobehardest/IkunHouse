@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"video_clip/cmd/msg/rpc/internal/config"
+	"IkunHouse/cmd/msg/rpc/internal/config"
 )
 
 type ServiceContext struct {

@@ -1,14 +1,14 @@
 package mqs
 
 import (
+	"IkunHouse/cmd/search/mq/internal/svc"
+	"IkunHouse/cmd/search/mq/internal/types"
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/elastic/go-elasticsearch/v8/esutil"
 	"github.com/zeromicro/go-zero/core/logx"
 	"strings"
-	"video_clip/cmd/search/mq/internal/svc"
-	"video_clip/cmd/search/mq/internal/types"
 )
 
 type ShortVideoPublishConsumer struct {

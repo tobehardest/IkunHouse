@@ -1,15 +1,15 @@
 package logic
 
 import (
+	"IkunHouse/cmd/follow/rpc/follow"
+	"IkunHouse/cmd/follow/rpc/internal/svc"
 	"context"
 	"gorm.io/gorm"
-	"video_clip/cmd/follow/rpc/follow"
-	"video_clip/cmd/follow/rpc/internal/svc"
 
+	"IkunHouse/cmd/follow/code"
+	"IkunHouse/cmd/follow/model"
+	"IkunHouse/cmd/follow/rpc/internal/types"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/cmd/follow/code"
-	"video_clip/cmd/follow/model"
-	"video_clip/cmd/follow/rpc/internal/types"
 )
 
 type UnFollowLogic struct {

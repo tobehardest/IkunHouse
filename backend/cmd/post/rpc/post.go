@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"video_clip/cmd/post/rpc/internal/config"
-	"video_clip/cmd/post/rpc/internal/server"
-	"video_clip/cmd/post/rpc/internal/svc"
-	"video_clip/cmd/post/rpc/post"
+	"IkunHouse/cmd/post/rpc/internal/config"
+	"IkunHouse/cmd/post/rpc/internal/server"
+	"IkunHouse/cmd/post/rpc/internal/svc"
+	"IkunHouse/cmd/post/rpc/post"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

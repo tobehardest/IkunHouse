@@ -1,13 +1,13 @@
 package main
 
 import (
+	"IkunHouse/cmd/search/mq/internal/config"
+	"IkunHouse/cmd/search/mq/internal/mqs"
+	"IkunHouse/cmd/search/mq/internal/svc"
 	"context"
 	"flag"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
-	"video_clip/cmd/search/mq/internal/config"
-	"video_clip/cmd/search/mq/internal/mqs"
-	"video_clip/cmd/search/mq/internal/svc"
 )
 
 // var configFile = flag.String("f", "etc/mq.yaml", "the config file")

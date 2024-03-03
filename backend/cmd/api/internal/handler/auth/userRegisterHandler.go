@@ -3,11 +3,11 @@ package auth
 import (
 	"net/http"
 
+	"IkunHouse/cmd/api/internal/logic/auth"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
+	"IkunHouse/pkg/result"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"video_clip/cmd/api/internal/logic/auth"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
-	"video_clip/pkg/result"
 )
 
 func UserRegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -4,8 +4,8 @@
 package msgclient
 
 import (
+	msg2 "IkunHouse/cmd/msg/rpc/msg"
 	"context"
-	msg2 "video_clip/cmd/msg/rpc/msg"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

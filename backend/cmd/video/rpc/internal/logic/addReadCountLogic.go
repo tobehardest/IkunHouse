@@ -1,10 +1,10 @@
 package logic
 
 import (
+	"IkunHouse/cmd/video/rpc/video"
 	"context"
-	"video_clip/cmd/video/rpc/video"
 
-	"video_clip/cmd/video/rpc/internal/svc"
+	"IkunHouse/cmd/video/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

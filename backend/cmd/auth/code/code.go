@@ -1,6 +1,6 @@
 package code
 
-import "video_clip/pkg/errx"
+import "IkunHouse/pkg/errx"
 
 var (
 	ErrUserExistsed      = errx.NewErrMsg("用户已存在")

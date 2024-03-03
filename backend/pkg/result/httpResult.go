@@ -1,13 +1,13 @@
 package result
 
 import (
+	"IkunHouse/pkg/errx"
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/status"
 	"net/http"
-	"video_clip/pkg/errx"
 )
 
 // http返回

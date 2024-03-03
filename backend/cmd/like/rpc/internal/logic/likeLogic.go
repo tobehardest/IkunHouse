@@ -3,11 +3,11 @@ package logic
 import (
 	"context"
 
-	"video_clip/cmd/like/rpc/internal/svc"
-	"video_clip/cmd/like/rpc/like"
+	"IkunHouse/cmd/like/rpc/internal/svc"
+	"IkunHouse/cmd/like/rpc/like"
 
+	"IkunHouse/pkg/utils"
 	"github.com/zeromicro/go-zero/core/logx"
-	"video_clip/pkg/utils"
 )
 
 type LikeLogic struct {

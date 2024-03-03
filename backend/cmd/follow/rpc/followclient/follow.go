@@ -6,7 +6,7 @@ package followClient
 import (
 	"context"
 
-	"video_clip/cmd/follow/rpc/follow"
+	"IkunHouse/cmd/follow/rpc/follow"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -3,10 +3,10 @@ package like
 import (
 	"net/http"
 
+	"IkunHouse/cmd/api/internal/logic/like"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"video_clip/cmd/api/internal/logic/like"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
 )
 
 func CancelLikeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

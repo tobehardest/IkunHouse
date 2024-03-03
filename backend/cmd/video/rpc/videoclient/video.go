@@ -6,7 +6,7 @@ package videoclient
 import (
 	"context"
 
-	"video_clip/cmd/video/rpc/video"
+	"IkunHouse/cmd/video/rpc/video"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

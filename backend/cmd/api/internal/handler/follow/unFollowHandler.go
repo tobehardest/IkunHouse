@@ -3,10 +3,10 @@ package follow
 import (
 	"net/http"
 
+	"IkunHouse/cmd/api/internal/logic/follow"
+	"IkunHouse/cmd/api/internal/svc"
+	"IkunHouse/cmd/api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"video_clip/cmd/api/internal/logic/follow"
-	"video_clip/cmd/api/internal/svc"
-	"video_clip/cmd/api/internal/types"
 )
 
 func UnFollowHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

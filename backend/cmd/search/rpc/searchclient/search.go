@@ -6,7 +6,7 @@ package searchClient
 import (
 	"context"
 
-	"video_clip/cmd/search/rpc/search"
+	"IkunHouse/cmd/search/rpc/search"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -1,17 +1,17 @@
 package svc
 
 import (
+	"IkunHouse/cmd/api/internal/config"
+	"IkunHouse/cmd/auth/rpc/authCenterClient"
+	"IkunHouse/cmd/collect/rpc/collectClient"
+	"IkunHouse/cmd/comment/rpc/commentClient"
+	"IkunHouse/cmd/follow/rpc/followClient"
+	"IkunHouse/cmd/like/rpc/likeClient"
+	"IkunHouse/cmd/msg/rpc/msgclient"
+	"IkunHouse/cmd/search/rpc/searchClient"
+	"IkunHouse/cmd/user/rpc/userClient"
+	"IkunHouse/cmd/video/rpc/videoclient"
 	"github.com/zeromicro/go-zero/zrpc"
-	"video_clip/cmd/api/internal/config"
-	"video_clip/cmd/auth/rpc/authCenterClient"
-	"video_clip/cmd/collect/rpc/collectClient"
-	"video_clip/cmd/comment/rpc/commentClient"
-	"video_clip/cmd/follow/rpc/followClient"
-	"video_clip/cmd/like/rpc/likeClient"
-	"video_clip/cmd/msg/rpc/msgclient"
-	"video_clip/cmd/search/rpc/searchClient"
-	"video_clip/cmd/user/rpc/userClient"
-	"video_clip/cmd/video/rpc/videoclient"
 )
 
 type ServiceContext struct {

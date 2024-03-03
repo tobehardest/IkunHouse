@@ -6,7 +6,7 @@ package collectClient
 import (
 	"context"
 
-	"video_clip/cmd/collect/rpc/collect"
+	"IkunHouse/cmd/collect/rpc/collect"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

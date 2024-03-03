@@ -4,6 +4,7 @@ CREATE TABLE `user` (
     `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
     `password` varchar(32)  NOT NULL DEFAULT '' COMMENT '密码',
     `avatar` varchar(256) NOT NULL DEFAULT '' COMMENT '头像',
+    `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别 0:男 1:女',
     `mobile` varchar(128) NOT NULL DEFAULT '' COMMENT '手机号',
     `follow_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '关注数',
     `follower_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '粉丝数',

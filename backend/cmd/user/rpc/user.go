@@ -7,7 +7,7 @@ import (
 	"video_clip/cmd/user/rpc/internal/config"
 	"video_clip/cmd/user/rpc/internal/server"
 	"video_clip/cmd/user/rpc/internal/svc"
-	"video_clip/cmd/user/rpc/types/user"
+	"video_clip/cmd/user/rpc/user"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -2,10 +2,10 @@ package code
 
 import "fmt"
 
-func UserFollowKey(userId int64) string {
-	return fmt.Sprintf("biz:user:follow:%d", userId)
+func UserFollowKey(userId string) string {
+	return fmt.Sprintf("biz:user:follow:%s", userId)
 }
 
-func UserFansKey(userId int64) string {
-	return fmt.Sprintf("biz:user:fans:%d", userId)
+func UserFansKey(userId string) string {
+	return fmt.Sprintf("biz:user:fans:%s", userId)
 }

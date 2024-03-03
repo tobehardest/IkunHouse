@@ -1,5 +1,5 @@
-create database beyond_follow;
-use beyond_follow;
+# create database beyond_follow;
+# use beyond_follow;
 
 CREATE TABLE `follow` (
     `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',

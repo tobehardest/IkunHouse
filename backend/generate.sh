@@ -10,3 +10,10 @@
 
 # model
 goctl model mysql ddl --src service/user-service/model/user.sql --dir service/user-service/model
+
+# 4. 根据api文件生成swagger json文件
+# 4.1 首先需要安装goctl-swagger插件
+GOPROXY=https://goproxy.cn/,direct go install github.com/zeromicro/goctl-swagger@latest
+# 4.2 进入到cmd/api/desc 目录下
+goctl api plugin -plugin goctl-swagger="swagger -filename api.json" -api api.api -dir .
+# 该命令会在当前目录下生成api.json文件

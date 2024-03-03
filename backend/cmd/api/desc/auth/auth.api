@@ -12,8 +12,9 @@ type (
     RegisterReq {
         UserName        string `json:"username"`
         Password        string `json:"password"`
-        Avatar   string `json:"avatar"`
+        Avatar   string `json:"avatar,optional"`
         Mobile   string `json:"mobile"`
+        Sex      int64 `json:"sex,optional"`
     }
     RegisterResp {
         UserId string `json:"userId"`

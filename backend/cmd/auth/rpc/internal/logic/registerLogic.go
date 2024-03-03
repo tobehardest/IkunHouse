@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/jinzhu/copier"
 	"github.com/openimsdk/openkf/server/pkg/utils"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -30,7 +31,6 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 
 // 注册接口
 func (l *RegisterLogic) Register(in *authCenter.RegisterReq) (*authCenter.RegisterRes, error) {
-	// todo: add your logic here and delete this line
 
 	// 1、判断用户存不存在
 	user, err := l.svcCtx.UserModel.FindOneByUserName(l.ctx, in.Username)
@@ -48,13 +48,17 @@ func (l *RegisterLogic) Register(in *authCenter.RegisterReq) (*authCenter.Regist
 	userId := utils.GenUUIDWithoutHyphen()
 
 	// 构造一个User实例
-	user = &model.User{
-		UserId:   userId,
-		UserName: in.Username,
-		Password: in.Password,
+	user = &model.User{}
+	err = copier.Copy(user, in)
+	if err != nil {
+		errors.Wrapf(errx.NewErrCode(errx.COPIER_COPY_ERROR), "username:%s", in.Username)
 	}
+	user.UserId = userId
 	// 3、保存进数据库
-	l.svcCtx.UserModel.Insert(l.ctx, user)
+	_, err = l.svcCtx.UserModel.Insert(l.ctx, user)
+	if err != nil {
+		return nil, errors.Wrapf(errx.NewErrCode(errx.DB_ERROR), "userName:%s", in.Username)
+	}
 
 	return &authCenter.RegisterRes{
 		UserId: userId,

@@ -10,8 +10,8 @@ info(
 
 type  (
     FollowReq {
-        UserId int64 `json:"userId"`
-        FollowedUserId int64 `json:"followedUserId"`
+        UserId string `json:"userId"`
+        FollowedUserId string `json:"followedUserId"`
     }
     FollowRes {
 
@@ -20,47 +20,53 @@ type  (
 
 type (
     UnFollowReq {
-        UserId int64 `json:"userId"`
-        FollowedUserId int64 `json:"followedUserId"`
+        UserId string `json:"userId"`
+        FollowedUserId string `json:"followedUserId"`
     }
     UnFollowRes {
 
     }
 )
 
-type FollowItem {
-
+type FolloweeItem {
+    Id int64 `json:"id"`
+    FolloweeUserId string  `json:"followeeUserId"`
+    CreateTime int64 `json:"createTime"`
 }
 
 type (
-    FollowListReq {
-        UserId int64 `json:"userId"`
+    FolloweeListReq {
+        Id int64  `json:"id"`
+        UserId string `json:"userId"`
         Cursor  int64 `json:"cursor"`
         PageSize int64 `json:"pageSize"`
     }
-    FollowListRes {
-        FollowList []FollowItem `json:"followList"`
+    FolloweeListRes {
+        Items []FolloweeItem `json:"followeeList"`
         Cursor  int64 `json:"cursor"`
         IsEnd bool `json:"isEnd"`
+        Id  int64 `json:"id"`
     }
 )
 
 
-type FansItem {
-    FansUserId int64 `json:"fansUserId"`
+type FollowerItem {
+    Id int64 `json:"id"`
+    FollowerUserId string  `json:"followeeUserId"`
+    CreateTime int64 `json:"createTime"`
 }
 
 type (
-    FansListReq {
-        UserId int64 `json:"userId"`
+    FollowerListReq {
+        UserId string `json:"userId"`
         Cursor  int64 `json:"cursor"`
         PageSize int64 `json:"pageSize"`
     }
-    FansListRes {
-        FansList []FansItem `json:"fansList"`
-
+    FollowerListRes {
+        Items []FollowerItem `json:"fansList"`
         Cursor  int64 `json:"cursor"`
         IsEnd bool `json:"isEnd"`
+        Id  int64 `json:"id"`
     }
 )
 

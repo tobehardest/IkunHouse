@@ -31,6 +31,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	return &ServiceContext{
 		Config:           c,
+		DB:               db,
 		FollowModel:      model.NewFollowModel(db.DB),
 		FollowCountModel: model.NewFollowCountModel(db.DB),
 		BizRedis:         rds,

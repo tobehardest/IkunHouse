@@ -9,35 +9,31 @@ info(
 )
 
 type (
-    User {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        Avatar string `json:"avatar"`
-        FollowCount int64 `json:"follow_count"`
-        FollowerCount int64 `json:"follower_count"`
-        IsFollow bool `json:"is_follow"`
-        WorkCount int64 `json:"work_count"`
+
+    GetUserInfoDetailReq{
+        UserId string `json:"userId"`
     }
 
-    GetUserInfoReq{
-        UserId int64 `json:"user_id"`
+    GetUserInfoDetailRes{
+        UserId string `json:"userId"`
+        Username string `json:"username"`
+        Avatar string `json:"avatar"`   // 头像
+        Sex int64 `json:"sex"`  // 性别
+        FolloweeNum uint64 `json:"followeeNum"` // 关注数
+        FollowerNum uint64 `json:"followerNum"` // 粉丝数
+        WorkNum     uint64 `json:"workNum"`     // 作品数
     }
-
-    GetUserInfoRes{
-        UserInfo User `json:"user_info"`
-    }
-
-
 )
+
 
 type (
     UpdateUserInfoReq {
-        Id       int64  `json:"id"`
-        Mobile   string `json:"mobile"`
-        Nickname string `json:"nickname"`
-        Sex      int64  `json:"sex"`
-        Avatar   string `json:"avatar"`
-        Info     string `json:"info"`
+        UserId string `json:"userId"`
+        Username string `json:"username,optional"`
+        Avatar string `json:"avatar,optional"`   // 头像
+        Sex int64 `json:"sex,optional"`  // 性别
+        Mobile string `json:"mobile,optional"` //手机号
+        Password string `json:"password,optional"`  //密码
     }
     UpdateUserInfoRes {
 

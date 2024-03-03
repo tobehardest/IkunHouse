@@ -8,6 +8,7 @@ message RegisterReq {
   string Password = 2;
   string Avatar = 3;
   string Mobile = 4;
+  int64 sex = 5;
 }
 
 message RegisterRes {

@@ -4,8 +4,9 @@ package types
 type RegisterReq struct {
 	UserName string `json:"username"`
 	Password string `json:"password"`
-	Avatar   string `json:"avatar"`
+	Avatar   string `json:"avatar,optional"`
 	Mobile   string `json:"mobile"`
+	Sex      int64  `json:"sex,optional"`
 }
 
 type RegisterResp struct {
@@ -38,31 +39,27 @@ type GenerateTokenResp struct {
 	RefreshAfter int64  `json:"refreshAfter"`
 }
 
-type User struct {
-	Id            int64  `json:"id"`
-	Name          string `json:"name"`
-	Avatar        string `json:"avatar"`
-	FollowCount   int64  `json:"follow_count"`
-	FollowerCount int64  `json:"follower_count"`
-	IsFollow      bool   `json:"is_follow"`
-	WorkCount     int64  `json:"work_count"`
+type GetUserInfoDetailReq struct {
+	UserId string `json:"userId"`
 }
 
-type GetUserInfoReq struct {
-	UserId int64 `json:"user_id"`
-}
-
-type GetUserInfoRes struct {
-	UserInfo User `json:"user_info"`
+type GetUserInfoDetailRes struct {
+	UserId      string `json:"userId"`
+	Username    string `json:"username"`
+	Avatar      string `json:"avatar"`      // 头像
+	Sex         int64  `json:"sex"`         // 性别
+	FolloweeNum uint64 `json:"followeeNum"` // 关注数
+	FollowerNum uint64 `json:"followerNum"` // 粉丝数
+	WorkNum     uint64 `json:"workNum"`     // 作品数
 }
 
 type UpdateUserInfoReq struct {
-	Id       int64  `json:"id"`
-	Mobile   string `json:"mobile"`
-	Nickname string `json:"nickname"`
-	Sex      int64  `json:"sex"`
-	Avatar   string `json:"avatar"`
-	Info     string `json:"info"`
+	UserId   string `json:"userId"`
+	Username string `json:"username,optional"`
+	Avatar   string `json:"avatar,optional"`   // 头像
+	Sex      int64  `json:"sex,optional"`      // 性别
+	Mobile   string `json:"mobile,optional"`   //手机号
+	Password string `json:"password,optional"` //密码
 }
 
 type UpdateUserInfoRes struct {
@@ -137,50 +134,58 @@ type LikeCountRes struct {
 }
 
 type FollowReq struct {
-	UserId         int64 `json:"userId"`
-	FollowedUserId int64 `json:"followedUserId"`
+	UserId         string `json:"userId"`
+	FollowedUserId string `json:"followedUserId"`
 }
 
 type FollowRes struct {
 }
 
 type UnFollowReq struct {
-	UserId         int64 `json:"userId"`
-	FollowedUserId int64 `json:"followedUserId"`
+	UserId         string `json:"userId"`
+	FollowedUserId string `json:"followedUserId"`
 }
 
 type UnFollowRes struct {
 }
 
-type FollowItem struct {
+type FolloweeItem struct {
+	Id             int64  `json:"id"`
+	FolloweeUserId string `json:"followeeUserId"`
+	CreateTime     int64  `json:"createTime"`
 }
 
-type FollowListReq struct {
-	UserId   int64 `json:"userId"`
-	Cursor   int64 `json:"cursor"`
-	PageSize int64 `json:"pageSize"`
+type FolloweeListReq struct {
+	Id       int64  `json:"id"`
+	UserId   string `json:"userId"`
+	Cursor   int64  `json:"cursor"`
+	PageSize int64  `json:"pageSize"`
 }
 
-type FollowListRes struct {
-	FollowList []FollowItem `json:"followList"`
-	Cursor     int64        `json:"cursor"`
-	IsEnd      bool         `json:"isEnd"`
+type FolloweeListRes struct {
+	Items  []FolloweeItem `json:"followeeList"`
+	Cursor int64          `json:"cursor"`
+	IsEnd  bool           `json:"isEnd"`
+	Id     int64          `json:"id"`
 }
 
-type FansItem struct {
-	FansUserId int64 `json:"fansUserId"`
+type FollowerItem struct {
+	Id             int64  `json:"id"`
+	FollowerUserId string `json:"followeeUserId"`
+	CreateTime     int64  `json:"createTime"`
 }
 
-type FansListReq struct {
-	UserId   int64 `json:"userId"`
-	Cursor   int64 `json:"cursor"`
-	PageSize int64 `json:"pageSize"`
+type FollowerListReq struct {
+	UserId   string `json:"userId"`
+	Cursor   int64  `json:"cursor"`
+	PageSize int64  `json:"pageSize"`
 }
 
-type FansListRes struct {
-	FansList []FansItem `json:"fansList"`
-	Cursor   int64      `json:"cursor"`
-	IsEnd    bool       `json:"isEnd"`
+type FollowerListRes struct {
+	Items  []FollowerItem `json:"fansList"`
+	Cursor int64          `json:"cursor"`
+	IsEnd  bool           `json:"isEnd"`
+	Id     int64          `json:"id"`
 }
 
 type Comment struct {

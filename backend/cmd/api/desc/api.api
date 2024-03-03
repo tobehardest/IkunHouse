@@ -34,7 +34,7 @@ service video_clip {
 service video_clip {
 	@doc "get user info"
 	@handler getUserInfo
-	get /getUserInfo (GetUserInfoReq) returns (GetUserInfoRes)
+	get /getUserInfoDetail (GetUserInfoDetailReq) returns (GetUserInfoDetailRes)
 
 	@doc "update user info"
 	@handler updateUserInfo
@@ -86,13 +86,13 @@ service video_clip {
 	@handler unFollow
 	post /unFollow (UnFollowReq) returns (UnFollowRes)
 
-	@doc "follow list"
-	@handler followList
-	post /follow/list (FollowListReq) returns (FollowListReq)
+	@doc "followee list"
+	@handler followeeList
+	post /followee/list (FolloweeListReq) returns (FolloweeListRes)
 
-	@doc "fas list"
-	@handler fansList
-	post /fans/list (FansListReq) returns (FansListRes)
+	@doc "follower list"
+	@handler followerList
+	post /follower/list (FollowerListReq) returns (FollowerListRes)
 }
 
 @server(

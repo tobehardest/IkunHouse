@@ -9,6 +9,7 @@ import (
 	"video_clip/cmd/auth/rpc/authCenter"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"video_clip/pkg/errx"
 )
 
 type UserRegisterLogic struct {
@@ -39,7 +40,10 @@ func (l *UserRegisterLogic) UserRegister(req *types.RegisterReq) (resp *types.Re
 	}
 
 	resp = &types.RegisterResp{}
-	_ = copier.Copy(&resp, registerResp)
+	err = copier.Copy(&resp, registerResp)
+	if err != nil {
+		errors.Wrapf(errx.NewErrCode(errx.COPIER_COPY_ERROR), "username:%s", req.UserName)
+	}
 
 	return resp, nil
 }

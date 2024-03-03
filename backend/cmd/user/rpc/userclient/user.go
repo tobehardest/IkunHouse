@@ -13,13 +13,17 @@ import (
 )
 
 type (
-	UserInfoModel    = user.UserInfoModel
-	UserInfoRequest  = user.UserInfoRequest
-	UserInfoResponse = user.UserInfoResponse
+	GetUserInfoDetailReq = user.GetUserInfoDetailReq
+	GetUserInfoDetailRes = user.GetUserInfoDetailRes
+	UpdateUserInfoReq    = user.UpdateUserInfoReq
+	UpdateUserInfoRes    = user.UpdateUserInfoRes
+	UserInfo             = user.UserInfo
 
 	User interface {
-		// 批量获得用户信息接口
-		MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+		// 更新用户信息
+		UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error)
+		// 获取用户主页信息
+		GetUserInfoDetail(ctx context.Context, in *GetUserInfoDetailReq, opts ...grpc.CallOption) (*GetUserInfoDetailRes, error)
 	}
 
 	defaultUser struct {
@@ -33,8 +37,14 @@ func NewUser(cli zrpc.Client) User {
 	}
 }
 
-// 批量获得用户信息接口
-func (m *defaultUser) MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
+// 更新用户信息
+func (m *defaultUser) UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error) {
 	client := user.NewUserClient(m.cli.Conn())
-	return client.MGetUserInfo(ctx, in, opts...)
+	return client.UpdateUserInfo(ctx, in, opts...)
+}
+
+// 获取用户主页信息
+func (m *defaultUser) GetUserInfoDetail(ctx context.Context, in *GetUserInfoDetailReq, opts ...grpc.CallOption) (*GetUserInfoDetailRes, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.GetUserInfoDetail(ctx, in, opts...)
 }

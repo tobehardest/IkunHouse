@@ -3,10 +3,12 @@ package auth
 import (
 	"context"
 	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"video_clip/cmd/api/internal/svc"
 	"video_clip/cmd/api/internal/types"
 	"video_clip/cmd/auth/rpc/authCenter"
+	"video_clip/pkg/errx"
 )
 
 type UserLoginLogic struct {
@@ -36,7 +38,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq) (resp *types.LoginResp, 
 	resp = &types.LoginResp{}
 	err = copier.Copy(&resp, loginResp)
 	if err != nil {
-		// todo fill err
+		errors.Wrapf(errx.NewErrCode(errx.COPIER_COPY_ERROR), "username:%s", req.UserName)
 	}
 
 	return resp, nil

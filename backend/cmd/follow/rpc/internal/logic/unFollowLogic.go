@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"gorm.io/gorm"
-	"strconv"
 	"video_clip/cmd/follow/rpc/follow"
 	"video_clip/cmd/follow/rpc/internal/svc"
 
@@ -28,12 +27,12 @@ func NewUnFollowLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UnFollow
 }
 
 // 取消关注
-func (l *UnFollowLogic) UnFollow(in *follow.UnFollowRequest) (*follow.UnFollowResponse, error) {
+func (l *UnFollowLogic) UnFollow(in *follow.UnFollowReq) (*follow.UnFollowRes, error) {
 	// 1. 校验
-	if in.UserId == 0 {
+	if len(in.UserId) == 0 {
 		return nil, code.FollowUserIdEmpty
 	}
-	if in.FollowedUserId == 0 {
+	if len(in.FollowedUserId) == 0 {
 		return nil, code.FollowedUserIdEmpty
 	}
 
@@ -71,16 +70,16 @@ func (l *UnFollowLogic) UnFollow(in *follow.UnFollowRequest) (*follow.UnFollowRe
 
 	// 2.2 更新redis
 	// todo: 保持一致性
-	_, err = l.svcCtx.BizRedis.ZremCtx(l.ctx, code.UserFollowKey(in.UserId), strconv.FormatInt(in.FollowedUserId, 10))
+	_, err = l.svcCtx.BizRedis.ZremCtx(l.ctx, code.UserFollowKey(in.UserId), in.FollowedUserId)
 	if err != nil {
 		l.Logger.Errorf("[UnFollow] BizRedis.ZremCtx error: %v", err)
 		return nil, err
 	}
-	_, err = l.svcCtx.BizRedis.ZremCtx(l.ctx, code.UserFansKey(in.FollowedUserId), strconv.FormatInt(in.UserId, 10))
+	_, err = l.svcCtx.BizRedis.ZremCtx(l.ctx, code.UserFansKey(in.FollowedUserId), in.UserId)
 	if err != nil {
 		l.Logger.Errorf("[UnFollow] BizRedis.ZremCtx error: %v", err)
 		return nil, err
 	}
 
-	return &follow.UnFollowResponse{}, nil
+	return &follow.UnFollowRes{}, nil
 }

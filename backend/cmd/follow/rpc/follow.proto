@@ -5,65 +5,79 @@ option go_package="./follow";
 
 service Follow {
   // 关注
-  rpc Follow (FollowRequest) returns (FollowResponse);
+  rpc Follow (FollowReq) returns (FollowRes);
   // 取消关注
-  rpc UnFollow (UnFollowRequest) returns (UnFollowResponse);
+  rpc UnFollow (UnFollowReq) returns (UnFollowRes);
   // 关注列表
-  rpc FollowList (FollowListRequest) returns (FollowListResponse);
+  rpc FolloweeList (FolloweeListReq) returns (FolloweeListRes);
   // 粉丝列表
-  rpc FansList (FansListRequest) returns (FansListResponse);
+  rpc FollowerList (FollowerListReq) returns (FollowerListRes);
+  // 是否已关注
+  rpc HasFollowed (HasFollowedReq) returns (HasFollowedRes);
 }
 
-message FollowRequest {
-  int64 userId = 1; // 关注者
-  int64 followedUserId = 2; // 被关注者
+message FollowReq {
+  string userId = 1; // 关注者
+  string followedUserId = 2; // 被关注者
 }
 
-message FollowResponse {
+message FollowRes {
 }
 
-message UnFollowRequest {
-  int64 userId = 1;
-  int64 followedUserId = 2;
+message UnFollowReq {
+  string userId = 1;
+  string followedUserId = 2;
 }
 
-message UnFollowResponse {
+message UnFollowRes {
 }
 
-message FollowListRequest {
+message FolloweeListReq {
   int64 Id = 1;
-  int64 userId = 2;
+  string userId = 2;
   int64 cursor = 3;
   int64 pageSize = 4;
 }
 
-message FollowItem {
-  int64 Id = 1;
-  int64 followedUserId = 2; // 被关注者
-  int64 fansCount = 3; // 粉丝数
-  int64 createTime = 4; // 关注时间
+message FolloweeItem {
+  int64 id = 1;
+  string followeeUserId = 2; // 被关注者
+  int64 createTime = 3;
 }
 
-message FollowListResponse {
-  repeated FollowItem items = 1;
+message FolloweeListRes {
+  repeated FolloweeItem items = 1;
   int64 cursor = 2;
   bool isEnd = 3;
   int64 Id = 4;
 }
 
-message FansListRequest {
-  int64 userId = 1;
-  int64 cursor = 2;
-  int64 pageSize = 3;
+message FollowerListReq {
+  int64 Id = 1;
+  string userId = 2;
+  int64 cursor = 3;
+  int64 pageSize = 4;
 }
 
-message FansItem {
-  int64 userId = 1;
-  int64 fansUserId = 2;
+message FollowerItem {
+  int64 id = 1;
+  string followeeUserId = 2;
   int64 createTime = 3;
 }
 
-message FansListResponse {
-  repeated FansItem items = 1;
+message FollowerListRes {
+  repeated FollowerItem items = 1;
   int64 cursor = 2;
+  bool isEnd = 3;
+  int64 Id = 4;
+}
+
+message HasFollowedReq {
+  string userId = 1;
+  string bizId = 2;
+  string objId = 3;
+}
+
+message HasFollowedRes {
+  bool hasFollowedRes = 1;
 }

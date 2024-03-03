@@ -1,26 +1,17 @@
 package config
 
 import (
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"
-	"k8s.io/client-go/tools/cache"
 )
 
 type Config struct {
 	zrpc.RpcServerConf
-	ViderRpcConf zrpc.RpcClientConf
-
-	CacheRedis cache.Config
-
-	MysqlCluster struct {
-		DataSource string
+	DB struct {
+		DataSource   string
+		MaxOpenConns int `json:",default=10"`
+		MaxIdleConns int `json:",default=100"`
+		MaxLifetime  int `json:",default=3600"`
 	}
-
-	RedisCluster struct {
-		Cluster string
-	}
-
-	//Token struct{
-	//	AccessToken string
-	//}
-
+	BizRedis redis.RedisConf
 }

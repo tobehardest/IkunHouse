@@ -9,8 +9,8 @@ import (
 
 type Follow struct {
 	ID             int64 `gorm:"primary_key"`
-	UserID         int64
-	FollowedUserID int64
+	UserID         string
+	FollowedUserID string
 	FollowStatus   int
 	CreateTime     time.Time
 	UpdateTime     time.Time
@@ -48,7 +48,7 @@ func (m *FollowModel) UpdateFields(ctx context.Context, id int64, values map[str
 	return m.db.WithContext(ctx).Model(&Follow{}).Where("id = ?", id).Updates(values).Error
 }
 
-func (m *FollowModel) FindByUserIDAndFollowedUserID(ctx context.Context, userId, followedUserId int64) (*Follow, error) {
+func (m *FollowModel) FindByUserIDAndFollowedUserID(ctx context.Context, userId, bizId, followedUserId string) (*Follow, error) {
 	var result Follow
 	err := m.db.WithContext(ctx).
 		Where("user_id = ? AND followed_user_id = ?", userId, followedUserId).
@@ -60,7 +60,7 @@ func (m *FollowModel) FindByUserIDAndFollowedUserID(ctx context.Context, userId,
 	return &result, err
 }
 
-func (m *FollowModel) FindByUserId(ctx context.Context, userId int64, limit int) ([]*Follow, error) {
+func (m *FollowModel) FindByUserId(ctx context.Context, userId string, limit int) ([]*Follow, error) {
 	var result []*Follow
 	err := m.db.WithContext(ctx).
 		Where("user_id = ? AND follow_status = ?", userId, 1).

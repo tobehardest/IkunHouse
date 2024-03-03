@@ -22,8 +22,14 @@ func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
 	}
 }
 
-// 批量获得用户信息接口
-func (s *UserServer) MGetUserInfo(ctx context.Context, in *user.UserInfoRequest) (*user.UserInfoResponse, error) {
-	l := logic.NewMGetUserInfoLogic(ctx, s.svcCtx)
-	return l.MGetUserInfo(in)
+// 更新用户信息
+func (s *UserServer) UpdateUserInfo(ctx context.Context, in *user.UpdateUserInfoReq) (*user.UpdateUserInfoRes, error) {
+	l := logic.NewUpdateUserInfoLogic(ctx, s.svcCtx)
+	return l.UpdateUserInfo(in)
+}
+
+// 获取用户主页信息
+func (s *UserServer) GetUserInfoDetail(ctx context.Context, in *user.GetUserInfoDetailReq) (*user.GetUserInfoDetailRes, error) {
+	l := logic.NewGetUserInfoDetailLogic(ctx, s.svcCtx)
+	return l.GetUserInfoDetail(in)
 }

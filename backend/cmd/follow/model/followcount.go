@@ -9,7 +9,7 @@ import (
 
 type FollowCount struct {
 	ID          int64 `gorm:"primary_key"`
-	UserID      int64
+	UserID      string
 	FollowCount int
 	FansCount   int
 	CreateTime  time.Time
@@ -44,31 +44,31 @@ func (m *FollowCountModel) Update(ctx context.Context, data *FollowCount) error 
 	return m.db.Save(data).Error
 }
 
-func (m *FollowCountModel) IncrFollowCount(ctx context.Context, userId int64) error {
+func (m *FollowCountModel) IncrFollowCount(ctx context.Context, userId string) error {
 	return m.db.WithContext(ctx).
 		Exec("INSERT INTO follow_count (user_id, follow_count) VALUES (?, 1) ON DUPLICATE KEY UPDATE follow_count = follow_count + 1", userId).
 		Error
 }
 
-func (m *FollowCountModel) DecrFollowCount(ctx context.Context, userId int64) error {
+func (m *FollowCountModel) DecrFollowCount(ctx context.Context, userId string) error {
 	return m.db.WithContext(ctx).
 		Exec("UPDATE follow_count SET follow_count = follow_count - 1 WHERE user_id = ? AND follow_count > 0", userId).
 		Error
 }
 
-func (m *FollowCountModel) IncrFansCount(ctx context.Context, userId int64) error {
+func (m *FollowCountModel) IncrFansCount(ctx context.Context, userId string) error {
 	return m.db.WithContext(ctx).
 		Exec("INSERT INTO follow_count (user_id, fans_count) VALUES (?, 1) ON DUPLICATE KEY UPDATE fans_count = fans_count + 1", userId).
 		Error
 }
 
-func (m *FollowCountModel) DecrFansCount(ctx context.Context, userId int64) error {
+func (m *FollowCountModel) DecrFansCount(ctx context.Context, userId string) error {
 	return m.db.WithContext(ctx).
 		Exec("UPDATE follow_count SET fans_count = fans_count - 1 WHERE user_id = ? AND fans_count > 0", userId).
 		Error
 }
 
-func (m *FollowCountModel) FindByUserIds(ctx context.Context, userIds []int64) ([]*FollowCount, error) {
+func (m *FollowCountModel) FindByUserIds(ctx context.Context, userIds []string) ([]*FollowCount, error) {
 	var result []*FollowCount
 	err := m.db.WithContext(ctx).Where("user_id IN ?", userIds).Find(&result).Error
 	return result, err

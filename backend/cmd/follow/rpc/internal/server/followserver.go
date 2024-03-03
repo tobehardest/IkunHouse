@@ -5,14 +5,15 @@ package server
 
 import (
 	"context"
-	follow2 "video_clip/cmd/follow/rpc/follow"
-	logic2 "video_clip/cmd/follow/rpc/internal/logic"
+
+	"video_clip/cmd/follow/rpc/follow"
+	"video_clip/cmd/follow/rpc/internal/logic"
 	"video_clip/cmd/follow/rpc/internal/svc"
 )
 
 type FollowServer struct {
 	svcCtx *svc.ServiceContext
-	follow2.UnimplementedFollowServer
+	follow.UnimplementedFollowServer
 }
 
 func NewFollowServer(svcCtx *svc.ServiceContext) *FollowServer {
@@ -22,25 +23,31 @@ func NewFollowServer(svcCtx *svc.ServiceContext) *FollowServer {
 }
 
 // 关注
-func (s *FollowServer) Follow(ctx context.Context, in *follow2.FollowRequest) (*follow2.FollowResponse, error) {
-	l := logic2.NewFollowLogic(ctx, s.svcCtx)
+func (s *FollowServer) Follow(ctx context.Context, in *follow.FollowReq) (*follow.FollowRes, error) {
+	l := logic.NewFollowLogic(ctx, s.svcCtx)
 	return l.Follow(in)
 }
 
 // 取消关注
-func (s *FollowServer) UnFollow(ctx context.Context, in *follow2.UnFollowRequest) (*follow2.UnFollowResponse, error) {
-	l := logic2.NewUnFollowLogic(ctx, s.svcCtx)
+func (s *FollowServer) UnFollow(ctx context.Context, in *follow.UnFollowReq) (*follow.UnFollowRes, error) {
+	l := logic.NewUnFollowLogic(ctx, s.svcCtx)
 	return l.UnFollow(in)
 }
 
 // 关注列表
-func (s *FollowServer) FollowList(ctx context.Context, in *follow2.FollowListRequest) (*follow2.FollowListResponse, error) {
-	l := logic2.NewFollowListLogic(ctx, s.svcCtx)
-	return l.FollowList(in)
+func (s *FollowServer) FolloweeList(ctx context.Context, in *follow.FolloweeListReq) (*follow.FolloweeListRes, error) {
+	l := logic.NewFolloweeListLogic(ctx, s.svcCtx)
+	return l.FolloweeList(in)
 }
 
 // 粉丝列表
-func (s *FollowServer) FansList(ctx context.Context, in *follow2.FansListRequest) (*follow2.FansListResponse, error) {
-	l := logic2.NewFansListLogic(ctx, s.svcCtx)
-	return l.FansList(in)
+func (s *FollowServer) FollowerList(ctx context.Context, in *follow.FollowerListReq) (*follow.FollowerListRes, error) {
+	l := logic.NewFollowerListLogic(ctx, s.svcCtx)
+	return l.FollowerList(in)
+}
+
+// 是否已关注
+func (s *FollowServer) HasFollowed(ctx context.Context, in *follow.HasFollowedReq) (*follow.HasFollowedRes, error) {
+	l := logic.NewHasFollowedLogic(ctx, s.svcCtx)
+	return l.HasFollowed(in)
 }

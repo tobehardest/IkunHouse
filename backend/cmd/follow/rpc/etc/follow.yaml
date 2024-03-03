@@ -1,6 +1,17 @@
 Name: follow.rpc
-ListenOn: 0.0.0.0:8080
+ListenOn: 0.0.0.0:11077
 Etcd:
   Hosts:
   - 127.0.0.1:2379
   Key: follow.rpc
+
+DB:
+  DataSource: root:12345678@tcp(127.0.0.1:3306)/video_clip?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass: #G62m50oigInC30sf
+
+BizRedis:
+  Host: 127.0.0.1:6379
+  Pass:
+  Type: node

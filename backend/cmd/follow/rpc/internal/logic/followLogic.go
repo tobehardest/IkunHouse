@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"strconv"
 	"time"
 	"video_clip/cmd/follow/code"
 	"video_clip/cmd/follow/model"
@@ -28,12 +27,12 @@ func NewFollowLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FollowLogi
 }
 
 // 关注
-func (l *FollowLogic) Follow(in *follow.FollowRequest) (*follow.FollowResponse, error) {
+func (l *FollowLogic) Follow(in *follow.FollowReq) (*follow.FollowRes, error) {
 	// 1. 校验
-	if in.UserId == 0 {
+	if len(in.UserId) == 0 {
 		return nil, code.FollowUserIdEmpty
 	}
-	if in.FollowedUserId == 0 {
+	if len(in.FollowedUserId) == 0 {
 		return nil, code.FollowedUserIdEmpty
 	}
 	if in.UserId == in.FollowedUserId {
@@ -45,7 +44,7 @@ func (l *FollowLogic) Follow(in *follow.FollowRequest) (*follow.FollowResponse, 
 		return nil, err
 	}
 	if followData != nil && followData.FollowStatus == types.FollowStatusFollow {
-		return nil, nil
+		return &follow.FollowRes{}, nil
 	}
 
 	// 2. 更新关注状态和关注数
@@ -87,7 +86,7 @@ func (l *FollowLogic) Follow(in *follow.FollowRequest) (*follow.FollowResponse, 
 		return nil, err
 	}
 	if followExist {
-		_, err = l.svcCtx.BizRedis.ZaddCtx(l.ctx, code.UserFollowKey(in.UserId), time.Now().Unix(), strconv.FormatInt(in.FollowedUserId, 10))
+		_, err = l.svcCtx.BizRedis.ZaddCtx(l.ctx, code.UserFollowKey(in.UserId), time.Now().Unix(), in.FollowedUserId)
 		if err != nil {
 			l.Logger.Errorf("[Follow] Redis Zadd error: %v", err)
 			return nil, err
@@ -103,7 +102,7 @@ func (l *FollowLogic) Follow(in *follow.FollowRequest) (*follow.FollowResponse, 
 		return nil, err
 	}
 	if fansExist {
-		_, err = l.svcCtx.BizRedis.ZaddCtx(l.ctx, code.UserFansKey(in.FollowedUserId), time.Now().Unix(), strconv.FormatInt(in.UserId, 10))
+		_, err = l.svcCtx.BizRedis.ZaddCtx(l.ctx, code.UserFansKey(in.FollowedUserId), time.Now().Unix(), in.UserId)
 		if err != nil {
 			l.Logger.Errorf("[Follow] Redis Zadd error: %v", err)
 			return nil, err
@@ -114,5 +113,5 @@ func (l *FollowLogic) Follow(in *follow.FollowRequest) (*follow.FollowResponse, 
 		}
 	}
 
-	return &follow.FollowResponse{}, nil
+	return &follow.FollowRes{}, nil
 }

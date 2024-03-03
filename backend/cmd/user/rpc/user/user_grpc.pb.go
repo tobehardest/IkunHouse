@@ -19,15 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	User_MGetUserInfo_FullMethodName = "/user.User/MGetUserInfo"
+	User_UpdateUserInfo_FullMethodName    = "/user.User/UpdateUserInfo"
+	User_GetUserInfoDetail_FullMethodName = "/user.User/GetUserInfoDetail"
 )
 
 // UserClient is the client API for User service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
-	// 批量获得用户信息接口
-	MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+	// 更新用户信息
+	UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error)
+	// 获取用户主页信息
+	GetUserInfoDetail(ctx context.Context, in *GetUserInfoDetailReq, opts ...grpc.CallOption) (*GetUserInfoDetailRes, error)
 }
 
 type userClient struct {
@@ -38,9 +41,18 @@ func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 	return &userClient{cc}
 }
 
-func (c *userClient) MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
-	out := new(UserInfoResponse)
-	err := c.cc.Invoke(ctx, User_MGetUserInfo_FullMethodName, in, out, opts...)
+func (c *userClient) UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error) {
+	out := new(UpdateUserInfoRes)
+	err := c.cc.Invoke(ctx, User_UpdateUserInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserInfoDetail(ctx context.Context, in *GetUserInfoDetailReq, opts ...grpc.CallOption) (*GetUserInfoDetailRes, error) {
+	out := new(GetUserInfoDetailRes)
+	err := c.cc.Invoke(ctx, User_GetUserInfoDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,8 +63,10 @@ func (c *userClient) MGetUserInfo(ctx context.Context, in *UserInfoRequest, opts
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility
 type UserServer interface {
-	// 批量获得用户信息接口
-	MGetUserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
+	// 更新用户信息
+	UpdateUserInfo(context.Context, *UpdateUserInfoReq) (*UpdateUserInfoRes, error)
+	// 获取用户主页信息
+	GetUserInfoDetail(context.Context, *GetUserInfoDetailReq) (*GetUserInfoDetailRes, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -60,8 +74,11 @@ type UserServer interface {
 type UnimplementedUserServer struct {
 }
 
-func (UnimplementedUserServer) MGetUserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MGetUserInfo not implemented")
+func (UnimplementedUserServer) UpdateUserInfo(context.Context, *UpdateUserInfoReq) (*UpdateUserInfoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserInfo not implemented")
+}
+func (UnimplementedUserServer) GetUserInfoDetail(context.Context, *GetUserInfoDetailReq) (*GetUserInfoDetailRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfoDetail not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
@@ -76,20 +93,38 @@ func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
 	s.RegisterService(&User_ServiceDesc, srv)
 }
 
-func _User_MGetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfoRequest)
+func _User_UpdateUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).MGetUserInfo(ctx, in)
+		return srv.(UserServer).UpdateUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_MGetUserInfo_FullMethodName,
+		FullMethod: User_UpdateUserInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).MGetUserInfo(ctx, req.(*UserInfoRequest))
+		return srv.(UserServer).UpdateUserInfo(ctx, req.(*UpdateUserInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserInfoDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserInfoDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserInfoDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserInfoDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserInfoDetail(ctx, req.(*GetUserInfoDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -102,8 +137,12 @@ var User_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "MGetUserInfo",
-			Handler:    _User_MGetUserInfo_Handler,
+			MethodName: "UpdateUserInfo",
+			Handler:    _User_UpdateUserInfo_Handler,
+		},
+		{
+			MethodName: "GetUserInfoDetail",
+			Handler:    _User_GetUserInfoDetail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
